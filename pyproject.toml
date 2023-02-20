@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "databased-project"
+version = "0.1.0"
+description = ""
+authors = ["Abe Burton, Lee-Or Bentovim, Maddie Roberts"]
+readme = "README.md"
+packages = [{include = "databased_project"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.5.3"
+lxml = "^4.9.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
