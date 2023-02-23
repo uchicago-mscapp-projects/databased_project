@@ -13,6 +13,7 @@ lxml = "^4.9.2"
 numpy = "^1.24.2"
 seaborn = "^0.12.2"
 plotly = "^5.13.0"
+pyarrow = "^11.0.0"
 
 
 [build-system]
