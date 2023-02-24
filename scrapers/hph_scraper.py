@@ -1,9 +1,12 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
-import time
-from selenium.webdriver.support.ui import Select
+import json
+import lxml.html
 
+def build_url():
+    example_url = 'https://www.hpherald.com/search/?f=html&q=%22Lori+Lightfoot%22+mayor&d1=2022-01-20&d2=2023-01-20&s=start_time&sd=desc&l=100&t=article&nsa=eedition'
+    return None
 
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-driver.get("https://www.hpherald.com/")
+def scrape_article():
+    return None
+
+def get_article_urls():
+    return None
