@@ -2,9 +2,21 @@ import json
 import lxml.html
 import requests
 import pandas as pd
+import os
+import sys
 
-def build_url():
-    example_url = 'https://www.hpherald.com/search/?f=html&q=%22Lori+Lightfoot%22+mayor&d1=2022-01-20&d2=2023-01-20&s=start_time&sd=desc&l=100&t=article&nsa=eedition'
+current = os.path.dirname(os.path.realpath(__file__))
+parent = os.path.dirname(current)
+sys.path.append(parent)
+from utilities.data_retrieval import search_strings
+    
+
+def build_url(name_token, start_date):
+    date_format = '2022-01-20'
+    name_list = name_token.split()
+    name_plus_delimited = '+'.join(name_list)
+    name_plus_delimited = name_plus_delimited.replace("'", "%27")
+    example_url = f'https://www.hpherald.com/search/?f=html&q=%22{name_plus_delimited}%22+mayor&d1={start_date}]&s=start_time&sd=desc&l=100&t=article&nsa=eedition'
     return None
 
 def scrape_article(url):
@@ -29,13 +41,16 @@ def next_page():
 def candidate_scrape():
     return json_object
 
-def hph_scraper():
+def hph_scrape():
     # get the input info
+    cand_data = search_strings('news_hp')
+    for row in cand_data.itertuples(index=False):
+        build_url(name_token=row.name_tokens, start_date=row.announcement_date)
+    
     # for each row in that df, run the candidate scraper
     # extend list of all json objects
     # figure out how you want this to be exported
     
-
 
 if __name__ == "__main__":
     url = build_url()
