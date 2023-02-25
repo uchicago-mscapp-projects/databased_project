@@ -1,7 +1,6 @@
 import sys
 import json
 import lxml.html
-import datetime 
 from datetime import datetime
 #from .utils import make_request, make_link_absolute
 
@@ -20,7 +19,7 @@ def scrape_park_page(full_name, announcement_date):
         article_urls, after_announcement = get_article_urls(current_url, announcement_date)
         list_of_article_urls. append(article_urls)
         current_url = get_next_page(current_url)
-    print(list_of_article_urls)
+
     
     # Scrape all pages
     for page_url in list_of_article_urls:
