@@ -72,18 +72,24 @@ def scrape_article(url):
     url = 'https://www.hpherald.com/' + url
     response = requests.get(url).text
     root = lxml.html.fromstring(response)
-    date = root.xpath('/html/body/div[4]/div[3]/div[6]/section[2]/article/div[3]/header/div[2]/span/ul/li[3]/time[1]')[0].text_content()
+    date = root.xpath('//time[1]')[0].text_content()
     date = str(pd.to_datetime(date)).split()[0]
     # do we really need what the search field was?
-    title = root.xpath('/html/body/div[4]/div[3]/div[6]/section[2]/article/div[3]/header/h1/span').text_content()
+    title = root.xpath('//article/div[3]/header/h1/span').text_content()
     # look at how to make this more relative so it breaks less!
-    text = root.xpath('/html/body/div[4]/div[3]/div[6]/section[2]/article/div[4]/div[1]/div/div[4]/div[1]/div/div/div[3]/p[*]').text_content()
-    text = root.xpath('/html/body/div[4]/div[2]/div[6]/section[2]/article/div[4]/div[1]/div/div[4]/div[1]/div/div/div[3]/p[19]')
+    text = root.xpath('//article//p').text_content()
     # don't see any tags
     site_id = 'news_hp'
     cand_id = '' # figure out passing this through the functions
     
     # create json object with these things and return it
+    # TODO figure out where this fits in. 
+    print("Writing defender.json")
+    with open("defender.json", "w") as f:
+        json.dump(pages, f, indent=1)
+        
+    # TODO lee - or is writing to an article dictionary each time and then turning putting all
+    # dictionary items in a list and then making that json object
     return article_dataset_row
 
 
@@ -104,7 +110,9 @@ def hph_scrape():
         for link in article_links:
             json_list.append(scrape_article(link))
             
-        # where do I want to export this? Is this really the format?
+        # TODO where do I want to export this? Is this really the format?
+        # export one json file that contains all article objects to the data folder
+        # TODO send filepath code to lee-or so he can write to data directory
     
 
 if __name__ == "__main__":
