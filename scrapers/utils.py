@@ -6,7 +6,7 @@ ALLOWED_DOMAINS = ("http://www.lawndalenews.com/",)
 REQUEST_DELAY = 0.1
 
 
-#def make_request(url):
+def make_request(url):
     """
     Make a request to `url` and return the raw response.
 

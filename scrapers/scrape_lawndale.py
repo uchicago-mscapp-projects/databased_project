@@ -3,7 +3,7 @@ import json
 import lxml.html
 import datetime 
 from datetime import datetime
-from .utils import make_request, make_link_absolute
+#from .utils import make_request, make_link_absolute
 
 
 def scrape_park_page(full_name, announcement_date):
@@ -11,13 +11,23 @@ def scrape_park_page(full_name, announcement_date):
 
     # Retreive correct search url
     current_url = get_first_search_page(full_name) 
-    list_of_article_urls = get_article_urls(current_url)
+    after_announcement = True
+    list_of_article_urls = []
     list_of_scraped_pages = []
 
-    while(list_of_article_urls): 
+    while(current_url and after_announcement): 
         # Scrape pages
-
+        article_urls, after_announcement = get_article_urls(current_url, announcement_date)
+        list_of_article_urls. append(article_urls)
+        current_url = get_next_page(current_url)
+    print(list_of_article_urls)
     
+    # Scrape all pages
+    for page_url in list_of_article_urls:
+        page_dict = scrape_article(page_url[0])
+        list_of_scraped_pages.append(page_dict)
+    
+    print(list_of_scraped_pages)
 
 def get_first_search_page(full_name):
     split_name = full_name.split()
@@ -59,16 +69,17 @@ def get_article_urls(url, announcement_date):
 
         for (article, date) in zip(articles, article_dates):
             # Check the date is not prior to announcement
-            date = article_dates.text_content()
-            if date < announcement_date:
+            print("$"+date.text_content()+"$")
+            parsed_date = date_convert(date.text_content())
+            if parsed_date < announcement_date:
                 # Article was written prior to announcement
-                return urls
+                return urls, False
 
             article_url = article[0].cssselect("a")[0].get("href")
 
             urls.append(article_url)
        
-    return urls
+    return urls, True
 
 def get_next_page(url):
     # TODO maybe pass the root node
@@ -127,8 +138,8 @@ def scrape_article(url):
 
 def date_convert(date):
     try:
-        parsed_date = datetime.strptime(date, '%B %d, %Y').date()
-        return
+        parsed_date = datetime.strptime(date, '%B %d, %Y')
+        return parsed_date
     except TypeError:
         raise("Error in date parsing: Format has changed. Type Error")
     except ValueError:
@@ -138,6 +149,3 @@ def date_convert(date):
        
 
     
-
-
-
