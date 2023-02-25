@@ -13,9 +13,13 @@ lxml = "^4.9.2"
 numpy = "^1.24.2"
 seaborn = "^0.12.2"
 plotly = "^5.13.0"
+<<<<<<< HEAD
+cssselect = "^1.2.0"
+=======
 selenium = "^4.8.2"
 requests = "^2.28.2"
 webdriver-manager = "^3.8.5"
+>>>>>>> b6876de648b3d0b105411366edab68cea49fb24f
 
 
 [build-system]
