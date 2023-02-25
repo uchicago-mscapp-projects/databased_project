@@ -5,29 +5,28 @@ from datetime import datetime
 #from .utils import make_request, make_link_absolute
 
 
-def scrape_park_page(full_name, announcement_date):
+def scrape_all_pages(full_name, announcement_date):
     # Assumming passed in date is a date object
 
     # Retreive correct search url
     current_url = get_first_search_page(full_name) 
-    after_announcement = True
     list_of_article_urls = []
     list_of_scraped_pages = []
 
-    while(current_url and after_announcement): 
+    while(current_url): 
         # Scrape pages
-        article_urls, after_announcement = get_article_urls(current_url, announcement_date)
-        list_of_article_urls. append(article_urls)
+        article_urls = get_article_urls(current_url, announcement_date)
+        list_of_article_urls = list_of_article_urls + article_urls
         current_url = get_next_page(current_url)
 
     
     # Scrape all pages
     for page_url in list_of_article_urls:
-        page_dict = scrape_article(page_url[0])
+        page_dict = scrape_article(page_url)
         list_of_scraped_pages.append(page_dict)
+        print(page_dict)
     
-    print(list_of_scraped_pages)
-
+    
 def get_first_search_page(full_name):
     split_name = full_name.split()
     search_name = "%22" + "+".join(split_name) + "%22+mayor"
@@ -68,17 +67,16 @@ def get_article_urls(url, announcement_date):
 
         for (article, date) in zip(articles, article_dates):
             # Check the date is not prior to announcement
-            print("$"+date.text_content()+"$")
             parsed_date = date_convert(date.text_content())
             if parsed_date < announcement_date:
                 # Article was written prior to announcement
-                return urls, False
+                break
 
             article_url = article[0].cssselect("a")[0].get("href")
 
             urls.append(article_url)
        
-    return urls, True
+    return urls
 
 def get_next_page(url):
     # TODO maybe pass the root node
@@ -118,7 +116,7 @@ def scrape_article(url):
     parsed_date = date_convert(date)
 
     # Get article text 
-    full_text = article[0].cssselect("div")[2].cssselect("p")[0].text_content()
+    full_text = article[0].cssselect("div.entry-content")[0].text_content()
 
     # pass in the missing args? 
     full_article = {
