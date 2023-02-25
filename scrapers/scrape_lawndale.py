@@ -10,7 +10,11 @@ def scrape_park_page(url, search):
     page = make_request(url)
     root = lxml.html.fromstring(page.text)
 
-#def candidate_search(cand_nickname):
+def get_first_search_page(full_name):
+    split_name = full_name.split()
+    search_name = "%22" + "+".join(split_name) + "%22+mayor"
+    url = f"http://www.lawndalenews.com/?s={search_name}&x=0&y=0"
+    return url
 
 def get_article_urls(url):
     """
