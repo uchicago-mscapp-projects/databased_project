@@ -113,6 +113,7 @@ def hph_scrape():
         # TODO where do I want to export this? Is this really the format?
         # export one json file that contains all article objects to the data folder
         # TODO send filepath code to lee-or so he can write to data directory
+        # TODO add in sleep
     
 
 if __name__ == "__main__":
