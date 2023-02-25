@@ -1,3 +1,9 @@
+"""
+This is the Hyde Park Herald Scraper Module
+
+Outputs:
+    List of json objects at (location)
+"""
 import json
 import lxml.html
 import requests
@@ -12,19 +18,36 @@ from utilities.data_retrieval import search_strings
     
 
 def build_url(name_token, start_date):
-    date_format = '2022-01-20'
+    """
+    Takes a name token and a start date and returns a url that conducts
+    an advanced search of articles on the HPH website
+    
+    Inputs:
+        name_token (str): The name to be used in the candidate search
+        start_date (str): The date to start searching for articles
+        
+    Outputs:
+        url (txt): The url string to search
+    """
+    start_date = str(pd.to_datetime(start_date)).split()[0]
     name_list = name_token.split()
     name_plus_delimited = '+'.join(name_list)
     name_plus_delimited = name_plus_delimited.replace("'", "%27")
-    example_url = f'https://www.hpherald.com/search/?f=html&q=%22{name_plus_delimited}%22+mayor&d1={start_date}]&s=start_time&sd=desc&l=100&t=article&nsa=eedition'
-    return None
+    url = f'https://www.hpherald.com/search/?f=html&q=%22{name_plus_delimited}%22+mayor&d1={start_date}&s=start_time&sd=desc&l=100&t=article&nsa=eedition'
+    
+    return url
 
-def scrape_article(url):
-    response = requests.get(url).text
-    root = lxml.html.fromstring(response)
-    return None
 
 def get_article_urls(url):
+    """
+    Get all the article links on a page of results
+    
+    Inputs:
+        url (str): The url of the search results page
+        
+    Outputs:
+        urls (lst of strings): List of article urls
+    """
     response = requests.get(url).text
     root = lxml.html.fromstring(response)
     links = root.xpath("/html/body/div[4]/div/div[6]/section[2]/div[2]/div[1]/div/div[3]/article[*]/div[1]/div[2]/div[2]/h3/a")
@@ -35,24 +58,56 @@ def get_article_urls(url):
     
     return urls
 
-def next_page():
-    return url
 
-def candidate_scrape():
-    return json_object
+def scrape_article(url):
+    """
+    Scrape the necessary info from the article
+    
+    Inputs:
+        url (str): article url to be scraped
+    
+    Outputs:
+        article_dataset_row (json): a json object with article dataset info
+    """
+    url = 'https://www.hpherald.com/' + url
+    response = requests.get(url).text
+    root = lxml.html.fromstring(response)
+    date = root.xpath('/html/body/div[4]/div[3]/div[6]/section[2]/article/div[3]/header/div[2]/span/ul/li[3]/time[1]')[0].text_content()
+    date = str(pd.to_datetime(date)).split()[0]
+    # do we really need what the search field was?
+    title = root.xpath('/html/body/div[4]/div[3]/div[6]/section[2]/article/div[3]/header/h1/span').text_content()
+    # look at how to make this more relative so it breaks less!
+    text = root.xpath('/html/body/div[4]/div[3]/div[6]/section[2]/article/div[4]/div[1]/div/div[4]/div[1]/div/div/div[3]/p[*]').text_content()
+    text = root.xpath('/html/body/div[4]/div[2]/div[6]/section[2]/article/div[4]/div[1]/div/div[4]/div[1]/div/div/div[3]/p[19]')
+    # don't see any tags
+    site_id = 'news_hp'
+    cand_id = '' # figure out passing this through the functions
+    
+    # create json object with these things and return it
+    return article_dataset_row
+
 
 def hph_scrape():
+    """
+    Runs the scraper to get all article info from HPH
+    
+    Outputs:
+        TBD
+    """
     # get the input info
     cand_data = search_strings('news_hp')
     for row in cand_data.itertuples(index=False):
-        build_url(name_token=row.name_tokens, start_date=row.announcement_date)
-    
-    # for each row in that df, run the candidate scraper
-    # extend list of all json objects
-    # figure out how you want this to be exported
+        url = build_url(name_token=row.name_tokens, start_date=row.announcement_date)
+        article_links = get_article_urls(url)
+        
+        json_list = []
+        for link in article_links:
+            json_list.append(scrape_article(link))
+            
+        # where do I want to export this? Is this really the format?
     
 
 if __name__ == "__main__":
-    url = build_url()
+    hph_scrape()
     
     
