@@ -6,23 +6,14 @@ ALLOWED_DOMAINS = ("http://www.lawndalenews.com/",)
 REQUEST_DELAY = 0.1
 
 
-def make_request(url):
+#def make_request(url):
     """
     Make a request to `url` and return the raw response.
 
     This function ensure that the domain matches what is expected and that the rate limit
     is obeyed.
     """
-    # check if URL starts with an allowed domain name
-    for domain in ALLOWED_DOMAINS:
-        if url.startswith(domain):
-            break
-    else:
-        raise ValueError(f"can not fetch {url}, must be in {ALLOWED_DOMAINS}")
-    time.sleep(REQUEST_DELAY)
-    print(f"Fetching {url}")
-    resp = requests.get(url)
-    return resp
+
 
 def make_request(url):
     time.sleep(0.1)

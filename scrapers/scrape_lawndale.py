@@ -6,9 +6,18 @@ from datetime import datetime
 from .utils import make_request, make_link_absolute
 
 
-def scrape_park_page(url, search):
-    page = make_request(url)
-    root = lxml.html.fromstring(page.text)
+def scrape_park_page(full_name, announcement_date):
+    # Assumming passed in date is a date object
+
+    # Retreive correct search url
+    current_url = get_first_search_page(full_name) 
+    list_of_article_urls = get_article_urls(current_url)
+    list_of_scraped_pages = []
+
+    while(list_of_article_urls): 
+        # Scrape pages
+
+    
 
 def get_first_search_page(full_name):
     split_name = full_name.split()
@@ -16,7 +25,7 @@ def get_first_search_page(full_name):
     url = f"http://www.lawndalenews.com/?s={search_name}&x=0&y=0"
     return url
 
-def get_article_urls(url):
+def get_article_urls(url, announcement_date):
     """
     This function takes a URL to a page of lawndale news and returns a
     list of URLs to each park on that page.
@@ -37,20 +46,25 @@ def get_article_urls(url):
     elements = rows[0].cssselect("div.gridrow")
 
     # Current structure of page is 3 containers, each which has at most two articles
-    if len(elements) > 3:
-        raise Exception ("Page structure has changed: more than 3 containers for articles")
+    if len(elements) > 5:
+        raise Exception ("Page structure has changed: more than 5 containers for articles")
     
     # Scape all website links in table
     for element in elements:
         articles = element.cssselect("div h2")
+        article_dates = element.cssselect("div div .meta-date")
 
         if len(articles) > 2:
             raise Exception ("Page structure has changed: more than 2 articles in container")
 
-        for article in articles:
-            article_url = article[0].cssselect("a")[0].get("href")
+        for (article, date) in zip(articles, article_dates):
+            # Check the date is not prior to announcement
+            date = article_dates.text_content()
+            if date < announcement_date:
+                # Article was written prior to announcement
+                return urls
 
-            # TODO Could do date checking here, maybe with flag to end scraping
+            article_url = article[0].cssselect("a")[0].get("href")
 
             urls.append(article_url)
        
@@ -90,14 +104,8 @@ def scrape_article(url):
 
     if date[:3] == "on ":
         date = date[3:]
-    try:
-        parsed_date = datetime.strptime(date, '%B %d, %Y').date()
-    except TypeError:
-        raise("Error in date parsing: Format has changed. Type Error")
-    except ValueError:
-        raise("Error in date parsing: Format has changed. Value Error")
-    except: 
-        raise("Error in date parsing: Format has changed.")
+    
+    parsed_date = date_convert(date)
 
     # Get article text 
     full_text = article[0].cssselect("div")[2].cssselect("p")[0].text_content()
@@ -111,12 +119,22 @@ def scrape_article(url):
         'article_text' : full_text,
         'associated_candidate' : None,
         'publication_date' : parsed_date,
-        'tags' : None,
         'site_id' : None,
         'cand_id' : None
     }
 
     return full_article
+
+def date_convert(date):
+    try:
+        parsed_date = datetime.strptime(date, '%B %d, %Y').date()
+        return
+    except TypeError:
+        raise("Error in date parsing: Format has changed. Type Error")
+    except ValueError:
+        raise("Error in date parsing: Format has changed. Value Error")
+    except: 
+        raise("Error in date parsing: Format has changed.")
        
 
     
