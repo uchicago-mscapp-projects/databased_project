@@ -11,7 +11,6 @@ Description:
 
 Purpose: 
 '''
-#from ..utilities.data_retrieval import query
 import os
 import sys
 import re
@@ -30,20 +29,21 @@ STRINGS_TO_REMOVE = ["<meta name='ValidationSchema' content='http://www.w3.org/2
 "</head>", "<body>", "<p>", "<html>", "<b>", "<i>", "</b>", "\n"]
 
 #List of strings to file path
+PROQUEST_FILES = []
+SITE_ID = ''
 
 # Chicago Tribune
-PROQUEST_FILES = [('chicago_tribune_2022.tar', 'data/chicago_tribune_2022.parquet'), 
-                  ('chicago_tribune_2023.tar', 'data/chicago_tribune_2023.parquet')]
-SITE_ID = "news_ct"
+#PROQUEST_FILES = [('chicago_tribune_2022.tar', 'data/chicago_tribune_2022.parquet'), 
+#                 ('chicago_tribune_2023.tar', 'data/chicago_tribune_2023.parquet')]
+#SITE_ID = "news_ct"
 
 # Crain Business
 #PROQUEST_FILES = [('crain.tar', 'data/crain.parquet')]
 #SITE_ID = "news_cc"
 
 
-
-
 #Pull Candidiate Name tokens from database and put into a dictionary
+search_strings
 cand_name_dict = {'cand_kb': ["Kam Buckner", "Kambium “Kam” Buckner"], 
              'cand_cg': ["‘Chuy’ García", "Jesús “Chuy” García", "Chuy Garcia"]}
 
