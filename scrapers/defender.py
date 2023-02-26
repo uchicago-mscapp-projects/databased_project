@@ -1,60 +1,66 @@
+"""
+Author: Lee-Or Bentovim
+Last Modified: 2/25/23
+
+This module is meant to take a search string and search it on the Chicago Defender
+website, and then scrapes associated URL's, outputting them into a json file called
+defender.json
+
+Some of the original structure of this file comes from Lee-Or's PA2 work
+"""
+
 import sys
+import os
 import json
 import lxml.html
 import pandas as pd
-from datetime import datetime
-from utils import make_request, make_link_absolute
+from utilities.data_retrieval import search_strings
+from utils import make_request
 
+current = os.path.dirname(os.path.realpath(__file__))
+parent = os.path.dirname(current)
+sys.path.append(parent)
 
 def scrape_page(article_dict, url):
     """
-    This function takes a URL to a page and returns a
-    dictionary with the title, address, description,
-    and history of the park.
+    This function takes a URL to a page and returns a dictionary with important
+    information from an article
 
-    Parameters:
-        * url:  a URL to a chicago defender page
+    Inputs:
+        article_dict (dict): a dictionary pre-filled with some key-value pairs
+        url (string):  a URL to a chicago defender page
 
     Returns:
         A dictionary with the following keys:
-            * url:          the URL of the park page
-            * name:         the name of the park
-            * address:      the address of the park
-            * description:  the description of the park
-            * history:      the history of the park
+            candidate_id:       the id associated with the candidate
+            name_tokens:        the name token associated with the search
+            announcment_date:   the date the associated candidate declared
+            newspaper_id:       the id associated with the newspaper
+            url:                the URL of the webpage
+            title:              the title of the webpage
+            text:               the text of the webpage
+            date:          the date the article was published
     """
+
     html = make_request(url).text
     root = parse_html(html)
 
-    page_dict = {}
+    article_dict['url'] = url
 
+    article_dict['title'] = root.xpath("//h1")[0].text_content()
 
-    # Should I make this lowercase? 
-    page_dict['title'] = root.xpath("//h1")[0].text_content()
-    
     body = root.xpath("//p")
 
     doc_text = ''
     for row in body[2:-3]:
-        doc_text += row
+        doc_text += row.text_content()
     
-    page_dict['text'] = doc_text
+    article_dict['text'] = doc_text
+    date = root.xpath("//time")[0].text
+    date = str(pd.to_datetime(date)).split()[0]
+    article_dict['date'] = date
 
-    page_dict['date'] = root.xpath("//time")[0].text
-    """
-    Website Title (string) Comes pre-filled
-    URL (string): URL
-    Search Field: Comes pre-filled
-    Title (string): done
-    Text (string): done
-    Associated Candidate (string): pre-filled
-    Publication Date (date): done
-    Tags (string): None
-    Site ID - foreign key
-    Cand ID - foreign key
-    """
-
-    return root
+    return article_dict
 
 def parse_html(html):
     """
@@ -62,18 +68,20 @@ def parse_html(html):
     """
     return lxml.html.fromstring(html)
 
-def get_news_urls(search_string, stop_date, current_page = 1, url = "https://chicagodefender.com/page/"):
+def get_news_urls(search_string, stop_date, current_page = 1,
+                    url = "https://chicagodefender.com/page/"):
     """
-    This function takes a URL to a page of parks and returns a
-    list of URLs to each park on that page.
+    This function takes a URL to a page of articles and returns a list of URLs
+    to each park on that page so long as they are later than the stop date
 
     Parameters:
-        search_string: the string to append to the url to create the search
-        url: the url to the chicago defender
-        stop_date (datetime): the earliest date to include in searches
+        search_string (str):  the string to add to create the search
+        stop_date (datetime): the date the candidate in search_string announced
+        current_page (int): The page number for the search
+        url (string): The url to search the website
 
     Returns:
-        A list of URLs to each park on the page.
+        A list of URLs to each website on the page.
     """
 
     # The string needs to be "mayor + associated_name", otherwise will fix here
@@ -93,7 +101,7 @@ def get_news_urls(search_string, stop_date, current_page = 1, url = "https://chi
     # Turns each date into a datetime object
     for item in dates:
         day = item.getnext().text
-        date_list.append(datetime.strptime (day, '%B %d, %Y'))
+        date_list.append(pd.to_datetime(day))
 
     # Looping through the links on a page
     for i, link in enumerate(links):
@@ -103,9 +111,10 @@ def get_news_urls(search_string, stop_date, current_page = 1, url = "https://chi
             raise Exception("Dates and Links don't match")
 
         # Stopping Condition: Date is before candidate filed
+        stop_date = pd.to_datetime(stop_date)
         if date_list[i] < stop_date:
             return urls, False
-        
+
         # Add URL to the list
         full_url = link.get("href")
         urls.append(full_url)
@@ -114,54 +123,75 @@ def get_news_urls(search_string, stop_date, current_page = 1, url = "https://chi
 
 def check_next_page_exists(search_string, current_page, url = "https://chicagodefender.com/page/"):
     """
-    This function takes a URL to a page of search results and returns a
-    URL to the next page of results if they exist.
+    This function takes a URL to a page of search results and returns the
+    length of nav_list, which will be zero if on last page, and greater otherwise
 
-    If no next page exists, this function returns None.
+    Inputs:
+        search_string (str):  the string to add to create the search
+        current_page (int): The page number for the search
+        url (string): The url to search the website
+
+    Outputs:
+        Len(nav_list) (int): len of the nav_list, a list of page buttons objects
     """
 
-    """OK so this function needs to pull the next page given the current page. 
-    However, the location of the next page button is dependent on the current page
-    Therefore, it may just make sense to modify the current url by tracking the 
-    current page number and then replacing it with the next one
-
-    """
     search = url + str(current_page) + "/?s=" + search_string
 
     html = make_request(search).text
     root = parse_html(html)
 
-    nav_list = root.xpath("/html/body/div[1]/div/main//li")
+    # nav_list is the list of button objects, length = 0 if page does not exist
+    nav_list = root.xpath("//main//li")
 
     return len(nav_list)
 
-def crawl(search_string, stop_date, article_dict, current_page = 1, 
-            url="https://chicagodefender.com/page/"):
+def crawl(current_page = 1, url="https://chicagodefender.com/page/"):
     """
-    This function starts at the base URL for the parks site and
-    crawls through each page of parks, scraping each park page
-    and saving output to a file named "parks.json".
+    This function starts at the base URL for the Chicago Defender website and
+    crawls through each page of the search, scraping each article before
+    the stop date and saving output to a file named "defender.json".
 
-    Parameters:
-        * max_parks_to_crawl:  the maximum number of pages to crawl
+    Inputs:
+        current_page (int): The page number for the search, initially 1
+        url (string): The url to search the website
+
+    Outputs:
+        None: This function will write a list of dictionaries to a json file called
+        defender.json
     """
+
+    df = search_strings(newspaper_id = 'news_cd')
+
+    # Turns the df into a dictionary with key: index, value: dictionary of each row
+    df_dicts = df.to_dict('index')
+
     pages = []
-    
-    # Will continue in loop until get_next_page finds no next page
-    while True:
-        pages_to_add, status = get_news_urls(search_string, stop_date, current_page, url)
 
-        for article in pages_to_add:
-            pages.append(scrape_page(article_dict, article))
+    # Run one while loop for each search term
+    for article_dict in df_dicts.values():
 
-        cont = check_next_page_exists(search_string, current_page + 1, url)
-        
-        # If either we've crossed date limit or there are no more pages
-        if not (cont and status):
-            break
-        
-        current_page += 1
+        # Allows us to ensure that we start each while loop at the first page requested
+        search_page = current_page
+
+        # Will continue in loop until we pass stop date or pass last page of search
+        while True:
+
+            search_field = str(article_dict['name_tokens']) + " + mayor"
+            pages_to_add, status = get_news_urls(search_field,
+                        article_dict['announcement_date'], search_page, url)
+
+            for article in pages_to_add:
+                pages.append(scrape_page(article_dict, article))
+
+            cont = check_next_page_exists(search_field, search_page + 1, url)
+
+            # If either we've crossed date limit or there are no more pages
+            if not (cont and status):
+                break
+
+            search_page += 1
 
     print("Writing defender.json")
-    with open("defender.json", "w") as f:
+    filepath = sys.path[-1] + '/data/defender.json'
+    with open(filepath, "w") as f:
         json.dump(pages, f, indent=1)
