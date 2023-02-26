@@ -2,14 +2,19 @@ import sys
 import json
 import lxml.html
 from datetime import datetime
-#from .utils import make_request, make_link_absolute
+from .utils import make_request
+
+current = os.path.dirname(os.path.realpath(__file__))
+parent = os.path.dirname(current)
+sys.path.append(parent)
+from utilities.data_retrieval import search_strings
 
 
-def scrape_all_pages(full_name, announcement_date):
+def scrape_all_pages(name_tokens, announcement_date):
     # Assumming passed in date is a date object
 
     # Retreive correct search url
-    current_url = get_first_search_page(full_name) 
+    current_url = get_first_search_page(name_tokens) 
     list_of_article_urls = []
     list_of_scraped_pages = []
 
@@ -24,8 +29,6 @@ def scrape_all_pages(full_name, announcement_date):
     for page_url in list_of_article_urls:
         page_dict = scrape_article(page_url)
         list_of_scraped_pages.append(page_dict)
-        print(page_dict)
-    
     
 def get_first_search_page(full_name):
     split_name = full_name.split()
@@ -97,7 +100,7 @@ def get_next_page(url):
         # Page has changed
         raise Exception ("Page has changed: check next link buttons/structure")
 
-def scrape_article(url):
+def scrape_article(url, candid, cand_name, name_tokens):
     page = make_request(url)
     root = lxml.html.fromstring(page.text)
 
@@ -115,20 +118,21 @@ def scrape_article(url):
     
     parsed_date = date_convert(date)
 
-    # Get article text 
+    # Get article text
+    # Note: this includes the author and editor; this should be removed in the cleaning 
     full_text = article[0].cssselect("div.entry-content")[0].text_content()
 
     # pass in the missing args? 
     full_article = {
         'website_title' : "Lawndale News",
         'url' : url,
-        'search_field' : None,
+        'search_field' : name_tokens,
         'article_title' : title,
         'article_text' : full_text,
-        'associated_candidate' : None,
+        'associated_candidate' : cand_name,
         'publication_date' : parsed_date,
-        'site_id' : None,
-        'cand_id' : None
+        'site_id' : "news_ln",
+        'cand_id' : candid
     }
 
     return full_article
