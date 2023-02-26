@@ -37,7 +37,6 @@ grandparent = os.path.dirname(parent)
 sys.path.append(grandparent)
 from utilities.data_retrieval import search_strings
 
-
 # Pull Candidiate Name tokens from database and put into a dictionary
 search_strings = search_strings(newspaper_id = 'news_ct')
 cand_name_dict = (search_strings.groupby('candidate_id')['name_tokens']
@@ -64,7 +63,9 @@ def article_selection(PROQUEST_FILES, NEWSPAPER_ID):
                 if re.search(name, article['Text']):
                     article['candidate_id'] = cand_id
                     article['name_tokens'] = name
-                    article['announcement_date'] = search_strings.loc[search_strings['candidate_id'] == cand_id,'announcement_date'].iloc[0]
+                    article['announcement_date'] = \
+                    search_strings.loc[search_strings['candidate_id'] 
+                                       == cand_id,'announcement_date'].iloc[0]
                     article['Newspaper_id'] = NEWSPAPER_ID
                     cand_articles[cand_id].append(article)
                     break
