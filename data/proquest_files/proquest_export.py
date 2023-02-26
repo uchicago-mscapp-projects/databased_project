@@ -31,6 +31,7 @@ import os
 import json
 import pandas as pd
 
+
 # Replace FILES_TO_EXPORT, PARQ_FILE_PATH and TZ_FILE_PATH with correct file paths
 FILES_TO_EXPORT = ""
 PARQ_FILE_PATH = ""
@@ -42,14 +43,14 @@ TZ_FILE_PATH = ""
 #TZ_FILE_PATH = "data/chicago_tribune_2022.tar.gz"
 
 # For Chicago Tribune 2023
-#FILES_TO_EXPORT = "data/Chicago_Tribune_-_Mayor_2023"
+#FILES_TO_EXPORT = "data/Chicago_Tribune_-_Mayor_-_2023"
 #PARQ_FILE_PATH = "data/chicago_tribune_2023.parquet"
 #TZ_FILE_PATH = "data/chicago_tribune_2023.tar.gz"
 
 # For Crain Business Journal
-#FILES_TO_EXPORT = "data/Crain_-_Mayor"
-#PARQ_FILE_PATH = "data/crain.parquet"
-#TZ_FILE_PATH = "data/crain.tar.gz"
+FILES_TO_EXPORT = "data/Crain_-_Mayor"
+PARQ_FILE_PATH = "data/crain.parquet"
+TZ_FILE_PATH = "data/crain.tar.gz"
 
 # Convert folder of xml files to list of JSON files
 file_list = os.listdir(FILES_TO_EXPORT)
@@ -68,6 +69,15 @@ for file in file_list:
 df = pd.DataFrame(list_of_file_data)
 df.columns = ["Data"]
 df.to_parquet(PARQ_FILE_PATH)
+
+# Compress with tarball
+# Chicago Tribune 2022
+#!tar -czvf data/chicago_tribune_2022.tar.gz data/chicago_tribune_2022.parquet
+
+# Chicago Tribune 2023
+#!tar -czvf data/chicago_tribune_2023.tar.gz data/chicago_tribune_2023.parquet
+
+# Crain Business
 !tar -czvf data/crain.tar.gz data/crain.parquet
 
 # Calculate final file size (to stay within Proquest file size limit)
