@@ -2,13 +2,31 @@ import sys
 import json
 import lxml.html
 from datetime import datetime
-from .utils import make_request
+import os
+import time
+import requests
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
 from utilities.data_retrieval import search_strings
 
+def scrape_ln():
+    # Retrieve all candidate information from database
+    cand_data = search_strings('news_ln')
+    cand_data = cand_data.to_dict('index')
+
+    json_list = []
+
+    # Run scraper for each unique token and output to json file
+    for _, val in cand_data.items():
+        article_list_for_token = scrape_all_pages(val['name_tokens'], val['announcement_date'])
+        json_list += json_list + article_list_for_token
+        
+    print("Writing hph.json")
+    filepath = sys.path[-1] + '/data/ln.json'
+    with open(filepath, "w") as f:
+        json.dump(json_list, f, indent=1)
 
 def scrape_all_pages(name_tokens, announcement_date):
     # Assumming passed in date is a date object
@@ -24,11 +42,12 @@ def scrape_all_pages(name_tokens, announcement_date):
         list_of_article_urls = list_of_article_urls + article_urls
         current_url = get_next_page(current_url)
 
-    
     # Scrape all pages
     for page_url in list_of_article_urls:
         page_dict = scrape_article(page_url)
         list_of_scraped_pages.append(page_dict)
+
+    return list_of_scraped_pages
     
 def get_first_search_page(full_name):
     split_name = full_name.split()
@@ -149,4 +168,11 @@ def date_convert(date):
         raise("Error in date parsing: Format has changed.")
        
 
+def make_request(url):
+    time.sleep(0.1)
+    resp = requests.get(url)
+    return resp
+
+if __name__ == "__main__":
+    scrape_ln()
     
