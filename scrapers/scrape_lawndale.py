@@ -20,7 +20,8 @@ def scrape_ln():
 
     # Run scraper for each unique token and output to json file
     for _, val in cand_data.items():
-        article_list_for_token = scrape_all_pages(val['name_tokens'], val['announcement_date'])
+        announcement_date = date_convert(val['announcement_date'])
+        article_list_for_token = scrape_all_pages(val['name_tokens'], announcement_date)
         json_list += json_list + article_list_for_token
         
     print("Writing hph.json")
