@@ -20,7 +20,7 @@ def scrape_ln():
 
     # Run scraper for each unique token and output to json file
     for _, val in cand_data.items():
-        announcement_date = date_convert(val['announcement_date'])
+        announcement_date = date_convert(val['announcement_date'], 1)
         article_list_for_token = scrape_all_pages(val['name_tokens'], announcement_date)
         json_list += json_list + article_list_for_token
         
@@ -90,7 +90,7 @@ def get_article_urls(url, announcement_date):
 
         for (article, date) in zip(articles, article_dates):
             # Check the date is not prior to announcement
-            parsed_date = date_convert(date.text_content())
+            parsed_date = date_convert(date.text_content(), 0)
             if parsed_date < announcement_date:
                 # Article was written prior to announcement
                 break
@@ -136,7 +136,7 @@ def scrape_article(url, candid, cand_name, name_tokens):
     if date[:3] == "on ":
         date = date[3:]
     
-    parsed_date = date_convert(date)
+    parsed_date = date_convert(date, 0)
 
     # Get article text
     # Note: this includes the author and editor; this should be removed in the cleaning 
@@ -157,9 +157,12 @@ def scrape_article(url, candid, cand_name, name_tokens):
 
     return full_article
 
-def date_convert(date):
+def date_convert(date, flag):
     try:
-        parsed_date = datetime.strptime(date, '%B %d, %Y')
+        if flag:
+            parsed_date = datetime.strptime(date, '%d-%B-%Y')
+        else:
+            parsed_date = datetime.strptime(date, '%B %d, %Y')
         return parsed_date
     except TypeError:
         raise("Error in date parsing: Format has changed. Type Error")
@@ -167,6 +170,7 @@ def date_convert(date):
         raise("Error in date parsing: Format has changed. Value Error")
     except: 
         raise("Error in date parsing: Format has changed.")
+
        
 
 def make_request(url):
