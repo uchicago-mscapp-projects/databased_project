@@ -22,6 +22,15 @@ STRINGS_TO_REMOVE = ["<meta name='ValidationSchema' content='http://www.w3.org/2
 
 def unpack_file(tar, parquet):
     '''
+    Extract compressed files from tarball and parquet and return as a pandas 
+    dataframe.
+    
+    Inputs:
+        tar (string): filepath to tar file
+        parquet (string): filepath to parquet file
+    Output:
+        df_jsons (pandas dataframe): pandas dataframe of JSON files, where 
+            each file is an article
     '''
     tz_file = tarfile.open(tar)
     parquet_file = tz_file.extractall("./")
@@ -30,8 +39,29 @@ def unpack_file(tar, parquet):
     tz_file.close()
     return df_jsons
 
-def convert_to_dict(tar, parquet, SITE_ID):
+def convert_to_dict(tar, parquet, newspaper_id):
     '''
+    Convert pandas dataframe of JSON's to dictionaries, containing the following
+    keys.
+        * 'candidate_id'
+        * 'name_tokens'
+        * 'announcement_date'
+        * 'Newspaper_id'
+        * 'Url'
+        * 'Title'
+        * 'Text' 
+        * 'date'
+    The values for the last 5 keys will be assigned in this function with data 
+    from the article JSON. The first 3 will be initialized to None, and will
+    have values assigned later when the articles are paired with a candidate.
+    
+    Inputs:
+        tar (string): filepath to tar file
+        parquet (string): filepath to parquet file
+        newspaper_id (string): Unique ID for the newspaper being analyzed
+    Output:
+        df_jsons (pandas dataframe): pandas dataframe of JSON files, where 
+            each file is an article
     '''
     url_counter = 0
     df_jsons = unpack_file(tar, parquet)
@@ -45,7 +75,7 @@ def convert_to_dict(tar, parquet, SITE_ID):
         title = row_json["RECORD"]['Obj']['TitleAtt']['Title']
         pub_date = row_json["RECORD"]['Obj']['NumericDate']
         result_dict = {'candidate_id': None, 'name_tokens': None, 
-                       'announcement_date': None, 'Newspaper_id': SITE_ID, 
+                       'announcement_date': None, 'Newspaper_id': newspaper_id, 
                        'Url': url, 'Title': title, 'Text': text_clean, 
                        'date': pub_date}
         all_results.append(result_dict)

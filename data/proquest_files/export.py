@@ -28,35 +28,34 @@ import os
 import json
 import pandas as pd
 
-
-# Replace FILES_TO_EXPORT, PARQ_FILE_PATH and TZ_FILE_PATH with correct file paths
-FILES_TO_EXPORT = ""
-PARQ_FILE_PATH = ""
-TZ_FILE_PATH = ""
+# Replace FILES_TO_EXPORT, parq_file_path and tz_file_path with correct file paths
+files_to_export = ""
+parq_file_path = ""
+tz_file_path = ""
 
 # For Chicago Tribune 2022
-#FILES_TO_EXPORT = "data/Chicago_Tribune_-_Mayor_-_2022"
-#PARQ_FILE_PATH = "data/chicago_tribune_2022.parquet"
-#TZ_FILE_PATH = "data/chicago_tribune_2022.tar.gz"
+#files_to_export  = "data/Chicago_Tribune_-_Mayor_-_2022"
+#parq_file_path = "data/chicago_tribune_2022.parquet"
+#tz_file_path = "data/chicago_tribune_2022.tar.gz"
 
 # For Chicago Tribune 2023
-#FILES_TO_EXPORT = "data/Chicago_Tribune_-_Mayor_-_2023"
-#PARQ_FILE_PATH = "data/chicago_tribune_2023.parquet"
-#TZ_FILE_PATH = "data/chicago_tribune_2023.tar.gz"
+#files_to_export  = "data/Chicago_Tribune_-_Mayor_-_2023"
+#parq_file_path = "data/chicago_tribune_2023.parquet"
+#tz_file_path = "data/chicago_tribune_2023.tar.gz"
 
 # For Crain Business Journal
-#FILES_TO_EXPORT = "data/Crain_-_Mayor"
-#PARQ_FILE_PATH = "data/crain.parquet"
-#TZ_FILE_PATH = "data/crain.tar.gz"
+#files_to_export  = "data/Crain_-_Mayor"
+#parq_file_path = "data/crain.parquet"
+#tz_file_path = "data/crain.tar.gz"
 
 # Convert folder of xml files to list of JSON files
-file_list = os.listdir(FILES_TO_EXPORT)
+file_list = os.listdir(files_to_export)
 file_list = [file for file in file_list if file.endswith("xml")]
 
 list_of_file_data = []
 
 for file in file_list:
-    file_path = os.path.join(FILES_TO_EXPORT, file)
+    file_path = os.path.join(files_to_export , file)
     with open(file_path, "r") as f:
         file_as_xml = f.read()
         file_as_dict = xmltodict.parse(file_as_xml)
@@ -65,7 +64,7 @@ for file in file_list:
 # Write Dataframe to parquet and then tarball to compress file size for export
 df = pd.DataFrame(list_of_file_data)
 df.columns = ["Data"]
-df.to_parquet(PARQ_FILE_PATH)
+df.to_parquet(parq_file_path)
 
 # Compress with tarball
 # Chicago Tribune 2022
@@ -75,8 +74,8 @@ df.to_parquet(PARQ_FILE_PATH)
 #!tar -czvf data/chicago_tribune_2023.tar.gz data/chicago_tribune_2023.parquet
 
 # Crain Business
-!tar -czvf data/crain.tar.gz data/crain.parquet
+#!tar -czvf data/crain.tar.gz data/crain.parquet
 
 # Calculate final file size (to stay within Proquest file size limit)
-file_size = os.path.getsize(TZ_FILE_PATH)
+file_size = os.path.getsize(tz_file_path)
 print(f"Size of file: {file_size/1000000} MB")

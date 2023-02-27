@@ -20,15 +20,15 @@ from process_articles import convert_to_dict
 
 #Strings to file paths - Run function once for each paper
 #Chicago Tribune
-#PROQUEST_FILES = [('chicago_tribune_2022.tar', 'data/chicago_tribune_2022.parquet'), 
+#proquest_files = [('chicago_tribune_2022.tar', 'data/chicago_tribune_2022.parquet'), 
 #                ('chicago_tribune_2023.tar', 'data/chicago_tribune_2023.parquet')]
-#NEWSPAPER_ID = "news_ct"
-#JSON_FILEPATH = '/data/chicago_tribune.json'
+#newspaper_id = "news_ct"
+#json_filepath = '/data/chicago_tribune.json'
 
 #Crain Business
-PROQUEST_FILES = [('crain.tar', 'data/crain.parquet')]
-NEWSPAPER_ID = "news_cc"
-JSON_FILEPATH = '/data/crain.json'
+proquest_files = [('crain.tar', 'data/crain.parquet')]
+newspaper_id = "news_cc"
+json_filepath = '/data/crain.json'
 
 # Import Search Strings Function to retrieve candidate names from database
 current = os.path.dirname(os.path.realpath(__file__))
@@ -43,15 +43,29 @@ cand_name_dict = (search_strings.groupby('candidate_id')['name_tokens']
                     .apply(lambda x: list(set(x)))
                     .to_dict())
 
-def article_selection(PROQUEST_FILES, NEWSPAPER_ID):
+def article_selection(proquest_files, newspaper_id):
     '''
-    Search list of dictionaries of articiles and find all mention.
+    Search list of dictionaries of articles and find all mentions of a specific 
+    candidate. If the candidate is mentioned in an article, append that artice 
+    to a list of articles for that candidate. The article lists are storted in 
+    a dictionary where the key is the candidate ID, and the value is a list
+    of dictionaries, one for each article. The values for 'candidate_id', 
+    'name_tokens', 'announcement_date' within the article dictionary will also 
+    be updated at this stage from None to the correct value.
+
+    Inputs:
+        proquest_files (tuple of strings): tuple of strings with the tar
+            file path and the parquet file path
+        newspaper_id (string): Unique ID for the newspaper being analyzed
+    Output:
+        df_jsons (pandas dataframe): pandas dataframe of JSON files, where 
+            each file is an article
     '''
     all_articles = []
 
-    for file in PROQUEST_FILES:
+    for file in proquest_files:
         tar, parquet = file
-        articles = convert_to_dict(tar, parquet, NEWSPAPER_ID)
+        articles = convert_to_dict(tar, parquet, newspaper_id)
         all_articles += articles
     
     cand_ids = search_strings['candidate_id'].unique()
@@ -66,20 +80,32 @@ def article_selection(PROQUEST_FILES, NEWSPAPER_ID):
                     article['announcement_date'] = \
                     search_strings.loc[search_strings['candidate_id'] 
                                        == cand_id,'announcement_date'].iloc[0]
-                    article['Newspaper_id'] = NEWSPAPER_ID
+                    article['Newspaper_id'] = newspaper_id
                     cand_articles[cand_id].append(article)
                     break
 
     return cand_articles
 
-def export_jsons(PROQUEST_FILES, NEWSPAPER_ID):
+def export_jsons(proquest_files, newspaper_id, json_filepath):
+    '''
+    Export lists of articles to JSON filtes in the data directory. 
+    
+    Inputs:
+        proquest_files (list of tuples of strings): tuple of strings with the 
+            tar file path and the parquet file path
+        newspaper_id (string): Unique ID for the newspaper being analyzed
+        json_filepath  (strong): file path to the JSON file to export
+    
+    Output:
+       Function writes list of JSON files to a JSON file in data director
+    '''
     all_articles = []
-    article_dict = article_selection(PROQUEST_FILES, NEWSPAPER_ID)
+    article_dict = article_selection(proquest_files, newspaper_id)
     for articles in article_dict.values():
         all_articles += articles
     
     print("Writing json")
-    filepath = sys.path[-2] + JSON_FILEPATH
+    filepath = sys.path[-1] + json_filepath 
     with open(filepath, "w") as f:
         json.dump(all_articles, f, indent=1)   
 
