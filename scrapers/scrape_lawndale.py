@@ -20,11 +20,15 @@ def scrape_ln():
 
     # Run scraper for each unique token and output to json file
     for _, val in cand_data.items():
+
         announcement_date = date_convert(val['announcement_date'], 1)
-        article_list_for_token = scrape_all_pages(val['name_tokens'], announcement_date)
-        json_list += json_list + article_list_for_token
         
-    print("Writing hph.json")
+        article_list_for_token = scrape_all_pages(val['name_tokens'], announcement_date)
+        print("here 10")
+        json_list.append(article_list_for_token)
+        print("here 11")
+        
+    print("Writing ln.json")
     filepath = sys.path[-1] + '/data/ln.json'
     with open(filepath, "w") as f:
         json.dump(json_list, f, indent=1)
@@ -40,14 +44,21 @@ def scrape_all_pages(name_tokens, announcement_date):
     while(current_url): 
         # Scrape pages
         article_urls = get_article_urls(current_url, announcement_date)
+        print("here 1")
         list_of_article_urls = list_of_article_urls + article_urls
+        print("here 2")
         current_url = get_next_page(current_url)
+        print("here 3")
 
+    print("here 4")
     # Scrape all pages
     for page_url in list_of_article_urls:
+        print("here 5")
         page_dict = scrape_article(page_url)
+        print("here 6")
         list_of_scraped_pages.append(page_dict)
-
+        print("here 7")
+    print("here 8")
     return list_of_scraped_pages
     
 def get_first_search_page(full_name):
@@ -76,6 +87,7 @@ def get_article_urls(url, announcement_date):
     rows = root.cssselect("#main #container #content")
     elements = rows[0].cssselect("div.gridrow")
 
+    
     # Current structure of page is 3 containers, each which has at most two articles
     if len(elements) > 5:
         raise Exception ("Page structure has changed: more than 5 containers for articles")
@@ -106,21 +118,31 @@ def get_next_page(url):
     page = make_request(url)
     root = lxml.html.fromstring(page.text)
 
+    # Check no search results
+    if root.cssselect("body")[0].get("class") == 'search search-no-results custom-background':
+        return None
+
     rows = root.cssselect("#main #container #content")
     page_nav = rows[0].cssselect("div")[-1]
+    print(url)
     last_link = page_nav.cssselect("a")[-1]
+    
 
     if last_link.get("class") == "current":
         # this is the last page
         return None
     elif last_link.text_content() == "Next »":
         link_to_next_page = last_link.get("href")
+    
         return link_to_next_page
     else:
+        # single page of results
+        return None
         # Page has changed
-        raise Exception ("Page has changed: check next link buttons/structure")
+        #raise Exception ("Page has changed: check next link buttons/structure")
 
-def scrape_article(url, candid, cand_name, name_tokens):
+#def scrape_article(url, candid, cand_name, name_tokens):
+def scrape_article(url):
     page = make_request(url)
     root = lxml.html.fromstring(page.text)
 
@@ -146,13 +168,13 @@ def scrape_article(url, candid, cand_name, name_tokens):
     full_article = {
         'website_title' : "Lawndale News",
         'url' : url,
-        'search_field' : name_tokens,
+        #'search_field' : name_tokens,
         'article_title' : title,
         'article_text' : full_text,
-        'associated_candidate' : cand_name,
+        #'associated_candidate' : cand_name,
         'publication_date' : parsed_date,
         'site_id' : "news_ln",
-        'cand_id' : candid
+        #'cand_id' : candid
     }
 
     return full_article
@@ -160,7 +182,7 @@ def scrape_article(url, candid, cand_name, name_tokens):
 def date_convert(date, flag):
     try:
         if flag:
-            parsed_date = datetime.strptime(date, '%d-%B-%Y')
+            parsed_date = datetime.strptime(date, '%d-%b-%y')
         else:
             parsed_date = datetime.strptime(date, '%B %d, %Y')
         return parsed_date
