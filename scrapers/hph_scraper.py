@@ -1,8 +1,13 @@
 """
-This is the Hyde Park Herald Scraper Module
+Project: Analyzing News Coverage of Chicago's 2023 Mayoral Election
+Team: dataBased
+File Name: hph_scraper.py
+Author: Abe Burton
 
 Outputs:
-    List of json objects at (location)
+    hph.json in data folder
+    
+Description: Scraper for Hyde Park Herald that outputs data in a json file
 """
 import json
 import lxml.html
