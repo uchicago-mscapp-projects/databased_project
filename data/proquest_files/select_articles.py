@@ -20,10 +20,10 @@ from process_articles import convert_to_dict
 
 #Strings to file paths - Run function once for each paper
 #Chicago Tribune
-#proquest_files = [('chicago_tribune_2022.tar', 'data/chicago_tribune_2022.parquet'), 
-#                ('chicago_tribune_2023.tar', 'data/chicago_tribune_2023.parquet')]
-#newspaper_id = "news_ct"
-#json_filepath = '/data/chicago_tribune.json'
+proquest_files = [('chicago_tribune_2022.tar', 'data/chicago_tribune_2022.parquet'), 
+                ('chicago_tribune_2023.tar', 'data/chicago_tribune_2023.parquet')]
+newspaper_id = "news_ct"
+json_filepath = '/data/chicago_tribune.json'
 
 #Crain Business
 proquest_files = [('crain.tar', 'data/crain.parquet')]
