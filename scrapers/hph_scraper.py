@@ -1,8 +1,13 @@
 """
-This is the Hyde Park Herald Scraper Module
+Project: Analyzing News Coverage of Chicago's 2023 Mayoral Election
+Team: dataBased
+File Name: hph_scraper.py
+Author: Abe Burton
 
 Outputs:
-    List of json objects at (location)
+    hph.json in data folder
+    
+Description: Scraper for Hyde Park Herald that outputs data in a json file
 """
 import json
 import lxml.html
@@ -10,6 +15,7 @@ import requests
 import pandas as pd
 import os
 import sys
+import time
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
@@ -48,9 +54,13 @@ def get_article_urls(url):
     Outputs:
         urls (lst of strings): List of article urls
     """
-    response = requests.get(url).text
-    root = lxml.html.fromstring(response)
-    links = root.xpath("/html/body/div[4]/div/div[6]/section[2]/div[2]/div[1]/div/div[3]/article[*]/div[1]/div[2]/div[2]/h3/a")
+    try:
+        response = requests.get(url).text
+        root = lxml.html.fromstring(response)
+        links = root.xpath("/html/body/div[4]/div/div[6]/section[2]/div[2]/div[1]/div/div[3]/article[*]/div[1]/div[2]/div[2]/h3/a")
+    except:
+        print(f"Couldn't get list of articles for {url}")
+        return False
     
     urls = []
     for link in links:
@@ -69,28 +79,24 @@ def scrape_article(url):
     Outputs:
         article_dataset_row (json): a json object with article dataset info
     """
-    url = 'https://www.hpherald.com/' + url
-    response = requests.get(url).text
-    root = lxml.html.fromstring(response)
-    date = root.xpath('//time[1]')[0].text_content()
-    date = str(pd.to_datetime(date)).split()[0]
-    # do we really need what the search field was?
-    title = root.xpath('//article/div[3]/header/h1/span').text_content()
-    # look at how to make this more relative so it breaks less!
-    text = root.xpath('//article//p').text_content()
-    # don't see any tags
-    site_id = 'news_hp'
-    cand_id = '' # figure out passing this through the functions
-    
-    # create json object with these things and return it
-    # TODO figure out where this fits in. 
-    print("Writing defender.json")
-    with open("defender.json", "w") as f:
-        json.dump(pages, f, indent=1)
-        
-    # TODO lee - or is writing to an article dictionary each time and then turning putting all
-    # dictionary items in a list and then making that json object
-    return article_dataset_row
+    try:    
+        url = 'https://www.hpherald.com/' + url
+        response = requests.get(url).text
+        root = lxml.html.fromstring(response)
+        date = root.xpath('//time[1]')[0].text_content()
+        date = str(pd.to_datetime(date)).split()[0]
+        title = root.xpath('//article/div[3]/header/h1/span')[0].text_content()
+        paragraphs = root.cssselect("p")
+        text = ''
+        for paragraph in paragraphs:
+            if paragraph.text_content() == '{{description}}':
+                break
+            text += paragraph.text_content()
+    except:
+        print(f'Couldnt get article info for {url}')
+        return False
+
+    return url, title, text, date
 
 
 def hph_scrape():
@@ -98,23 +104,35 @@ def hph_scrape():
     Runs the scraper to get all article info from HPH
     
     Outputs:
-        TBD
+        hph.json: json file with a list of json objects of article data
     """
     # get the input info
     cand_data = search_strings('news_hp')
-    for row in cand_data.itertuples(index=False):
-        url = build_url(name_token=row.name_tokens, start_date=row.announcement_date)
+    cand_data = cand_data.to_dict('index')
+    
+    # search each token and scrape all article results for them
+    json_list = []
+    for _, val in cand_data.items():
+        url = build_url(name_token=val['name_tokens'], start_date=val['announcement_date'])
         article_links = get_article_urls(url)
         
-        json_list = []
-        for link in article_links:
-            json_list.append(scrape_article(link))
-            
-        # TODO where do I want to export this? Is this really the format?
-        # export one json file that contains all article objects to the data folder
-        # TODO send filepath code to lee-or so he can write to data directory
-        # TODO add in sleep
-    
+        if article_links:
+            for link in article_links:
+                article_dict = val
+                article_data = scrape_article(link)
+                if article_data:
+                    url, title, text, date = article_data
+                    article_dict['url'] = url
+                    article_dict['title'] = title
+                    article_dict['text'] = text
+                    article_dict['date'] = date
+                    json_list.append(article_dict)
+                    time.sleep(.1)
+        
+    print("Writing hph.json")
+    filepath = sys.path[-1] + '/data/hph.json'
+    with open(filepath, "w") as f:
+        json.dump(json_list, f, indent=1)    
 
 if __name__ == "__main__":
     hph_scrape()

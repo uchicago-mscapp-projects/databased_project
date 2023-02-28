@@ -13,10 +13,7 @@ lxml = "^4.9.2"
 numpy = "^1.24.2"
 seaborn = "^0.12.2"
 plotly = "^5.13.0"
-cssselect = "^1.2.0"
-selenium = "^4.8.2"
-requests = "^2.28.2"
-datetime = "^5.0"
+pyarrow = "^11.0.0"
 
 
 [build-system]

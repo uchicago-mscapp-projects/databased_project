@@ -1,7 +1,12 @@
 """
-This module contains functions that retrieve data from the sqlite database.
-There are functions for returning specific datasets and for getting the table
-used as inputs in the scraper functions.
+Project: Analyzing News Coverage of Chicago's 2023 Mayoral Election
+Team: dataBased
+File Name: data_retrieval.py
+Author: Abe Burton (news_database.db created as part of this as well)
+    
+Description: This module contains functions that pull data from the sqlite
+database. It builds queries, pulls specific data sets, and has a function that
+returns the dataframe with the content the scrapers need.
 """
 
 import sqlite3
