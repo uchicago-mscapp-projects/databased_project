@@ -20,13 +20,9 @@ def scrape_ln():
 
     # Run scraper for each unique token and output to json file
     for _, val in cand_data.items():
-
         announcement_date = date_convert(val['announcement_date'], 1)
-        
         article_list_for_token = scrape_all_pages(val['name_tokens'], announcement_date)
-        print("here 10")
         json_list.append(article_list_for_token)
-        print("here 11")
         
     print("Writing ln.json")
     filepath = sys.path[-1] + '/data/ln.json'
@@ -43,22 +39,19 @@ def scrape_all_pages(name_tokens, announcement_date):
 
     while(current_url): 
         # Scrape pages
+        print(current_url)
         article_urls = get_article_urls(current_url, announcement_date)
-        print("here 1")
+        print("articles on this page:")
+        print(len(article_urls))
         list_of_article_urls = list_of_article_urls + article_urls
-        print("here 2")
         current_url = get_next_page(current_url)
-        print("here 3")
 
-    print("here 4")
+
     # Scrape all pages
     for page_url in list_of_article_urls:
-        print("here 5")
         page_dict = scrape_article(page_url)
-        print("here 6")
         list_of_scraped_pages.append(page_dict)
-        print("here 7")
-    print("here 8")
+
     return list_of_scraped_pages
     
 def get_first_search_page(full_name):
@@ -101,11 +94,12 @@ def get_article_urls(url, announcement_date):
             raise Exception ("Page structure has changed: more than 2 articles in container")
 
         for (article, date) in zip(articles, article_dates):
+            
             # Check the date is not prior to announcement
             parsed_date = date_convert(date.text_content(), 0)
             if parsed_date < announcement_date:
                 # Article was written prior to announcement
-                break
+                continue
 
             article_url = article[0].cssselect("a")[0].get("href")
 
@@ -124,7 +118,6 @@ def get_next_page(url):
 
     rows = root.cssselect("#main #container #content")
     page_nav = rows[0].cssselect("div")[-1]
-    print(url)
     last_link = page_nav.cssselect("a")[-1]
     
 
