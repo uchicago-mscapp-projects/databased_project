@@ -3,7 +3,7 @@ Project: Analyzing News Coverage of Chicago's 2023 Mayoral Election
 Team: dataBASED
 
 File name: export.py
-Associated files: process_articles.py, select_articles.py
+Associated files: None
 Primary Author: Kathryn Link-Oberstar
 Addiditional Authors: None
 
