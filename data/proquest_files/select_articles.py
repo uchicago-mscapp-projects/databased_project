@@ -16,6 +16,7 @@ import sys
 import re
 import json
 import pandas as pd
+from copy import deepcopy
 from process_articles import convert_to_dict
 
 #Strings to file paths - Run function once for each paper
@@ -75,15 +76,15 @@ def article_selection(proquest_files, newspaper_id):
         for cand_id, names in cand_name_dict.items():
             for name in names:
                 if re.search(name, article['Text']):
-                    article['candidate_id'] = cand_id
-                    article['name_tokens'] = name
-                    article['announcement_date'] = \
+                    article_copy = deepcopy(article)
+                    article_copy['candidate_id'] = cand_id
+                    article_copy['name_tokens'] = name
+                    article_copy['announcement_date'] = \
                     search_strings.loc[search_strings['candidate_id'] 
-                                       == cand_id,'announcement_date'].iloc[0]
-                    article['Newspaper_id'] = newspaper_id
-                    cand_articles[cand_id].append(article)
+                                    == cand_id,'announcement_date'].iloc[0]
+                    article_copy['Newspaper_id'] = newspaper_id
+                    cand_articles[cand_id].append(article_copy)
                     break
-
     return cand_articles
 
 def export_jsons(proquest_files, newspaper_id, json_filepath):
