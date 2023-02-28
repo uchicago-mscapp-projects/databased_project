@@ -27,13 +27,16 @@ from utilities.data_retrieval import search_strings
 
 #Strings to file paths - Run function once for each paper
 #Chicago Tribune
-proquest_files = [(sys.path[-1] + '/data/proquest_files/chicago_tribune_2022.tar', 'data/chicago_tribune_2022.parquet'), 
-                (sys.path[-1] + '/data/proquest_files/chicago_tribune_2023.tar', 'data/chicago_tribune_2023.parquet')]
+proquest_files = [(sys.path[-1] + '/data/proquest_files/chicago_tribune_2022.tar', 
+                   'data/chicago_tribune_2022.parquet'), 
+                (sys.path[-1] + '/data/proquest_files/chicago_tribune_2023.tar', 
+                 'data/chicago_tribune_2023.parquet')]
 newspaper_id = "news_ct"
 json_filepath = '/data/chicago_tribune.json'
 
 #Crain Business
-proquest_files = [(sys.path[-1] + '/data/proquest_files/crain.tar', 'data/crain.parquet')]
+proquest_files = [(sys.path[-1] + '/data/proquest_files/crain.tar', 
+                   'data/crain.parquet')]
 newspaper_id = "news_cc"
 json_filepath = '/data/crain.json'
 
