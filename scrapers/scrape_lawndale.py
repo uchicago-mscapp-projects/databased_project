@@ -31,6 +31,8 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 from utilities.data_retrieval import search_strings
 
+ELECTION_DAY = datetime(2023, 2, 28)
+
 def scrape_ln():
     """
     Scrapes all articles from lawndale news that are associated with the candidates 
@@ -145,7 +147,7 @@ def get_article_urls(url, announcement_date):
             
             # Check the date is not prior to announcement
             parsed_date = date_convert(date.text_content(), 0)
-            if parsed_date < announcement_date:
+            if parsed_date < announcement_date or parsed_date > ELECTION_DAY:
                 # Article was written prior to announcement
                 continue
 
@@ -192,7 +194,7 @@ def get_next_page(url):
 
 
 def scrape_article(url, cand_id, name_tokens, announcement_date):
-     """
+    """
     This function takes a URL to a Lawndale newspaper article page and its repesective 
     database tokens and returns a dictonary with database tokens (candidate_id,
     name_tokens, announcement_date, and newspaper_id), url to article, article title,
@@ -215,7 +217,6 @@ def scrape_article(url, cand_id, name_tokens, announcement_date):
             * text:         the text content of the article
             * date:         the description of the park
     """
-    
     page = make_request(url)
     root = lxml.html.fromstring(page.text)
 
