@@ -9,7 +9,7 @@ Addiditional Authors: None
 
 Description: Search through a list of article dictionaries using candidate name
 tokens and assign articles to a candidate if their name appears in that article.
-Export these dictionaries as 
+Export these dictionaries as a list of JSONs.
 '''
 import os
 import sys
@@ -19,7 +19,6 @@ import pandas as pd
 from copy import deepcopy
 from process_articles_ct_cc import convert_to_dict
 
-# Import Search Strings Function to retrieve candidate names from database
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
@@ -40,13 +39,6 @@ proquest_files = [(sys.path[-1] + '/data/proquest_files/crain.tar',
 newspaper_id = "news_cc"
 json_filepath = '/data/crain.json'
 
-
-# Pull Candidiate Name tokens from database and put into a dictionary
-search_strings = search_strings(newspaper_id = 'news_ct')
-cand_name_dict = (search_strings.groupby('candidate_id')['name_tokens']
-                    .apply(lambda x: list(set(x)))
-                    .to_dict())
-
 def article_selection(proquest_files, newspaper_id):
     '''
     Search list of dictionaries of articles and find all mentions of a specific 
@@ -65,8 +57,12 @@ def article_selection(proquest_files, newspaper_id):
         df_jsons (pandas dataframe): pandas dataframe of JSON files, where 
             each file is an article
     '''
+    search_strings = search_strings(newspaper_id = newspaper_id)
+    cand_name_dict = (search_strings.groupby('candidate_id')['name_tokens']
+                    .apply(lambda x: list(set(x)))
+                    .to_dict())
+    
     all_articles = []
-
     for file in proquest_files:
         tar, parquet = file
         articles = convert_to_dict(tar, parquet, newspaper_id)

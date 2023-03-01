@@ -15,7 +15,6 @@ import tarfile
 import json
 import pandas as pd
 
-# List of strings to remove from text
 STRINGS_TO_REMOVE = ["<meta name='ValidationSchema' content='http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd'/>",
 "</i>", "</p>", "</body>", "</html>", "<head>", "<title>", "</title>", 
 "</head>", "<body>", "<p>", "<html>", "<b>", "<i>", "</b>"]
