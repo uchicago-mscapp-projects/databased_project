@@ -10,12 +10,12 @@ Addiditional Authors: None
 Description: Decompress Proquest Data Files, and process articles to create a 
 list of dictionaries, one for each article.
 '''
+import sys
 import re
 import tarfile
 import json
 import pandas as pd
 
-# List of strings to remove from text
 STRINGS_TO_REMOVE = ["<meta name='ValidationSchema' content='http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd'/>",
 "</i>", "</p>", "</body>", "</html>", "<head>", "<title>", "</title>", 
 "</head>", "<body>", "<p>", "<html>", "<b>", "<i>", "</b>"]
@@ -33,7 +33,7 @@ def unpack_file(tar, parquet):
             each file is an article
     '''
     tz_file = tarfile.open(tar)
-    parquet_file = tz_file.extractall("./")
+    parquet_file = tz_file.extractall(sys.path[-1] + 'data/proquest_files')
     parquet_file = tz_file.extractfile(parquet)
     df_jsons = pd.read_parquet(parquet_file)
     tz_file.close()
