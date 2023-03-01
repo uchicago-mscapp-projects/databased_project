@@ -10,6 +10,7 @@ Addiditional Authors: None
 Description: Decompress Proquest Data Files, and process articles to create a 
 list of dictionaries, one for each article.
 '''
+import sys
 import re
 import tarfile
 import json
@@ -32,7 +33,7 @@ def unpack_file(tar, parquet):
             each file is an article
     '''
     tz_file = tarfile.open(tar)
-    parquet_file = tz_file.extractall("./")
+    parquet_file = tz_file.extractall(sys.path[-1] + 'data/proquest_files')
     parquet_file = tz_file.extractfile(parquet)
     df_jsons = pd.read_parquet(parquet_file)
     tz_file.close()

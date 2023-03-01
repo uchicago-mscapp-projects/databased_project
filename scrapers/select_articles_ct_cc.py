@@ -57,8 +57,8 @@ def article_selection(proquest_files, newspaper_id):
         df_jsons (pandas dataframe): pandas dataframe of JSON files, where 
             each file is an article
     '''
-    search_strings = search_strings(newspaper_id = newspaper_id)
-    cand_name_dict = (search_strings.groupby('candidate_id')['name_tokens']
+    search_str = search_strings(newspaper_id = newspaper_id)
+    cand_name_dict = (search_str.groupby('candidate_id')['name_tokens']
                     .apply(lambda x: list(set(x)))
                     .to_dict())
     
@@ -68,7 +68,7 @@ def article_selection(proquest_files, newspaper_id):
         articles = convert_to_dict(tar, parquet, newspaper_id)
         all_articles += articles
     
-    cand_ids = search_strings['candidate_id'].unique()
+    cand_ids = search_str['candidate_id'].unique()
     cand_articles = {val: [] for val in cand_ids}
 
     for article in all_articles:
@@ -79,7 +79,7 @@ def article_selection(proquest_files, newspaper_id):
                     article_copy['candidate_id'] = cand_id
                     article_copy['name_tokens'] = name
                     article_copy['announcement_date'] = \
-                    search_strings.loc[search_strings['candidate_id'] 
+                    search_str.loc[search_str['candidate_id'] 
                                     == cand_id,'announcement_date'].iloc[0]
                     article_copy['Newspaper_id'] = newspaper_id
                     cand_articles[cand_id].append(article_copy)
