@@ -1,10 +1,16 @@
 """
+Project: Analyzing News Coverage of Chicago's 2023 Mayoral Election
+Team: dataBased
+File Name: triibe.py
 Author: Lee-Or Bentovim
-Last Modified: 2/25/23
 
-This module is meant to take a search string and search it on the Triibe website,
-and then scrapes associated URL's, outputting them into a json file called
-triibe.json
+Outputs:
+    triibe.json in data folder
+
+Description:
+    This module is meant to take a search string and search it on the Triibe website,
+    and then scrapes associated URL's, outputting them into a json file called
+    triibe.json
 
 Some of the original structure of this file comes from Lee-Or's PA2 work
 """
@@ -14,12 +20,17 @@ import os
 import json
 import lxml.html
 import pandas as pd
-from utilities.data_retrieval import search_strings
+from datetime import datetime
 from utils import make_request
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
+from utilities.data_retrieval import search_strings
+
+# We are stopping our search at Feb 27, 2023
+END_DATE = datetime(2023,2,27)
+
 
 def scrape_page(article_dict, url):
     """
@@ -58,7 +69,7 @@ def scrape_page(article_dict, url):
     date = pd.to_datetime(date)
 
     # Checking if the article is from before candidate announced
-    if date < pd.to_datetime(article_dict['announcement_date']):
+    if date < pd.to_datetime(article_dict['announcement_date']) or date > END_DATE:
         return article_dict, False
 
     article_dict['date'] = date.date()
@@ -139,7 +150,7 @@ def crawl(url="https://thetriibe.com/"):
     # Run one while loop for each search term
     for article_dict in df_dicts.values():
 
-        search_field = str(article_dict['name_tokens']) + "+mayor"
+        search_field = '"' + str(article_dict['name_tokens']) + '"+mayor'
         pages_to_add = get_news_urls(search_field, url)
 
         for article in pages_to_add:
