@@ -3,27 +3,41 @@ Project: Analyzing News Coverage of Chicago's 2023 Mayoral Election
 Team: dataBASED
 
 File name: clean.py
-Associated files: 
-Primary Authors: Kathryn Link-Oberstar, Maddie Roberts
-    * <Function Name> - <Function Author>
+Associated files: None
+Primary Authors: Kathryn Link-Oberstar
 
 Clean JSON files of scraped articles.
 '''
-import unicodedata
+import csv
 import sys
 import re
 import os
 import pandas as pd
 import json
+
 from data_retrieval import search_strings
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
 
-STOP_WORDS = ["a", "an", "the", "this", "that", "of", "for", "or",
-              "and", "on", "to", "be", "if", "in", "is",
-              "at", "it", "chicago", "mayor", "mayoral", "s", "t", "u.s."]
+STOP_WORDS = ['ourselves', 'hers', 'between', 'yourself', 'but', 'again', 
+               'there', 'about', 'once', 'during', 'out', 'very', 'having', 
+               'with', 'they', 'own', 'an', 'be', 'some', 'for', 'do', 'its', 
+               'yours', 'such', 'into', 'of', 'most', 'itself', 'other', 'off', 
+               'is', 's', 'am', 'or', 'who', 'as', 'from', 'him', 'each', 'the', 
+               'themselves', 'until', 'below', 'are', 'we', 'these', 'your', 
+               'his', 'through', 'don', 'nor', 'me', 'were', 'her', 'more', 
+               'himself', 'this', 'down', 'should', 'our', 'their', 'while', 
+               'above', 'both', 'up', 'to', 'ours', 'had', 'she', 'all', 'no', 
+               'when', 'at', 'any', 'before', 'them', 'same', 'and', 'been', 'have', 
+               'in', 'will', 'on', 'does', 'yourselves', 'then', 'that', 'because', 
+               'what', 'over', 'why', 'so', 'can', 'did', 'not', 'now', 'under', 
+               'he', 'you', 'herself', 'has', 'just', 'where', 'too', 'only', 
+               'myself', 'which', 'those', 'i', 'after', 'few', 'whom', 't', 
+               'being', 'if', 'theirs', 'my', 'against', 'a', 'by', 'doing', 
+               'it', 'how', 'further', 'was', 'here', 'than', 'chicago', 'mayor', 
+               'mayoral', 'we\'ve', 'we\'re', 'it\'s', 'he\s', 'she\'s']
 
 STOP_WORDS_FORMAT = r'\b('+'|'.join(STOP_WORDS)+r')\b'
 
@@ -38,25 +52,25 @@ def clean(filepath, paper_id):
         articles = json.load(f)
 
     for article in articles:
-        article["Clean Title"] = clean_title(article)
-        article["Clean Text"] = clean_text(article)
-        article["Clean Strings"] = clean_sentences(article, article["Clean Text"], paper_id)
+        article["clean_title"] = clean_title(article)
+        article["clean_text"] = clean_text(article)
+        article["clean_sentences"] = clean_sentences(article, article["clean_text"], paper_id)
     return articles
 
 def clean_title(article):
-    clean_title = article['Title'].strip().lower()
-    remove_punct = re.sub(r'[^\w\s]', '', clean_title)
-    remove_words_title = re.sub(STOP_WORDS_FORMAT,' ', remove_punct)
-    clean_title = re.sub(r'\s+',' ', remove_words_title)
+    clean_title = article['title'].strip().lower()
+    remove_words_title = re.sub(STOP_WORDS_FORMAT,' ', clean_title)
+    remove_punct = re.sub(r'[^\w\s]', '', remove_words_title)
+    clean_title = re.sub(r'\s+',' ', remove_punct)
     return clean_title
 
 def clean_text(article):
-    clean_text = article['Text'].lower()
-    remove_ald = re.sub(r'(ald\.|rep\.)',' ', clean_text)
+    clean_text = article['text'].lower()
+    remove_words = re.sub(STOP_WORDS_FORMAT,' ', clean_text)
+    remove_ald = re.sub(r'(ald\.|rep\.)',' ', remove_words)
     remove_punct = re.sub(r'[^\w\s.!?]+',' ', remove_ald) # remove tabs
     replace_end = re.sub(r'[\n?!]', '.', remove_punct)
-    remove_words = re.sub(STOP_WORDS_FORMAT,' ', replace_end)
-    clean_text = re.sub(r'\s+',' ', remove_words)
+    clean_text = re.sub(r'\s+',' ', replace_end)
     return clean_text
 
 def clean_sentences(article, clean_text, paper_id):
@@ -75,7 +89,10 @@ def clean_sentences(article, clean_text, paper_id):
                         break
     return ' '.join(final_sent)
 
-# what to call ... papers = [("/data/crain.json", 'news_cc'), ("/data/chicago_tribune.json", 'news_ct')]
+papers = [("/data/crain.json", 'news_cc'), ("/data/chicago_tribune.json", 'news_ct'), 
+          ("/data/defender.json", 'news_cd'), ("/data/hph.json", 'news_hp'), 
+          ("/data/ln.json", 'news_ln'), ("/data/triibe.json", 'news_tt')]
+
 # Export Clean Articles
 def export_clean(papers):
     '''
@@ -89,10 +106,29 @@ def export_clean(papers):
     for paper in papers:
         filename, paper_id = paper
         all_articles += clean(filename, paper_id)
+    
     df = pd.DataFrame(all_articles)
-    print(df)
-    ## For Debugging
+    dedupe_df = df.drop_duplicates(subset = ['candidate_id', 'url'], 
+                                keep = 'last').reset_index(drop = True)
+    print(dedupe_df)
+    print("Writing CSV")
+    filepath = sys.path[-1] + '/data/clean_articles.csv'
+    dedupe_df.to_csv(filepath, index=False)
+
+    """
+    print("Writing CSV")
+    filepath = sys.path[-1] + '/data/clean_articles.csv'
+    keys = ["candidate_id", "name_tokens", "announcement_date", "newspaper_id", 
+            "url", "date", "title", "text", "clean_title", "clean_text", 
+            "clean_sentences"]
+    with open(filepath, 'w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=keys)
+        writer.writeheader()
+        for article in all_articles:
+            writer.writerow(article)
+    """
+
+    # For Debugging
     print("Writing json")
     filepath = sys.path[-1] + '/data/clean_articles.json'
-    with open(filepath, "w") as f:
-        json.dump(all_articles, f, indent=1)
+    df.to_json(filepath, orient='records')
