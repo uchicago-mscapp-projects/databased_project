@@ -1,10 +1,16 @@
 """
+Project: Analyzing News Coverage of Chicago's 2023 Mayoral Election
+Team: dataBased
+File Name: defender.py
 Author: Lee-Or Bentovim
-Last Modified: 2/25/23
 
-This module is meant to take a search string and search it on the Chicago Defender
-website, and then scrapes associated URL's, outputting them into a json file called
-defender.json
+Outputs:
+    defender.json in data folder
+
+Description:
+    This module is meant to take a search string and search it on the Chicago Defender
+    website, and then scrapes associated URL's, outputting them into a json file called
+    defender.json
 
 Some of the original structure of this file comes from Lee-Or's PA2 work
 """
@@ -14,12 +20,16 @@ import os
 import json
 import lxml.html
 import pandas as pd
-from utilities.data_retrieval import search_strings
 from utils import make_request
+from datetime import datetime
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
+from utilities.data_retrieval import search_strings
+
+# We are stopping our search at Feb 27, 2023
+END_DATE = datetime(2023,2,27)
 
 def scrape_page(article_dict, url):
     """
@@ -85,8 +95,7 @@ def get_news_urls(search_string, stop_date, current_page = 1,
     """
 
     # The string needs to be "mayor + associated_name", otherwise will fix here
-    search = url + str(current_page) + "/?s=" + search_string
-
+    search = url + str(current_page) + '/?s=' + search_string
     urls = []
 
     html = make_request(search).text
@@ -110,14 +119,16 @@ def get_news_urls(search_string, stop_date, current_page = 1,
         if len(links) != len(dates):
             raise Exception("Dates and Links don't match")
 
-        # Stopping Condition: Date is before candidate filed
+        # Stopping Condition: Date is before candidate filed 
+        # or after end of tracking period
         stop_date = pd.to_datetime(stop_date)
         if date_list[i] < stop_date:
             return urls, False
-
-        # Add URL to the list
-        full_url = link.get("href")
-        urls.append(full_url)
+        
+        # If the date is before our end date, add info
+        if date_list[i] < END_DATE:
+            full_url = link.get("href")
+            urls.append(full_url)
 
     return urls, True
 
@@ -135,7 +146,7 @@ def check_next_page_exists(search_string, current_page, url = "https://chicagode
         Len(nav_list) (int): len of the nav_list, a list of page buttons objects
     """
 
-    search = url + str(current_page) + "/?s=" + search_string
+    search = url + str(current_page) + '/?s=' + search_string + '"'
 
     html = make_request(search).text
     root = parse_html(html)
@@ -176,7 +187,7 @@ def crawl(current_page = 1, url="https://chicagodefender.com/page/"):
         # Will continue in loop until we pass stop date or pass last page of search
         while True:
 
-            search_field = str(article_dict['name_tokens']) + " + mayor"
+            search_field = '"' + str(article_dict['name_tokens']) + '"+mayor'
             pages_to_add, status = get_news_urls(search_field,
                         article_dict['announcement_date'], search_page, url)
 
