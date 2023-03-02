@@ -39,7 +39,7 @@ def unpack_file(tar, parquet):
     tz_file.close()
     return df_jsons
 
-def convert_to_dict(tar, parquet, newspaper_id):
+def convert_to_dict(tar, parquet, newspaper_id, url_counter = 0):
     '''
     Convert pandas dataframe of JSON's to dictionaries, containing the following
     keys.
@@ -63,7 +63,6 @@ def convert_to_dict(tar, parquet, newspaper_id):
         df_jsons (pandas dataframe): pandas dataframe of JSON files, where 
             each file is an article
     '''
-    url_counter = 0
     df_jsons = unpack_file(tar, parquet)
     all_results = []
     for row in df_jsons.iterrows():
@@ -75,8 +74,8 @@ def convert_to_dict(tar, parquet, newspaper_id):
         title = row_json["RECORD"]['Obj']['TitleAtt']['Title']
         pub_date = row_json["RECORD"]['Obj']['NumericDate']
         result_dict = {'candidate_id': None, 'name_tokens': None, 
-                       'announcement_date': None, 'Newspaper_id': newspaper_id, 
-                       'Url': url, 'Title': title, 'Text': text_clean, 
+                       'announcement_date': None, 'newspaper_id': newspaper_id, 
+                       'url': url, 'title': title, 'text': text_clean, 
                        'date': pub_date}
         all_results.append(result_dict)
     return all_results

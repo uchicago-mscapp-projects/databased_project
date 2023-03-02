@@ -31,19 +31,24 @@ import pandas as pd
 # Replace FILES_TO_EXPORT, parq_file_path and tz_file_path with correct file paths
 
 # For Chicago Tribune 2022
-files_to_export  = "data/Chicago_Tribune_-_Mayor_-_2022"
-parq_file_path = "data/chicago_tribune_2022.parquet"
-tz_file_path = "data/chicago_tribune_2022.tar.gz"
+#files_to_export  = "data/Chicago_Tribune_-_Mayor_-_2022"
+#parq_file_path = "data/chicago_tribune_2022.parquet"
+#tz_file_path = "data/chicago_tribune_2022.tar.gz"
 
 # For Chicago Tribune 2023
-files_to_export  = "data/Chicago_Tribune_-_Mayor_-_2023"
-parq_file_path = "data/chicago_tribune_2023.parquet"
-tz_file_path = "data/chicago_tribune_2023.tar.gz"
+#files_to_export  = "data/Chicago_Tribune_-_Mayor_-_2023"
+#parq_file_path = "data/chicago_tribune_2023.parquet"
+#tz_file_path = "data/chicago_tribune_2023.tar.gz"
+
+# For Chicago Tribune 2023 Final
+files_to_export  = "data/Chicago_Tribune_-_Mayor_-_Final_Week"
+parq_file_path = "data/chicago_tribune_final.parquet"
+tz_file_path = "data/chicago_tribune_final.tar.gz"
 
 # For Crain Business Journal
-files_to_export  = "data/Crain_-_Mayor"
-parq_file_path = "data/crain.parquet"
-tz_file_path = "data/crain.tar.gz"
+#files_to_export  = "data/Crain_-_Mayor"
+#parq_file_path = "data/crain.parquet"
+#tz_file_path = "data/crain.tar.gz"
 
 # Convert folder of xml files to list of JSON files
 file_list = os.listdir(files_to_export)
@@ -69,6 +74,9 @@ df.to_parquet(parq_file_path)
 
 # Chicago Tribune 2023
 #!tar -czvf data/chicago_tribune_2023.tar.gz data/chicago_tribune_2023.parquet
+
+# Chicago Tribune Final Week
+!tar -czvf data/chicago_tribune_final.tar.gz data/chicago_tribune_final.parquet
 
 # Crain Business
 #!tar -czvf data/crain.tar.gz data/crain.parquet
