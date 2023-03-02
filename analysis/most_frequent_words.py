@@ -10,17 +10,9 @@ Finds and the most frequent words associated with a candidates and newspapers.
 # python3 -m pip install nltk
 # nltk.download("stopwords")
 import nltk
-import sys
-import os
 import pandas as pd
 from nltk.corpus import stopwords
 from collections import Counter
-
-current = os.path.dirname(os.path.realpath(__file__))
-parent = os.path.dirname(current)
-sys.path.append(parent)
-from utilities.data_retrieval import search_strings
-
 
 def most_frequent():
     """
@@ -37,6 +29,7 @@ def most_frequent():
     # will probably have to read in as data base
     df = pd.read_json('data/clean_articles.json')
     
+    # Additional words that should not be included in the most frequent word count
     cand_stopwords = ['kambium', 'elijah', 'kam', 'buckner', 'jesús', 'jesus',
         'chuy', 'garcía', 'garcia', 'ja', 'mal', 'green', 'jamal', 'sophia', 'king',
         'roderick', 'sawyer', 'paul', 'vallas', 'willie', 'wilson', 'lori',
@@ -75,10 +68,12 @@ def calc_most_frequent_single(df, token, additional_stop_words, text_to_inspect)
         # Concatenate all pretaining text into one string
         full_text = single_text_str (subset, text_to_inspect)
 
+        # Find frequency of words in text and recover top 100
         words = Counter()
         words.update(full_text.split())
         most_common = words.most_common(100)
 
+        # Find ~50 top words when excluding stop words from count
         freq_list = calc_freq(most_common, additional_stop_words)
         
         respective_word_dict[identifier] = freq_list
@@ -105,6 +100,7 @@ def calc_most_frequent_double(df, additional_stop_words):
 
     complete_dict = {}
 
+    # iterate over newspapers
     for news_source in list_news_ids:
         news_dict = {}
        
@@ -112,6 +108,7 @@ def calc_most_frequent_double(df, additional_stop_words):
         list_cand_ids = cand_ids["candidate_id"].values.tolist()
         subset = df.loc[df["newspaper_id"] == news_source]
 
+        # calculate the frequency for each candidate within the news paper
         complete_dict[news_source] = calc_most_frequent_single(subset, "candidate_id", additional_stop_words, "clean_sentences")
 
     return complete_dict
