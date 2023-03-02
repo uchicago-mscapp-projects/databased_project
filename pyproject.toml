@@ -14,6 +14,8 @@ numpy = "^1.24.2"
 seaborn = "^0.12.2"
 plotly = "^5.13.0"
 pyarrow = "^11.0.0"
+nltk = "^3.8.1"
+corpora = "^1.0"
 
 
 [build-system]

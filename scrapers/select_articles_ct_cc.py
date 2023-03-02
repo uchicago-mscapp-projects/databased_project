@@ -27,15 +27,17 @@ from utilities.data_retrieval import search_strings
 #Strings to file paths - Run function once for each paper
 #Chicago Tribune
 proquest_files = [(sys.path[-1] + '/data/proquest_files/chicago_tribune_2022.tar', 
-                   'data/chicago_tribune_2022.parquet'), 
+                   'data/chicago_tribune_2022.parquet', 1000), 
                 (sys.path[-1] + '/data/proquest_files/chicago_tribune_2023.tar', 
-                 'data/chicago_tribune_2023.parquet')]
+                 'data/chicago_tribune_2023.parquet', 3000), 
+                (sys.path[-1] + '/data/proquest_files/chicago_tribune_final.tar', 
+                 'data/chicago_tribune_final.parquet', 5000)]
 newspaper_id = "news_ct"
 json_filepath = '/data/chicago_tribune.json'
 
 #Crain Business
 proquest_files = [(sys.path[-1] + '/data/proquest_files/crain.tar', 
-                   'data/crain.parquet')]
+                   'data/crain.parquet', 7000)]
 newspaper_id = "news_cc"
 json_filepath = '/data/crain.json'
 
@@ -64,8 +66,8 @@ def article_selection(proquest_files, newspaper_id):
     
     all_articles = []
     for file in proquest_files:
-        tar, parquet = file
-        articles = convert_to_dict(tar, parquet, newspaper_id)
+        tar, parquet, url_counter = file
+        articles = convert_to_dict(tar, parquet, newspaper_id, url_counter)
         all_articles += articles
     
     cand_ids = search_str['candidate_id'].unique()
@@ -74,14 +76,14 @@ def article_selection(proquest_files, newspaper_id):
     for article in all_articles:
         for cand_id, names in cand_name_dict.items():
             for name in names:
-                if re.search(name, article['Text']):
+                if re.search(name, article['text']):
                     article_copy = deepcopy(article)
                     article_copy['candidate_id'] = cand_id
                     article_copy['name_tokens'] = name
                     article_copy['announcement_date'] = \
                     search_str.loc[search_str['candidate_id'] 
                                     == cand_id,'announcement_date'].iloc[0]
-                    article_copy['Newspaper_id'] = newspaper_id
+                    article_copy['newspaper_id'] = newspaper_id
                     cand_articles[cand_id].append(article_copy)
                     break
     return cand_articles
