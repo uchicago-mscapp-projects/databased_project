@@ -50,13 +50,13 @@ def most_frequent():
     news_stopwords = ['said', 'also', 'would', 'city', 'former', '.']
     
     cand_word_freq = calc_most_frequent_single(df, "candidate_id", cand_stopwords, "clean_sentences")
-    write_to_json("candidate_word_freq.json", cand_word_freq)
+    write_to_json("word_freq_candidate.json", cand_word_freq)
 
     news_word_freq = calc_most_frequent_single(df, "newspaper_id", news_stopwords, "clean_text")
-    write_to_json("news_word_freq.json", news_word_freq)
+    write_to_json("word_freq_news.json", news_word_freq)
 
     cand_by_news_freq = calc_most_frequent_double(df, cand_stopwords)
-    write_to_json("cand_by_news_freq.json", cand_by_news_freq)
+    write_to_json("word_freq_cand_by_news.json", cand_by_news_freq)
 
     #return cand_word_freq, news_word_freq, cand_by_news_freq
 
