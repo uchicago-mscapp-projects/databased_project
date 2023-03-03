@@ -24,25 +24,39 @@ count_cand_df.drop(['total_num_articles_scraped'], inplace=True)
 # Create the app
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-mentions = px.bar(count_cand_df, x='candidates', y='mentions', labels={'candidates':'Candidate', 'mentions':'Number of Mentions'}, title='Number of Mentions By Candidate')
-sentiment = px.bar(cand_sentiment_df, x='candidates', y=['pos','neg'], labels={'candidates':'Candidate', 'value': 'Sentiment'}, title='Sentiment Scores By Candidate')
+mentions = px.bar(count_cand_df, x='candidates', y='mentions', labels={'candidates':'Candidate', 'mentions':'Number of Mentions'})
+sentiment = px.bar(cand_sentiment_df, x='candidates', y=['pos','neg'], labels={'candidates':'Candidate', 'value': 'Sentiment'})
 sentiment.layout.update(showlegend=False)
 
+mentions_card = dbc.Card(
+    [
+        dbc.CardHeader(html.H5("Number of Mentions by Candidate")),
+        dbc.CardBody(
+            [
+                dcc.Graph(id='mentions_graph', figure=mentions)
+            ]
+        ),
+        dbc.CardFooter("This is the footer"),
+    ],
+    style={"marginTop": 0, "marginBottom": 0},
+)
+
+sentiment_card = dbc.Card(
+    [
+        dbc.CardHeader(html.H5("Sentiment by Candidate")),
+        dbc.CardBody(
+            [
+                dcc.Graph(id='sentiment_graph', figure=sentiment)
+            ]
+        ),
+        dbc.CardFooter("This is the footer"),
+    ],
+    style={"marginTop": 0, "marginBottom": 0},
+)
+
 BODY = html.Div(children=[
-    html.Div([
-        html.H5(children='Mention'),
-        dcc.Graph(
-            id='mention_graph',
-            figure=mentions
-        ),
-    ]),
-    html.Div([
-        html.H5(children='Sentiment'),
-        dcc.Graph(
-            id='sentiment_graph',
-            figure=sentiment
-        ),
-    ]),
+    dbc.Row([dbc.Col(md=2),dbc.Col(mentions_card),dbc.Col(md=2),], style={'marginTop':30}),
+    dbc.Row([dbc.Col(md=2),dbc.Col(sentiment_card),dbc.Col(md=2),], style={'marginTop':30}),
 ])
 
 NAVBAR = dbc.Navbar(
@@ -57,7 +71,6 @@ NAVBAR = dbc.Navbar(
                 ],
                 align="center"
             ),
-            href="https://plot.ly",
         )
     ],
     color="dark",
