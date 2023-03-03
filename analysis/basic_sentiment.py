@@ -40,18 +40,19 @@ def basic_sentence_sentiment():
     """
     df = pd.read_json('data/clean_articles.json')
     sia = SentimentIntensityAnalyzer()
-
-    # cand_sentiment takes about 30 seconds to calculate
-    cand_sentiment = sentence_sentiment_single_token(sia, df, "candidate_id", "clean_sentences")
-    write_to_json("candidate_bs.json", cand_sentiment)
     
     # cand_by_newspaper_sentiment takes about 30 seconds
     cand_by_newspaper_sentiment = sentence_sentiment_cand_by_news(sia, df)
-    write_to_json("cand_by_newspaper_bs.json", cand_by_newspaper_sentiment)
+
+    # cand_sentiment takes about 30 seconds to calculate
+    cand_sentiment = sentence_sentiment_single_token(sia, df, "candidate_id", "clean_sentences")
+    cand_by_newspaper_sentiment["overall_sentiment"] = cand_sentiment
+
+    write_to_json("sentiment.json", cand_by_newspaper_sentiment)
 
     # news_sentiment takes about 35 minutes
-    news_sentiment = sentence_sentiment_single_token(sia, df, "newspaper_id", "clean_text")
-    write_to_json("news_bs.json", news_sentiment)
+    # news_sentiment = sentence_sentiment_single_token(sia, df, "newspaper_id", "clean_text")
+    # write_to_json("bs_news.json", news_sentiment)
 
 
 def sentence_sentiment_single_token(sia, df, token, text_to_inspect):
@@ -99,7 +100,7 @@ def sentence_sentiment_cand_by_news(sia, df):
        the respective sentiment scores for each candidate within the respective newspaper.
     """
     list_news_ids = unique_list(df, "newspaper_id")
-    
+
     complete_dict = {}
 
     for news_source in list_news_ids:
