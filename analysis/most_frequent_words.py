@@ -11,8 +11,19 @@ Finds and the most frequent words associated with a candidates and newspapers.
 # nltk.download("stopwords")
 import nltk
 import pandas as pd
+import json
+import os
+import sys
 from nltk.corpus import stopwords
 from collections import Counter
+from analysis_helpers import single_text_str, write_to_json, unique_list
+
+#from basic_sentiment import write_to_json
+
+current = os.path.dirname(os.path.realpath(__file__))
+parent = os.path.dirname(current)
+sys.path.append(parent)
+from utilities.data_retrieval import search_strings
 
 def most_frequent():
     """
@@ -39,10 +50,15 @@ def most_frequent():
     news_stopwords = ['said', 'also', 'would', 'city', 'former', '.']
     
     cand_word_freq = calc_most_frequent_single(df, "candidate_id", cand_stopwords, "clean_sentences")
-    news_word_freq = calc_most_frequent_single(df, "newspaper_id", news_stopwords, "clean_text")
-    cand_by_news_freq = calc_most_frequent_double(df, cand_stopwords)
+    write_to_json("word_freq_candidate.json", cand_word_freq)
 
-    return cand_word_freq, news_word_freq, cand_by_news_freq
+    news_word_freq = calc_most_frequent_single(df, "newspaper_id", news_stopwords, "clean_text")
+    write_to_json("word_freq_news.json", news_word_freq)
+
+    cand_by_news_freq = calc_most_frequent_double(df, cand_stopwords)
+    write_to_json("word_freq_cand_by_news.json", cand_by_news_freq)
+
+    #return cand_word_freq, news_word_freq, cand_by_news_freq
 
 def calc_most_frequent_single(df, token, additional_stop_words, text_to_inspect):
     """
@@ -57,9 +73,8 @@ def calc_most_frequent_single(df, token, additional_stop_words, text_to_inspect)
         list of tuples, where each tuple contains a word and its frequency count, after filtering out 
         stop words. This frequency list contains the about 50 most common words in the text data for that token. 
     """
-    unique_ids = df.loc[:,[token]].drop_duplicates()
-    list_ids = unique_ids[token].values.tolist()
-
+    list_ids = unique_list(df, token)
+   
     respective_word_dict = {}
 
     for identifier in list_ids:
@@ -95,41 +110,20 @@ def calc_most_frequent_double(df, additional_stop_words):
         stop words. This frequency list contains the about 50 most common words in the text data for that candidate 
         and newspaper source.
     """
-    news_ids = df.loc[:,["newspaper_id"]].drop_duplicates()
-    list_news_ids = news_ids["newspaper_id"].values.tolist()
-
+    list_news_ids = unique_list(df, "newspaper_id")
+    
     complete_dict = {}
 
     # iterate over newspapers
     for news_source in list_news_ids:
         news_dict = {}
        
-        cand_ids = df.loc[:,["candidate_id"]].drop_duplicates()
-        list_cand_ids = cand_ids["candidate_id"].values.tolist()
         subset = df.loc[df["newspaper_id"] == news_source]
 
         # calculate the frequency for each candidate within the news paper
         complete_dict[news_source] = calc_most_frequent_single(subset, "candidate_id", additional_stop_words, "clean_sentences")
 
     return complete_dict
-
-def single_text_str (df, text_to_inspect):
-    """
-    Concatenates all text values in the given DataFrame column into a single string.
-
-    Parameters:
-        * df (pandas.DataFrame): The DataFrame containing the text data to concatenate.
-        * text_to_inspect (str): The name of the column containing the text data to concatenate.
-
-    Returns:
-        A single string that is the concatenation of all text values in the specified column.
-    """
-    full_text = ""
-    for __, row in df.iterrows():
-        full_text += row[text_to_inspect]
-        full_text += " "
-    
-    return full_text
 
 def calc_freq(most_common, additional_stop_words):
     """
@@ -150,8 +144,7 @@ def calc_freq(most_common, additional_stop_words):
             freq_list.append(word_freq)
 
     return freq_list
-
-    
+ 
 if __name__ == "__main__":
     most_frequent()
 
