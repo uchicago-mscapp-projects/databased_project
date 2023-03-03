@@ -52,3 +52,8 @@ def write_to_json(file_name, data_to_convert):
 
     with open(filepath, "w") as f:
         json.dump(data_to_convert, f, indent=1)
+
+def unique_list(df, token):
+    unique_ids = df.loc[:,[token]].drop_duplicates()
+    list_ids = unique_ids[token].values.tolist()
+    return list_ids

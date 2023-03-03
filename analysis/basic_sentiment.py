@@ -5,7 +5,7 @@ File name: basic_sentiment.py
 Finds the basic sentiment of articles about candidates and within newspapers by
 using NLTK’s built-in classifier, which uses VADER.
 
-NOTE: running this file takes about 10 minutes
+NOTE: running this file takes about 35 minutes
 
 @Author: Madeleine Roberts
 @Date: Mar 2, 2023
@@ -19,7 +19,7 @@ import json
 import pandas as pd
 from nltk.corpus import stopwords
 from nltk.sentiment import SentimentIntensityAnalyzer
-from analysis_helpers import single_text_str, write_to_json
+from analysis_helpers import single_text_str, write_to_json, unique_list
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
@@ -49,7 +49,7 @@ def basic_sentence_sentiment():
     cand_by_newspaper_sentiment = sentence_sentiment_cand_by_news(sia, df)
     write_to_json("cand_by_newspaper_bs.json", cand_by_newspaper_sentiment)
 
-    # news_sentiment takes about 20 minutes
+    # news_sentiment takes about 35 minutes
     news_sentiment = sentence_sentiment_single_token(sia, df, "newspaper_id", "clean_text")
     write_to_json("news_bs.json", news_sentiment)
 
@@ -68,8 +68,10 @@ def sentence_sentiment_single_token(sia, df, token, text_to_inspect):
     Returns:
        A dictionary containing the respective sentiment scores for each unique identifier token in the dataframe
     """
-    unique_ids = df.loc[:,[token]].drop_duplicates()
-    list_ids = unique_ids[token].values.tolist()
+    if token == "newspaper_id":
+        df = df.loc[:,["url"]].drop_duplicates()
+
+    list_ids = unique_list(df, token)
 
     respective_word_dict = {}
 
@@ -96,19 +98,16 @@ def sentence_sentiment_cand_by_news(sia, df):
        A dictionary containing dictionaries for each newspaper where the values are 
        the respective sentiment scores for each candidate within the respective newspaper.
     """
-    news_ids = df.loc[:,["newspaper_id"]].drop_duplicates()
-    list_news_ids = news_ids["newspaper_id"].values.tolist()
-
+    list_news_ids = unique_list(df, "newspaper_id")
+    
     complete_dict = {}
 
     for news_source in list_news_ids:
         news_dict = {}
-        
-        cand_ids = df.loc[:,["candidate_id"]].drop_duplicates()
-        list_cand_ids = cand_ids["candidate_id"].values.tolist()
-        subset = df.loc[df["newspaper_id"] == news_source]
 
+        subset = df.loc[df["newspaper_id"] == news_source]
         complete_dict[news_source] = sentence_sentiment_single_token(sia, subset, "candidate_id", "clean_sentences")
+   
     return complete_dict
 
 

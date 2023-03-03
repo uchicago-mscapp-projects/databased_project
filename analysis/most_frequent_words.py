@@ -16,7 +16,7 @@ import os
 import sys
 from nltk.corpus import stopwords
 from collections import Counter
-from analysis_helpers import single_text_str, write_to_json
+from analysis_helpers import single_text_str, write_to_json, unique_list
 
 #from basic_sentiment import write_to_json
 
@@ -73,9 +73,8 @@ def calc_most_frequent_single(df, token, additional_stop_words, text_to_inspect)
         list of tuples, where each tuple contains a word and its frequency count, after filtering out 
         stop words. This frequency list contains the about 50 most common words in the text data for that token. 
     """
-    unique_ids = df.loc[:,[token]].drop_duplicates()
-    list_ids = unique_ids[token].values.tolist()
-
+    list_ids = unique_list(df, token)
+   
     respective_word_dict = {}
 
     for identifier in list_ids:
@@ -111,17 +110,14 @@ def calc_most_frequent_double(df, additional_stop_words):
         stop words. This frequency list contains the about 50 most common words in the text data for that candidate 
         and newspaper source.
     """
-    news_ids = df.loc[:,["newspaper_id"]].drop_duplicates()
-    list_news_ids = news_ids["newspaper_id"].values.tolist()
-
+    list_news_ids = unique_list(df, "newspaper_id")
+    
     complete_dict = {}
 
     # iterate over newspapers
     for news_source in list_news_ids:
         news_dict = {}
        
-        cand_ids = df.loc[:,["candidate_id"]].drop_duplicates()
-        list_cand_ids = cand_ids["candidate_id"].values.tolist()
         subset = df.loc[df["newspaper_id"] == news_source]
 
         # calculate the frequency for each candidate within the news paper
