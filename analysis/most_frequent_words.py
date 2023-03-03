@@ -11,8 +11,18 @@ Finds and the most frequent words associated with a candidates and newspapers.
 # nltk.download("stopwords")
 import nltk
 import pandas as pd
+import json
+import os
+import sys
 from nltk.corpus import stopwords
 from collections import Counter
+
+#from basic_sentiment import write_to_json
+
+current = os.path.dirname(os.path.realpath(__file__))
+parent = os.path.dirname(current)
+sys.path.append(parent)
+from utilities.data_retrieval import search_strings
 
 def most_frequent():
     """
@@ -39,10 +49,15 @@ def most_frequent():
     news_stopwords = ['said', 'also', 'would', 'city', 'former', '.']
     
     cand_word_freq = calc_most_frequent_single(df, "candidate_id", cand_stopwords, "clean_sentences")
-    news_word_freq = calc_most_frequent_single(df, "newspaper_id", news_stopwords, "clean_text")
-    cand_by_news_freq = calc_most_frequent_double(df, cand_stopwords)
+    write_to_json("candidate_word_freq.json", cand_word_freq)
 
-    return cand_word_freq, news_word_freq, cand_by_news_freq
+    news_word_freq = calc_most_frequent_single(df, "newspaper_id", news_stopwords, "clean_text")
+    write_to_json("news_word_freq.json", news_word_freq)
+
+    cand_by_news_freq = calc_most_frequent_double(df, cand_stopwords)
+    write_to_json("cand_by_news_freq.json", cand_by_news_freq)
+
+    #return cand_word_freq, news_word_freq, cand_by_news_freq
 
 def calc_most_frequent_single(df, token, additional_stop_words, text_to_inspect):
     """
@@ -150,6 +165,20 @@ def calc_freq(most_common, additional_stop_words):
             freq_list.append(word_freq)
 
     return freq_list
+
+def write_to_json(file_name, sentiment_data):
+    """
+    Writes the given dictionary of sentiment data to a JSON file with the given file name.
+
+    Parameters:
+        * file_name (str): The name of the JSON file to write to
+        * sentiment_data (dict): The dictionary of sentiment data to write to the JSON file.
+    """
+    print("Writing to json")
+    filepath = sys.path[-1] + '/data/' + file_name
+
+    with open(filepath, "w") as f:
+        json.dump(sentiment_data, f, indent=1)
 
     
 if __name__ == "__main__":
