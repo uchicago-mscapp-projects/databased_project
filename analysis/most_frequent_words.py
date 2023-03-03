@@ -16,6 +16,7 @@ import os
 import sys
 from nltk.corpus import stopwords
 from collections import Counter
+from analysis_helpers import single_text_str, write_to_json
 
 #from basic_sentiment import write_to_json
 
@@ -128,24 +129,6 @@ def calc_most_frequent_double(df, additional_stop_words):
 
     return complete_dict
 
-def single_text_str (df, text_to_inspect):
-    """
-    Concatenates all text values in the given DataFrame column into a single string.
-
-    Parameters:
-        * df (pandas.DataFrame): The DataFrame containing the text data to concatenate.
-        * text_to_inspect (str): The name of the column containing the text data to concatenate.
-
-    Returns:
-        A single string that is the concatenation of all text values in the specified column.
-    """
-    full_text = ""
-    for __, row in df.iterrows():
-        full_text += row[text_to_inspect]
-        full_text += " "
-    
-    return full_text
-
 def calc_freq(most_common, additional_stop_words):
     """
     Calculates the frequency list of words after filtering out stop words.
@@ -165,22 +148,7 @@ def calc_freq(most_common, additional_stop_words):
             freq_list.append(word_freq)
 
     return freq_list
-
-def write_to_json(file_name, sentiment_data):
-    """
-    Writes the given dictionary of sentiment data to a JSON file with the given file name.
-
-    Parameters:
-        * file_name (str): The name of the JSON file to write to
-        * sentiment_data (dict): The dictionary of sentiment data to write to the JSON file.
-    """
-    print("Writing to json")
-    filepath = sys.path[-1] + '/data/' + file_name
-
-    with open(filepath, "w") as f:
-        json.dump(sentiment_data, f, indent=1)
-
-    
+ 
 if __name__ == "__main__":
     most_frequent()
 

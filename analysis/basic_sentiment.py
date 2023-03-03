@@ -19,12 +19,13 @@ import json
 import pandas as pd
 from nltk.corpus import stopwords
 from nltk.sentiment import SentimentIntensityAnalyzer
-from most_frequent_words import single_text_str
+from analysis_helpers import single_text_str, write_to_json
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
 from utilities.data_retrieval import search_strings
+
 
 def basic_sentence_sentiment():
     """
@@ -82,6 +83,7 @@ def sentence_sentiment_single_token(sia, df, token, text_to_inspect):
 
     return respective_word_dict
 
+
 def sentence_sentiment_cand_by_news(sia, df):
     """
     Computes the sentiment scores for each candidate within each newspaper.
@@ -109,19 +111,6 @@ def sentence_sentiment_cand_by_news(sia, df):
         complete_dict[news_source] = sentence_sentiment_single_token(sia, subset, "candidate_id", "clean_sentences")
     return complete_dict
 
-def write_to_json(file_name, sentiment_data):
-    """
-    Writes the given dictionary of sentiment data to a JSON file with the given file name.
-
-    Parameters:
-        * file_name (str): The name of the JSON file to write to
-        * sentiment_data (dict): The dictionary of sentiment data to write to the JSON file.
-    """
-    print("Writing to json")
-    filepath = sys.path[-1] + '/data/' + file_name
-
-    with open(filepath, "w") as f:
-        json.dump(sentiment_data, f, indent=1)
 
 if __name__ == "__main__":
     basic_sentence_sentiment()
