@@ -114,11 +114,11 @@ def export_clean(papers):
     dedupe_df = df.drop_duplicates(subset = ['candidate_id', 'url'], 
                                 keep = 'last').reset_index(drop = True)
     print(dedupe_df)
-    '''
+
     print("Writing clean_articles json")
     filepath = sys.path[-1] + '/data/clean_articles.json'
     dedupe_df.to_json(filepath, orient='records')
-    '''
+
     print("Writing clean_articles_ abridged.json")
     filepath_abr = sys.path[-1] + '/data/clean_articles_abr.json'
     dedupe_df_drop = dedupe_df.drop(['title','text','clean_text'], axis = 1)
