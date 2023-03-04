@@ -24,7 +24,7 @@ poetry shell
 ```
 
 
-&emsp; Execute the data visualization of Dash by running:
+Execute the data visualization of Dash by running:
 ```bash
 python -m databased/dash
 ```
@@ -34,7 +34,7 @@ Execute all scrapers/apis by running:
 ```bash
 python -m databased/scrapers
 ```
-Note: this command will take about ?? minutes to complete.
+<sub>Note: this command will take about ?? minutes to complete.<\sub>
 
 
 Execute all data cleaning by running:
