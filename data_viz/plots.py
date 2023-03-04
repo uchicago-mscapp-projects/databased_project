@@ -10,9 +10,22 @@ CANDIDATES = ['Kam Buckner','Chuy García',"Ja'Mal Green",'Brandon Johnson','Sop
 cand_sentiment_df['candidates'] = CANDIDATES
 
 news_sentiment_df = pd.read_json('/home/abejburton/capp30122/databased_project/data/news_bs.json', orient='index')
-# cand_news_sentiment_df is a little weird w formatting hopefully it works for now
-cand_news_sentiment_df = pd.read_json('/home/abejburton/capp30122/databased_project/data/cand_by_newspaper_bs.json')
 
+# Candidate Sentiment By Newspaper data is in a tricky json format. Reformat
+# to work with pandas.
+cand_news_sentiment_df = pd.read_json('/home/abejburton/capp30122/databased_project/data/cand_by_newspaper_bs.json')
+cand_news_sentiment_df_formatted = pd.DataFrame(columns = ['candidate_id','neg','pos','neu','compound','news_id'])
+for col in cand_news_sentiment_df.columns:
+    for row in cand_news_sentiment_df[col].items():
+        if not isinstance(row[1], float):
+            temp_df = {'candidate_id':row[0],'neg':row[1]['neg'],'pos':row[1]['pos'], 'neu':row[1]['neu'], 'compound':row[1]['compound'], 'news_id':col}
+            cand_news_sentiment_df_formatted = cand_news_sentiment_df_formatted.append(temp_df, ignore_index = True)
+        else:
+            temp_df = {'candidate_id':row[0], 'neg':None, 'pos':None, 'neu':None, 'compound':None, 'news_id':col}
+            cand_news_sentiment_df_formatted = cand_news_sentiment_df_formatted.append(temp_df, ignore_index = True)
+cand_news_sentiment_df_formatted.dropna(inplace=True)
+cand_news_sentiment_df_formatted.reset_index(drop=True, inplace=True)
+            
 # TODO get article info from maddie and also most common words.
 # clean_articles_df = pd.read_csv(pathlib.Path(__file__).parent.parent / clean_articles_filepath, usecols=['candidate_id', 'newspaper_id', 'url', 'date'], nrows = 50)
 
