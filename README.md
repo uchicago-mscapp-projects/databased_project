@@ -24,7 +24,7 @@ poetry shell
 ```
 
 
-Execute the data visualization of Dash by running:
+&emsp; Execute the data visualization of Dash by running:
 ```bash
 python -m databased/dash
 ```
