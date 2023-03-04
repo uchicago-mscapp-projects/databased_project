@@ -18,38 +18,53 @@ python3 -m pip install nltk
 
 ## Usage
 Project must be run in the Poetry virtual environment. 
-Within project terminal, initalize virual environment by running:
+Upon completeion of abvoe installation requirements and within project terminal, initalize virual environment by running:
 ```bash
 poetry shell
 ```
+<br />
 
 
-Execute the data visualization of Dash by running:
+**Execute the data visualization of Dash by running:**
 ```bash
 python -m databased/dash
 ```
+<br />
 
 
-Execute all scrapers/apis by running:
+**Execute all scrapers/apis by running:**
 ```bash
 python -m databased/scrapers
 ```
-<sub>Note: this command will take about ?? minutes to complete.</sub>
+<sub>Note: this command will take about ?? minutes to complete.</sub> 
+
+<br />
 
 
-Execute all data cleaning by running:
+
+**Execute all data cleaning by running:**
 ```bash
 python -m databased/clean
 ```
 <sub>Note: this command will take about 2 minutes to complete.</sub>
 
+<br />
 
-Execute all data analysis by running:
+
+**Execute all data analysis by running:**
 ```bash
 python -m databased/analysis
 ```
 <sub>Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.</sub>
 
+<br />
 
 
+
+**Execute entire project by running:**
+```bash
+python -m databased
+```
+<sub>Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.</sub>
+<br />
 
