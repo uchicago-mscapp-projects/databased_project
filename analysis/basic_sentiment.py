@@ -51,8 +51,8 @@ def basic_sentence_sentiment():
     write_to_json("sentiment.json", cand_by_newspaper_sentiment)
 
     # news_sentiment takes about 35 minutes
-    #news_sentiment = sentence_sentiment_single_token(sia, df, "newspaper_id", "clean_text")
-    #write_to_json("bs_news.json", news_sentiment)
+    news_sentiment = sentence_sentiment_single_token(sia, df, "newspaper_id", "clean_text")
+    write_to_json("bs_news.json", news_sentiment)
 
 
 def sentence_sentiment_single_token(sia, df, token, text_to_inspect):

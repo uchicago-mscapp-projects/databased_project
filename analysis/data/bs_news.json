@@ -1,0 +1,38 @@
+{
+ "news_cc": {
+  "neg": 0.069,
+  "neu": 0.8,
+  "pos": 0.131,
+  "compound": 1.0
+ },
+ "news_ct": {
+  "neg": 0.094,
+  "neu": 0.779,
+  "pos": 0.127,
+  "compound": 1.0
+ },
+ "news_cd": {
+  "neg": 0.079,
+  "neu": 0.724,
+  "pos": 0.198,
+  "compound": 0.9998
+ },
+ "news_hp": {
+  "neg": 0.088,
+  "neu": 0.775,
+  "pos": 0.137,
+  "compound": 0.9998
+ },
+ "news_ln": {
+  "neg": 0.04,
+  "neu": 0.831,
+  "pos": 0.129,
+  "compound": 1.0
+ },
+ "news_tt": {
+  "neg": 0.105,
+  "neu": 0.762,
+  "pos": 0.134,
+  "compound": 0.9998
+ }
+}
