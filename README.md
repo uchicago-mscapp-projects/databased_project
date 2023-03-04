@@ -1,6 +1,6 @@
 *This README.md file was generated on 03-04-23 by Madeleine Roberts*
 # CAPP 30122 databased_project
-Analysis of Local Newspaper Coverage of Mayoral Candidates in Chicago's 2023 Primary Election
+Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primary Election's Mayoral Candidates in Chicago
 
 ## Authors
 - [Abe Burton](https://github.com/abejburton)
