@@ -12,11 +12,15 @@ Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primar
 ## Installation
 
 ```bash
-install poetry
-python3 -m pip install nltk
+>> poetry install
+>> python3 -m pip install nltk
 ```
 
 ## Usage
+Project must be run in the Poetry virtual environment. Initalize virual environment 
 ```bash
-poetry shell
+>> poetry shell
 ```
+
+To only run the data visualization of dash board:
+
