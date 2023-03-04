@@ -73,12 +73,17 @@ def calc_most_frequent_single(df, token, additional_stop_words, text_to_inspect)
         list of tuples, where each tuple contains a word and its frequency count, after filtering out 
         stop words. This frequency list contains the about 50 most common words in the text data for that token. 
     """
+    if token == "newspaper_id":
+        df = df.drop_duplicates("url")
+
     list_ids = unique_list(df, token)
    
     respective_word_dict = {}
 
     for identifier in list_ids:
         subset = df.loc[df[token] == identifier]
+        if token == "candidate_id":
+            subset = subset.drop_duplicates("url")
      
         # Concatenate all pretaining text into one string
         full_text = single_text_str (subset, text_to_inspect)
