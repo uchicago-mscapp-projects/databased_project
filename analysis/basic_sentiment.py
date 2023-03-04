@@ -45,14 +45,14 @@ def basic_sentence_sentiment():
     cand_by_newspaper_sentiment = sentence_sentiment_cand_by_news(sia, df)
 
     # cand_sentiment takes about 30 seconds to calculate
-    cand_sentiment = sentence_sentiment_single_token(sia, df, "candidate_id", "clean_sentences")
-    cand_by_newspaper_sentiment["overall_sentiment"] = cand_sentiment
+    #cand_sentiment = sentence_sentiment_single_token(sia, df, "candidate_id", "clean_sentences")
+    #cand_by_newspaper_sentiment["overall_sentiment"] = cand_sentiment
 
     write_to_json("sentiment.json", cand_by_newspaper_sentiment)
 
     # news_sentiment takes about 35 minutes
-    # news_sentiment = sentence_sentiment_single_token(sia, df, "newspaper_id", "clean_text")
-    # write_to_json("bs_news.json", news_sentiment)
+    news_sentiment = sentence_sentiment_single_token(sia, df, "newspaper_id", "clean_text")
+    write_to_json("bs_news.json", news_sentiment)
 
 
 def sentence_sentiment_single_token(sia, df, token, text_to_inspect):
@@ -69,16 +69,19 @@ def sentence_sentiment_single_token(sia, df, token, text_to_inspect):
     Returns:
        A dictionary containing the respective sentiment scores for each unique identifier token in the dataframe
     """
-    if token == "newspaper_id":
-        df = df.loc[:,["url"]].drop_duplicates()
 
     list_ids = unique_list(df, token)
+
+    if token == "newspaper_id":
+        df = df.drop_duplicates("url")
 
     respective_word_dict = {}
 
     for identifier in list_ids:
 
         subset = df.loc[df[token] == identifier]
+        if token == "candidate_id":
+            subset = subset.drop_duplicates("url")
      
         # Concatenate all pretaining text into one string
         full_text = single_text_str (subset, text_to_inspect)
