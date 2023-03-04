@@ -310,5 +310,61 @@
    "pos": 0.153,
    "compound": -0.6124
   }
+ },
+ "overall_sentiment": {
+  "cand_kb": {
+   "neg": 0.049,
+   "neu": 0.881,
+   "pos": 0.069,
+   "compound": 0.9901
+  },
+  "cand_cg": {
+   "neg": 0.044,
+   "neu": 0.859,
+   "pos": 0.098,
+   "compound": 0.9996
+  },
+  "cand_jg": {
+   "neg": 0.024,
+   "neu": 0.918,
+   "pos": 0.059,
+   "compound": 0.5719
+  },
+  "cand_bj": {
+   "neg": 0.057,
+   "neu": 0.836,
+   "pos": 0.107,
+   "compound": 0.9992
+  },
+  "cand_sk": {
+   "neg": 0.034,
+   "neu": 0.874,
+   "pos": 0.092,
+   "compound": 0.9993
+  },
+  "cand_rs": {
+   "neg": 0.037,
+   "neu": 0.906,
+   "pos": 0.057,
+   "compound": 0.9844
+  },
+  "cand_pv": {
+   "neg": 0.043,
+   "neu": 0.86,
+   "pos": 0.098,
+   "compound": 0.9995
+  },
+  "cand_ww": {
+   "neg": 0.09,
+   "neu": 0.825,
+   "pos": 0.085,
+   "compound": -0.9915
+  },
+  "cand_ll": {
+   "neg": 0.103,
+   "neu": 0.781,
+   "pos": 0.115,
+   "compound": 1.0
+  }
  }
 }
