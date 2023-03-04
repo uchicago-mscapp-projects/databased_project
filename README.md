@@ -8,6 +8,15 @@ Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primar
 - [Lee-Or Bentovim](https://github.com/bentoviml)
 - [Madeleine Roberts](https://github.com/MadeleineKRoberts) 
 
-- files 
-- What they do
-- process to install/run
+## Introduction
+## Installation
+
+```bash
+install poetry
+python3 -m pip install nltk
+```
+
+## Usage
+```bash
+poetry shell
+```
