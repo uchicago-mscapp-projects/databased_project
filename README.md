@@ -34,21 +34,21 @@ Execute all scrapers/apis by running:
 ```bash
 python -m databased/scrapers
 ```
-<sub>Note: this command will take about ?? minutes to complete.<\sub>
+<sub>Note: this command will take about ?? minutes to complete.</sub>
 
 
 Execute all data cleaning by running:
 ```bash
 python -m databased/clean
 ```
-Note: this command will take about 2 minutes to complete.
+<sub>Note: this command will take about 2 minutes to complete.</sub>
 
 
 Execute all data analysis by running:
 ```bash
 python -m databased/analysis
 ```
-Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.
+<sub>Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.</sub>
 
 
 
