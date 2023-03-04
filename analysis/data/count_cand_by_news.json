@@ -31,13 +31,13 @@
  "news_hp": {
   "cand_kb": 2,
   "cand_cg": 2,
-  "cand_jg": 1,
   "cand_bj": 1,
   "cand_sk": 1,
   "cand_rs": 1,
   "cand_pv": 1,
   "cand_ww": 1,
-  "cand_ll": 1
+  "cand_ll": 1,
+  "cand_jg": 1
  },
  "news_ln": {
   "cand_kb": 2,
@@ -61,6 +61,6 @@
   "cand_ww": 1,
   "cand_ll": 2
  },
- "total_num_articles_scraped": 2909,
+ "total_num_articles_scraped": 2389,
  "total_unique_articles_scraped": 1340
 }
