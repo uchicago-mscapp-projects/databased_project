@@ -1,0 +1,56 @@
+{
+ "cand_kb": {
+  "neg": 0.04,
+  "neu": 0.864,
+  "pos": 0.096,
+  "compound": 0.9999
+ },
+ "cand_cg": {
+  "neg": 0.039,
+  "neu": 0.863,
+  "pos": 0.098,
+  "compound": 0.9999
+ },
+ "cand_jg": {
+  "neg": 0.008,
+  "neu": 0.935,
+  "pos": 0.057,
+  "compound": 0.9442
+ },
+ "cand_bj": {
+  "neg": 0.053,
+  "neu": 0.841,
+  "pos": 0.106,
+  "compound": 0.9994
+ },
+ "cand_sk": {
+  "neg": 0.03,
+  "neu": 0.891,
+  "pos": 0.078,
+  "compound": 0.9992
+ },
+ "cand_rs": {
+  "neg": 0.034,
+  "neu": 0.915,
+  "pos": 0.051,
+  "compound": 0.9844
+ },
+ "cand_pv": {
+  "neg": 0.04,
+  "neu": 0.868,
+  "pos": 0.092,
+  "compound": 0.9995
+ },
+ "cand_ww": {
+  "neg": 0.079,
+  "neu": 0.832,
+  "pos": 0.089,
+  "compound": -0.0609
+ },
+ "cand_ll": {
+  "neg": 0.109,
+  "neu": 0.787,
+  "pos": 0.104,
+  "compound": -1.0
+ }
+}
