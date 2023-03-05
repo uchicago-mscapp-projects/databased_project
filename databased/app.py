@@ -22,7 +22,7 @@ def run():
     print()
     print("********************************************************************************************************************************")
     print()
-    print("Welcome to the CAPP 122 databased project.")
+    print("CAPP 122 databased project")
     print("Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primary Election's Mayoral Candidates in Chicago")
 
     render_project()
