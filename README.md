@@ -35,7 +35,24 @@ python -m databased
 ```
 <br />
 
-You are then prompted to enter a singular digit execute a portion or entire project. (example: "1[Return]" will run the data visualization)
+You are then prompted to enter a singular digit execute a portion or entire project, as seen below. 
+
+```bash
+CAPP 122 dataBASED project
+Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primary Election\'s Mayoral Candidates \in Chicago
+
+To execute a desired aspect of the project please enter one of the following commands:
+         1 - Open Data Visualization
+         2 - Scrape All Newspapers
+         3 - Clean Scraped Data
+         4 - Conduct Data Analysyis
+         5 - Run Entire Project Start to Finish(Scrape -\> Clean -\> Analyze -\> Visualize)
+         6 - End Program
+```
+
+
+
+(example: "1[Return]" will run the data visualization)
 
 <br />
 
