@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 ### Read in the data
 # Candidate Sentiment By Newspaper data is in a tricky json format. Reformat
 # to work with pandas.
-cand_news_sentiment_df = pd.read_json('/home/abejburton/capp30122/databased_project/analysis/data/sentiment.json')
+cand_news_sentiment_df = pd.read_json('/home/bentovim/capp30122/databased_project/analysis/data/sentiment.json')
 cand_news_sentiment_df_formatted = pd.DataFrame(columns = ['news_id','candidate_id','neg','pos','neu','compound','candidates', 'newspapers'])
 
 name_dict = {'cand_kb':'Kam Buckner', 'cand_cg':'Chuy García', 'cand_jg':"Ja'Mal Green", 'cand_bj':'Brandon Johnson', 'cand_sk':'Sophia King', 'cand_rs':'Roderick Sawyer', 'cand_pv':'Paul Vallas','cand_ww':'Willie Wilson', 'cand_ll':'Lori Lightfoot'}
@@ -33,13 +33,13 @@ cand_news_sentiment_df_formatted['neg'] = cand_news_sentiment_df_formatted['neg'
 # TODO get article info from maddie and also most common words.
 # clean_articles_df = pd.read_csv(pathlib.Path(__file__).parent.parent / clean_articles_filepath, usecols=['candidate_id', 'newspaper_id', 'url', 'date'], nrows = 50)
 # Candidate references in articles count
-count_cand_df = pd.read_json('/home/abejburton/capp30122/databased_project/analysis/data/count_cand.json', orient='index')
+count_cand_df = pd.read_json('/home/bentovim/capp30122/databased_project/analysis/data/count_cand.json', orient='index')
 count_cand_df.rename(columns={0:'mentions'}, inplace=True)
 MENTION_LABELS = ['Kam Buckner','Chuy García',"Ja'Mal Green",'Brandon Johnson','Sophia King','Roderick Sawyer','Paul Vallas','Willie Wilson','Lori Lightfoot','Total Articles','Total Unique Articles']
 count_cand_df['candidates'] = MENTION_LABELS
 count_cand_df.drop(['total_num_articles_scraped'], inplace=True)
 
-words_df = pd.read_json("/home/abejburton/capp30122/databased_project/analysis/data/word_freq_cand_by_news.json")
+words_df = pd.read_json("/home/bentovim/capp30122/databased_project/analysis/data/word_freq_cand_by_news.json")
 word_df_formatted = pd.DataFrame(columns = ['news_id','candidate_id','word','freq','candidates', 'newspapers'])
 news_dict_wordcloud = {'news_cc':"Crain's Chicago", 'news_ct':'Chicago Tribune', 'news_cd':"Chicago Defender", 'news_hp':'Hyde Park Herald', 'news_ln':'Lawndale News', 'news_tt':'The Triibe', 'all_sites':'All Sites'}
 
@@ -50,7 +50,7 @@ for col in words_df.columns:
                 temp_df = {'news_id':col, 'candidate_id':index,'word':pair[0],'freq':pair[1], 'candidates':name_dict[index], 'newspapers':news_dict_wordcloud[col]}
                 word_df_formatted = word_df_formatted.append(temp_df, ignore_index = True)
             
-words_freq_cand_df = pd.read_json("/home/abejburton/capp30122/databased_project/analysis/data/word_freq_candidate.json", orient='index')
+words_freq_cand_df = pd.read_json("/home/bentovim/capp30122/databased_project/analysis/data/word_freq_candidate.json", orient='index')
 
 for col in words_freq_cand_df.columns:
     for index, row in words_freq_cand_df[col].items():
