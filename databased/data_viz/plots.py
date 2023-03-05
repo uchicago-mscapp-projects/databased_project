@@ -38,10 +38,10 @@ NEWS = {'news_cc':"Crain's Chicago Business", 'news_ct':'Chicago Tribune',
         'news_cd':"Chicago Defender", 'news_hp':'Hyde Park Herald',
         'news_ln':'Lawndale News', 'news_tt':'The Triibe',
         'overall_sentiment':'Overall Sentiment'}
+
 MENTION_LABELS = ['Kam Buckner', 'Chuy García', "Ja'Mal Green", 'Brandon Johnson',
                 'Sophia King', 'Roderick Sawyer', 'Paul Vallas',
                 'Willie Wilson', 'Lori Lightfoot', 'Total Unique Articles']
-
 
 """
 
@@ -102,8 +102,6 @@ for col in cand_news_sentiment_df.columns:
 # Adds a column flagging if the associated value is positive or negative for graph
 cand_news_sentiment_df_formatted['sign'] = cand_news_sentiment_df_formatted['value'] > 0
 
-# clean_articles_df = pd.read_csv(pathlib.Path(__file__).parent.parent / clean_articles_filepath, usecols=['candidate_id', 'newspaper_id', 'url', 'date'], nrows = 50)
-
 """
 
 # Dataset 3: Most Frequent Word by Candidate and Newspaper
@@ -138,8 +136,12 @@ for col in words_freq_cand_df.columns:
 
             # Due to JSON conversion, some rows appear as None, exclude them
             if row is not None:
-                temp_df = pd.Series({'news_id':'all_sites', 'candidate_id':index,'word':row[0],'freq':row[1], 'candidates':NAME[index], 'newspapers':'All Sites'})
-                word_df_formatted = pd.concat([word_df_formatted, temp_df.to_frame().T], ignore_index=True)
+                temp_df = pd.Series({'news_id':'all_sites', 'candidate_id':index,
+                'word':row[0],'freq':row[1], 'candidates':NAME[index], 
+                'newspapers':'All Sites'})
+
+                word_df_formatted = pd.concat([word_df_formatted, 
+                                    temp_df.to_frame().T], ignore_index=True)
 
 """
 
@@ -147,14 +149,12 @@ for col in words_freq_cand_df.columns:
 
 """
 
-
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-
 
 """
 
 # Make Graphs
-# Static Graphs live here, live graphs are created in callbacks
+# Static Graphs live here, dynamic graphs are created in callbacks
 
 """
 
@@ -171,7 +171,9 @@ temp_df.drop(['total_unique_articles_scraped', 'cand_ll'], inplace=True)
 temp_df = pd.concat([temp_df,pd.Series(VOTE_SHARE)],axis=1)
 temp_df.rename(columns={0:'vote_share'}, inplace=True)
 mentions_scatter = px.scatter(temp_df, x='mentions', y = 'vote_share', 
-                            text='candidates', labels={'mentions':'Number of Mentions','vote_share': 'Vote Share'})
+                            text='candidates', labels={'mentions':'Number of Mentions',
+                            'vote_share': 'Vote Share'})
+
 mentions_scatter.update_traces(marker=dict(color ='darkviolet', size=10),
                                textposition='bottom center')
 
@@ -367,7 +369,7 @@ def sentiment_graph(selection):
     temp_df = cand_news_sentiment_df_formatted[cand_news_sentiment_df_formatted\
                                                 ['newspapers'] == selection]
     graph = px.bar(temp_df, x='candidates', y='value', color='sign',
-                labels={'candidates': 'Candidate', 'values': 'Value'},
+                labels={'candidates': 'Candidate', 'value': 'Sentiment Percentage'},
                 color_discrete_sequence=['mediumseagreen','darkviolet'])
 
     newnames = {'True':'Positive', 'False': 'Negative'}
@@ -429,6 +431,7 @@ def update_wordcloud_plot(news_value_drop, cand_value_drop):
     frequency_figure.update_traces(marker=dict(color = 'mediumseagreen'))
 
     return (wordcloud_figure, frequency_figure)
+
 
 if __name__ == "__main__":
     # Run the app on the specified port
