@@ -14,6 +14,11 @@ The project aims to analyze the press coverage of the Chicago's mayoral primary 
 
 ## Installation
 
+1. Clone the project repository
+```bash
+```
+
+2. Install virtual environment and dependencies
 ```bash
 poetry install
 python3 -m pip install nltk
@@ -52,39 +57,40 @@ Please input the number of your desired command:
 
 <br />
 
-**Execute all scrapers/apis by running:**
-```bash
-python -m databased/scrapers
-```
-<sub>Note: this command will take about ?? minutes to complete.</sub> 
+**Command 1 - Opens Data Visualization**
+Renders a Dash to visualize the final results of the dataBASED project.
+
+Note: This command will take about ?? minutes to render Dash.
+
+<br />
+
+**Command 2 - Executes All Scrapers/Proquest API**
+Runs all scrapers and Proquest API to collect newpaper articles about Chicago's mayoral candidates. The retrieved data is then stored in JSON format and outputted to the databased/data folder.
+
+Note: This command will take about 20 minutes to complete.
+
+<br />
+
+**Command 3 - Executes All Data Cleaning**
+Runs data cleaning on all scraped data; strips stop words, normalizes case, and selects only sentences that refer to the candidate that is the subject of the article. The cleaned data is then stored in JSON format and outputted to the databased/data folder.
+
+Note: this command will take about 1 minute to complete.
 
 <br />
 
 
+**Command 4 - Execute All Data Analysis**
+Runs data analysis on cleaned candidate data
 
-**Execute all data cleaning by running:**
-```bash
-python -m databased/clean
-```
-<sub>Note: this command will take about 2 minutes to complete.</sub>
+Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.
 
 <br />
 
 
-**Execute all data analysis by running:**
-```bash
-python -m databased/analysis
-```
-<sub>Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.</sub>
-
-<br />
-
-
-
-**Execute entire project by running:**
+**Command 5 - Execute Entire Project**
 ```bash
 python -m databased
 ```
-<sub>Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.</sub>
+<sub>Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 1 minute. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.</sub>
 <br />
 
