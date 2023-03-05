@@ -10,6 +10,7 @@ Description: Search through a list of article dictionaries using candidate name
 tokens and assign articles to a candidate if their name appears in that article.
 Export these dictionaries as a list of JSONs.
 '''
+#!python3 pip install pyarrow
 import os
 import sys
 import re

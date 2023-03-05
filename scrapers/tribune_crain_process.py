@@ -33,7 +33,7 @@ def unpack_file(tar, parquet):
             each file is an article
     '''
     with tarfile.open(tar) as tz_file:
-        parquet_file = tz_file.extractall(sys.path[-1] + 'data/proquest_files')
+        parquet_file = tz_file.extractall(sys.path[-1] + '/data/proquest_files')
         parquet_file = tz_file.extractfile(parquet)
         df_jsons = pd.read_parquet(parquet_file)
         tz_file.close()
