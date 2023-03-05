@@ -103,13 +103,13 @@ def run_scrapers():
     print("\nScraping the Chicago Defender:")
     defender_scrape()
     
-    print("\nScraping the Hyde Park Harold:")
+    print("\nScraping the Hyde Park Herald:")
     hph_scrape() 
 
     print("\nScraping Lawndale News:")
     ln_scrape()
 
-    print("\nScraping the TRiiBE:")
+    print("\nScraping The TRiiBE:")
     triibe_scrape()
 
     print("\nAccessing APIs of the Chicago Tribune and Crain's Chicago Business:")

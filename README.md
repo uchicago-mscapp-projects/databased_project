@@ -61,7 +61,7 @@ Please input the number of your desired command:
 
 Renders a Dash to visualize the final results of the dataBASED project.
 
-Note: This command will take about ?? minutes to render Dash.
+Note: This command will take about 1 minute to render Dash.
 
 <br />
 
@@ -78,7 +78,7 @@ Note: This command will take about 20 minutes to complete.
 Runs data cleaning on all scraped data; strips stop words, normalizes case, and selects only sentences that refer to the candidate that is the subject of the article. The cleaned data is then stored in JSON format and outputted to the databased/data folder.
 
 Notes:
- -  This command will take about 1 minute to complete.
+ - This command will take about 1 minute to complete.
  - TEST THE DOWNLOAD MECHANISMS ON A OR L'S MACHINES. Can we do it outside file?
 
 <br />
@@ -89,14 +89,31 @@ Notes:
 Runs data analysis on cleaned candidate data to calculate word frequency, sentiment, and article counts for the candidate, the newspaper, and for the candidate within each paper. The results are outputted to JSON files within databased/analysis/data folder.
 
 Note: 
-
-this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.
+- This command will take about 12 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 1 minute. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.
+- TEST THE DOWNLOAD MECHANISMS ON A OR L'S MACHINES. Can we do it outside file?
 
 <br />
 
 
 **Command 5 - Execute Entire Project**
 
-<sub>Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 1 minute. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.</sub>
-<br />
+Runs entire project start to finish. Runs scrapers/Proquest API, then cleans article data, conducts data analysis, and renders the visualization of results.
+
+Note: this command will take about 45 minutes to complete.
+
+**Command 6 - Close Project**
+
+Terminates python scripts.
+
+## Acknowledgments
+CAPP 122 Instructor - Professor James Turk
+CAPP 122 Project TA - Yifu Hou
+
+Local Chicago Newsources Used for Data Collection:
+- [Crain's Chicago Business](https://www.chicagobusiness.com/)
+- [Chicago Defender](https://chicagodefender.com/)
+- [Chicago Tribune](https://www.chicagotribune.com/)
+- [Hyde Park Herald](https://www.hpherald.com/)
+- [Lawndale News](http://www.lawndalenews.com/)
+- [The TRiiBE](https://thetriibe.com/)
 
