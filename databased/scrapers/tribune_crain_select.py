@@ -78,7 +78,7 @@ def article_selection(proquest_files, newspaper_id):
                     .apply(lambda x: list(set(x)))
                     .to_dict())
     cand_name_dict["cand_jg"] += ['JaMal Green']
-    print(cand_name_dict)
+
     all_articles = []
     for file in proquest_files:
         tar, parquet, url_counter = file
@@ -87,7 +87,6 @@ def article_selection(proquest_files, newspaper_id):
 
     cand_ids = search_str['candidate_id'].unique()
     cand_articles = {val: [] for val in cand_ids}
-    print(cand_articles)
 
     for article in all_articles:
         for cand_id, names in cand_name_dict.items():

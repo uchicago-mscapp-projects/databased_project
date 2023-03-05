@@ -51,14 +51,14 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 
 # Define and format stopwords
-additional_stop_words =  ['000', 'ald.', 'alderman', 'alderwoman', 'also', 'amp',
-                          'candidate', 'candidates', 'chicago', 'city',
-                          'commissioner', 'congressman', 'cook', 'county', 'de',
-                          'del', 'el', 'en', 'former', 'get', 'gets', 'illinois',
-                          'la', 'las', 'lopez', 'los', 'mayor', 'mayoral',
-                          'mayors', 'office','one', 'q', 'que', 'raymond', 'rep',
-                          'rep.', 'representative', 'said', 'say', 'says', 'state',
-                          'un', 'una', 'vs.', 'www']
+additional_stop_words =  ['000', 'ald', 'alderman', 'aldermen', 'ald.', 'also', 
+                          'amp', 'campaign', 'candidate', 'candidates', 'chicago', 
+                          'city', 'commissioner', 'congressman', 'cook', 'county', 
+                          'de', 'del', 'el', 'en', 'former', 'get', 'gets', 
+                          'illinois', 'la', 'las', 'lopez', 'los', 'mayor', 
+                          'mayoral', 'mayors', 'office', 'one', 'q', 'que', 
+                          'raymond', 'rep', 'rep.', 'representative', 'said', 
+                          'say', 'says', 'state', 'un', 'una', 'vs.', 'www']
 
 standard_stop_words = stopwords.words('english')
 standard_stop_words.extend(additional_stop_words)
