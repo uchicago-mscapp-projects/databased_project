@@ -1,3 +1,13 @@
+"""
+Project: CAPP 122 DataBased Project
+File name: app.py
+
+Executes the dataBASED project.
+
+@Author: Madeleine Roberts
+@Date: Mar 4, 2023
+"""
+
 import sys
 from textwrap import dedent
 
@@ -20,6 +30,10 @@ from databased.analysis.basic_sentiment import basic_sentence_sentiment
 #from databased.data_viz.plots.app import run_server
 
 def run():
+    """
+    Print an intial message for executing the CAPP 122 dataBASED project. 
+    Then, call the `render_project` function.
+    """
     print(dedent(
     """
     ********************************************************************************************************************************
@@ -29,7 +43,10 @@ def run():
     render_project()
 
 def render_project():
-    print()
+    """
+    Print a message with instructions for executing different aspects of the project based on user input.
+    Takes user input as a string and executes the corresponding aspect of the project.
+    """
     print(dedent(
         """
         To execute a desired aspect of the project please enter one of the following commands:
@@ -38,38 +55,43 @@ def render_project():
         \t 3 - Clean Scraped Data
         \t 4 - Conduct Data Analysyis
         \t 5 - Run Entire Project Start to Finish (Scrape -> Clean -> Analyze -> Visualize)
-        \t 6 - End Program\n
+        \t 6 - End Program
         """))
     
     user_input = input("Please input the number of your desired command: ")
 
+    # Ensure correct user input
     try:
         user_input = int(user_input)
     except ValueError:
         user_input = -1
         
-    
+    # Visualize command
     if user_input == 1:
         print("\nRendering DASH for Data Visualization:")
         # TODO we need to figure this out
         ask_continue()
-
+   
+    # Scrape command
     elif user_input == 2:
         run_scrapers()
         ask_continue()
-
+    
+    # Clean command
     elif user_input == 3:
         print("\nCleaning Data:")
         export_clean()
         ask_continue()
 
+    # Analysis command
     elif user_input == 4:
         run_analysis()
         ask_continue()
 
+    # Run entire project command
     elif user_input == 5:
         print("\nExecuting Entire Project")
-        
+
         run_scrapers()
 
         print("\nCleaning Data:")
@@ -80,18 +102,22 @@ def render_project():
         print("\nRendering DASH for Data Visualization:")
         # Will need to enter the command for data viz here
         ask_continue()
+
+    # Close command
     elif user_input == 6:
-        print("\nClosing Project.")
-        print("\n********************************************************************************************************************************\n")
+        close_project()
         return
+
+    # Invalid input
     else:
         print("\nERROR! User input not recognized. Please input the singular digit of your desired command and press enter.")
         render_project()
 
 
-
-
 def run_analysis():
+    """
+    Executes the data analysis files.
+    """
     print("\nCalculating Total Article Counts:")
     retrieve_total_article_counts()
 
@@ -103,11 +129,15 @@ def run_analysis():
 
 
 def run_scrapers():
+    """
+    Executes all newpaper scrapers and APIs.
+    """
     print("\nScraping the Chicago Defender:")
     defender_scrape()
     
     print("\nScraping the Hyde Park Herald:")
     hph_scrape() 
+    # TODO add print statement within this file
 
     print("\nScraping Lawndale News:")
     ln_scrape()
@@ -118,16 +148,29 @@ def run_scrapers():
     print("\nAccessing APIs of the Chicago Tribune and Crain's Chicago Business:")
     run_selection()
     # ^ TODO ask kathryn if tar files are created from this, if so delete and rerun to ensure it works
+
+
+def close_project():
+    """
+    Closes project
+    """
+    print("Closing Project.")
+    print("\n********************************************************************************************************************************\n")
    
+
 def ask_continue():
+    """
+    Prompts user if they would like to execute another portion of the project
+    """
     user_input = input("\nWould you like to enter another command (y/n): ")
 
     if user_input == 'y':
         render_project()
-        # call begining render
+        
     elif user_input == 'n':
-        print("Closing Project.")
-        print("\n********************************************************************************************************************************\n")
+        close_project()
     else:
         print("\nERROR! Unrecognized User Input. Please input the singular letter of your desired command and press enter.")
         ask_continue()
+
+
