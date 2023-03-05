@@ -21,7 +21,7 @@ import json
 import lxml.html
 import pandas as pd
 from datetime import datetime
-from utils import make_request
+from .utils import make_request
 import copy
 
 current = os.path.dirname(os.path.realpath(__file__))
@@ -125,7 +125,7 @@ def get_news_urls(search_string, url = "https://thetriibe.com/"):
 
     return urls
 
-def crawl(url="https://thetriibe.com/"):
+def triibe_scrape(url="https://thetriibe.com/"):
     """
     This function starts at the base URL for the Chicago Defender website and
     crawls through each page of the search, scraping each article before
@@ -167,5 +167,5 @@ def crawl(url="https://thetriibe.com/"):
         json.dump(pages, f, indent=1)
 
 if __name__ == "__main__":
-    crawl()
+    triibe_scrape()
         

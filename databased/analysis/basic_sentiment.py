@@ -19,7 +19,7 @@ import json
 import pandas as pd
 from nltk.corpus import stopwords
 from nltk.sentiment import SentimentIntensityAnalyzer
-from analysis_helpers import single_text_str, write_to_json, unique_list
+from .analysis_helpers import single_text_str, write_to_json, unique_list
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
@@ -51,8 +51,8 @@ def basic_sentence_sentiment():
     write_to_json("sentiment.json", cand_by_newspaper_sentiment)
 
     # news_sentiment takes about 35 minutes
-    news_sentiment = sentence_sentiment_single_token(sia, df, "newspaper_id", "clean_text")
-    write_to_json("bs_news.json", news_sentiment)
+    #news_sentiment = sentence_sentiment_single_token(sia, df, "newspaper_id", "clean_text")
+    #write_to_json("bs_news.json", news_sentiment)
 
 
 def sentence_sentiment_single_token(sia, df, token, text_to_inspect):

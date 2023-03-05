@@ -48,7 +48,7 @@ def write_to_json(file_name, data_to_convert):
         * data_to_convert (dict): The dictionary of  data to write to the JSON file.
     """
     print("Writing to json")
-    filepath = sys.path[0] + '/data/' + file_name
+    filepath = sys.path[0] + '/databased/analysis/data/' + file_name
 
     with open(filepath, "w") as f:
         json.dump(data_to_convert, f, indent=1)

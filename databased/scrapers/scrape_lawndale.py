@@ -5,7 +5,7 @@ File name: scrape_lawndale.py
 Scrapes data from lawndale news pages pages.
 
 Methods:
-    * scrape_ln - scrapes data for mayoral candidates.
+    * ln_scrape - scrapes data for mayoral candidates.
     * scrape_all_pages - scrapes data for passed candidate tokens.
     * get_first_search_page - finds first page of search results for passed candidate tokens.
     * get_article_urls - finds all park URLs on page.
@@ -33,7 +33,7 @@ from utilities.data_retrieval import search_strings
 
 ELECTION_DAY = datetime(2023, 2, 28)
 
-def scrape_ln():
+def ln_scrape():
     """
     Scrapes all articles from lawndale news that are associated with the candidates 
     and candidate tokens in the database.
@@ -290,6 +290,6 @@ def make_request(url):
     return resp
 
 if __name__ == "__main__":
-    scrape_ln()
+    ln_scrape()
     
     

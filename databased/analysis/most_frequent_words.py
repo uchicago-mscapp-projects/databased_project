@@ -16,7 +16,7 @@ import os
 import sys
 from nltk.corpus import stopwords
 from collections import Counter
-from analysis_helpers import single_text_str, write_to_json, unique_list
+from .analysis_helpers import single_text_str, write_to_json, unique_list
 
 #from basic_sentiment import write_to_json
 

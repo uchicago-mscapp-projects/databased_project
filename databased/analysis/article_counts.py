@@ -2,7 +2,7 @@ import sys
 import os
 import json
 import pandas as pd
-from analysis_helpers import write_to_json, unique_list
+from .analysis_helpers import write_to_json, unique_list
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)

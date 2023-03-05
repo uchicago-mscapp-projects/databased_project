@@ -3,7 +3,6 @@ Project: Analyzing News Coverage of Chicago's 2023 Mayoral Election
 Team: dataBased
 File Name: hph_scraper.py
 Author: Abe Burton
-Coauthors: Lee-Or, Maddie
 
 Outputs:
     hph.json in data folder
