@@ -78,14 +78,15 @@ Note: This command will take about 20 minutes to complete.
 Runs data cleaning on all scraped data; strips stop words, normalizes case, and selects only sentences that refer to the candidate that is the subject of the article. The cleaned data is then stored in JSON format and outputted to the databased/data folder.
 
 Notes:
-    This command will take about 1 minute to complete.
+ -  This command will take about 1 minute to complete.
+ - TEST THE DOWNLOAD MECHANISMS ON A OR L'S MACHINES. Can we do it outside file?
 
 <br />
 
 
 **Command 4 - Execute All Data Analysis**
 
-Runs data analysis on cleaned candidate data to calculate word frequency, sentiment, and article counts for the candidate, the newspaper, and for the candidate within each paper.
+Runs data analysis on cleaned candidate data to calculate word frequency, sentiment, and article counts for the candidate, the newspaper, and for the candidate within each paper. The results are outputted to JSON files within databased/analysis/data folder.
 
 Note: 
 
