@@ -1,5 +1,5 @@
 *This README.md file was generated on 03-04-23 by Madeleine Roberts*
-# CAPP 30122 databased_project
+# CAPP 30122 dataBASED Project
 Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primary Election's Mayoral Candidates in Chicago
 
 ## Authors
@@ -58,6 +58,7 @@ Please input the number of your desired command:
 <br />
 
 **Command 1 - Opens Data Visualization**
+
 Renders a Dash to visualize the final results of the dataBASED project.
 
 Note: This command will take about ?? minutes to render Dash.
@@ -65,6 +66,7 @@ Note: This command will take about ?? minutes to render Dash.
 <br />
 
 **Command 2 - Executes All Scrapers/Proquest API**
+
 Runs all scrapers and Proquest API to collect newpaper articles about Chicago's mayoral candidates. The retrieved data is then stored in JSON format and outputted to the databased/data folder.
 
 Note: This command will take about 20 minutes to complete.
