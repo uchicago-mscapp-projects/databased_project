@@ -88,7 +88,7 @@ Notes:
 
 Runs data analysis on cleaned candidate data to calculate word frequency, sentiment, and article counts for the candidate, the newspaper, and for the candidate within each paper. The results are outputted to JSON files within databased/analysis/data folder.
 
-Note: 
+Notes: 
 - This command will take about 12 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 1 minute. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.
 - TEST THE DOWNLOAD MECHANISMS ON A OR L'S MACHINES. Can we do it outside file?
 
@@ -101,12 +101,15 @@ Runs entire project start to finish. Runs scrapers/Proquest API, then cleans art
 
 Note: this command will take about 45 minutes to complete.
 
+<br />
+
 **Command 6 - Close Project**
 
 Terminates python scripts.
 
 ## Acknowledgments
 CAPP 122 Instructor - Professor James Turk
+
 CAPP 122 Project TA - Yifu Hou
 
 Local Chicago Newsources Used for Data Collection:
