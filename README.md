@@ -22,19 +22,22 @@ python3 pip install pyarrow
 
 ## Usage
 Project must be run in the Poetry virtual environment. 
-Upon completeion of abvoe installation requirements and within project terminal, initalize virual environment by running:
+Upon completion of above installation requirements and within project terminal, initalize virual environment by running:
 ```bash
 poetry shell
 ```
 <br />
 
 
-**Execute the data visualization of Dash by running:**
+**Execute the project by running:**
 ```bash
-python -m databased/dash
+python -m databased
 ```
 <br />
 
+You are then prompted to enter a singular digit execute a portion or entire project. (example: "1[Return]" will run the data visualization)
+
+<br />
 
 **Execute all scrapers/apis by running:**
 ```bash
