@@ -170,7 +170,7 @@ temp_df = count_cand_df
 temp_df.drop(['total_unique_articles_scraped', 'cand_ll'], inplace=True)
 temp_df = pd.concat([temp_df,pd.Series(VOTE_SHARE)],axis=1)
 temp_df.rename(columns={0:'vote_share'}, inplace=True)
-mentions_scatter = px.scatter(temp_df, x='vote_share', y = 'mentions', 
+mentions_scatter = px.scatter(temp_df, x='mentions', y = 'vote_share', 
                             text='candidates', labels={'mentions':'Number of Mentions','vote_share': 'Vote Share'})
 mentions_scatter.update_traces(marker=dict(color ='darkviolet', size=10),
                                textposition='bottom center')
