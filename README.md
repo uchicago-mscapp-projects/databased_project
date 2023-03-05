@@ -35,7 +35,7 @@ python -m databased
 ```
 <br />
 
-You are then prompted to enter a singular digit execute a portion or entire project, as seen below. 
+You are then prompted to enter a singular digit execute a portion or the entire project, as seen below. 
 
 ```bash
 To execute a desired aspect of the project please enter one of the following commands:
@@ -43,15 +43,12 @@ To execute a desired aspect of the project please enter one of the following com
     2 - Scrape All Newspapers
     3 - Clean Scraped Data
     4 - Conduct Data Analysyis
-    5 - Run Entire Project Start to Finish(Scrape -> Clean -> Analyze -> Visualize)
+    5 - Run Entire Project Start to Finish (Scrape -> Clean -> Analyze -> Visualize)
     6 - End Program
     
 Please input the number of your desired command:
 ```
-
-
-
-(example: "1[Return]" will run the data visualization)
+<sub>example: "1[Return]" will run the data visualization</sub>
 
 <br />
 
