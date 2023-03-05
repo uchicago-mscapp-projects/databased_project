@@ -1,4 +1,5 @@
 import sys
+from textwrap import dedent
 
 # Scrapers
 from databased.scrapers.defender import defender_scrape
@@ -19,24 +20,27 @@ from databased.analysis.basic_sentiment import basic_sentence_sentiment
 #from databased.data_viz.plots.app import run_server
 
 def run():
-    print()
-    print("********************************************************************************************************************************")
-    print()
-    print("CAPP 122 dataBASED project")
-    print("Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primary Election's Mayoral Candidates in Chicago")
-
+    print(dedent(
+    """
+    ********************************************************************************************************************************
+    CAPP 122 dataBASED project
+    Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primary Election's Mayoral Candidates in Chicago"""
+    ))
     render_project()
 
 def render_project():
     print()
-    print("To execute a desired aspect of the project please enter one of the following commands:")
-    print("\t 1 - Open Data Visualization")
-    print("\t 2 - Scrape All Newspapers")
-    print("\t 3 - Clean Scraped Data")
-    print("\t 4 - Conduct Data Analysyis")
-    print("\t 5 - Run Entire Project Start to Finish (Scrape -> Clean -> Analyze -> Visualize)")
-    print("\t 6 - End Program")
-    print()
+    print(dedent(
+        """
+        To execute a desired aspect of the project please enter one of the following commands:
+        \t 1 - Open Data Visualization
+        \t 2 - Scrape All Newspapers
+        \t 3 - Clean Scraped Data
+        \t 4 - Conduct Data Analysyis
+        \t 5 - Run Entire Project Start to Finish (Scrape -> Clean -> Analyze -> Visualize)
+        \t 6 - End Program\n
+        """))
+    
     user_input = input("Please input the number of your desired command: ")
 
     try:
@@ -78,7 +82,6 @@ def render_project():
         ask_continue()
     elif user_input == 6:
         print("\nClosing Project.")
-
         print("\n********************************************************************************************************************************\n")
         return
     else:

@@ -9,7 +9,7 @@ Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primar
 - [Madeleine Roberts](https://github.com/MadeleineKRoberts) 
 
 ## Introduction
-The project aims to analyze the press coverage of the Chicago's mayoral primary race and investigate how candidates are covered differently in local newspapers. We scraped/access the APIs of six different Chicago focused media sites to collect data. We then conducted data analysis to identify which topics are brought up most often and sentiment analysis to examine the tone of the articles. This analysis was preformed for the candidate overall, the paper overall and for the candidate in each paper.
+The project aims to analyze the press coverage of the Chicago's mayoral primary race and investigate how candidates are covered differently in local newspapers. We scraped/accessed the APIs of six different Chicago focused media sites to collect data. We then conducted data analysis to identify which topics are brought up most often and sentiment analysis to examine the tone of the articles. This analysis was preformed for the candidate overall, the paper overall and for the candidate in each paper.
 
 
 ## Installation
