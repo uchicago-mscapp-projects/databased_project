@@ -41,7 +41,7 @@ python -m databased
 ```
 <br />
 
-You are then prompted to enter a singular digit execute a portion or the entire project, as seen below. 
+You are then prompted to enter a singular digit command to execute a portion or the entire project, as seen below. 
 
 ```bash
 To execute a desired aspect of the project please enter one of the following commands:
