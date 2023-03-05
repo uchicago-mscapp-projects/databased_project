@@ -10,7 +10,7 @@ Outputs:
     None: opens a Dash page on local server with all visualizations
 
 Description:
-    TODO: Lorem ipsum 
+    Creates all the plots and generates a dashboard to display our analysis
 
 Some guidance was drawn from this plotly example: 
 https://github.com/plotly/dash-sample-apps/blob/main/apps/dash-nlp/app.py
@@ -22,132 +22,17 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 from wordcloud import WordCloud
-import pathlib
-import sys
+import data_processing as dp
 
 VOTE_SHARE = {'cand_kb':.109, 'cand_cg':.137, 'cand_jg':.021, 'cand_bj':.211,
 'cand_sk':.013, 'cand_rs':.004, 'cand_pv':.332,'cand_ww':.093, 'cand_ll':.169}
 
-NAME = {'cand_kb':'Kam Buckner', 'cand_cg':'Chuy García',
-        'cand_jg':"Ja'Mal Green", 'cand_bj':'Brandon Johnson',
-        'cand_sk':'Sophia King', 'cand_rs':'Roderick Sawyer',
-        'cand_pv':'Paul Vallas','cand_ww':'Willie Wilson',
-        'cand_ll':'Lori Lightfoot'}
-
-NEWS = {'news_cc':"Crain's Chicago Business", 'news_ct':'Chicago Tribune',
-        'news_cd':"Chicago Defender", 'news_hp':'Hyde Park Herald',
-        'news_ln':'Lawndale News', 'news_tt':'The Triibe',
-        'overall_sentiment':'Overall Sentiment'}
-
-MENTION_LABELS = ['Kam Buckner', 'Chuy García', "Ja'Mal Green", 'Brandon Johnson',
-                'Sophia King', 'Roderick Sawyer', 'Paul Vallas',
-                'Willie Wilson', 'Lori Lightfoot', 'Total Unique Articles']
-
-"""
-
-# Data Reading and Reformatting
-# Much of the data is imported in JSON formats that need reformatting
-
-"""
-
-parent_string = str(pathlib.PurePath(sys.path[0]).parents[0]) + '/analysis/data/'
-
-"""
-
 # Dataset 1: Mentions by Candidate
-
-"""
-
-count_cand_path = parent_string + 'count_cand.json'
-count_cand_df = pd.read_json(count_cand_path, orient='index')
-count_cand_df.rename(columns={0:'mentions'}, inplace=True)
-count_cand_df.drop(['total_num_articles_scraped'], inplace=True)
-count_cand_df['candidates'] = MENTION_LABELS
-
-
-"""
-
+count_cand_df = dp.mentions_candidate()
 # Dataset 2: News Sentiment by candidate and paper
-
-"""
-
-cand_news_sentiment_df_path = parent_string + 'sentiment.json'
-cand_news_sentiment_df = pd.read_json(cand_news_sentiment_df_path)
-cand_news_sentiment_df_formatted = pd.DataFrame(columns = 
-                ['news_id','candidate_id','value','candidates', 'newspapers'])
-
-
-for col in cand_news_sentiment_df.columns:
-    for row in cand_news_sentiment_df[col].items():
-        
-        # Pandas reads missing values as nan (type float), exclude those rows
-        if not isinstance(row[1], float):
-
-            # Collapses positive and negative values into one column
-            temp_pos_df = pd.Series({'news_id': col, 'candidate_id': row[0],
-                                     'value': row[1]['pos'], 
-                                     'candidates': NAME[row[0]],
-                                     'newspapers': NEWS[col]})
-
-            temp_neg_df = pd.Series({'news_id': col, 'candidate_id': row[0],
-                                     'value': -1 * row[1]['neg'], 
-                                     'candidates': NAME[row[0]], 
-                                     'newspapers': NEWS[col]})
-
-            cand_news_sentiment_df_formatted = pd.concat([cand_news_sentiment_df_formatted, 
-                                    temp_pos_df.to_frame().T], ignore_index=True)
-            cand_news_sentiment_df_formatted = pd.concat([cand_news_sentiment_df_formatted, 
-                                    temp_neg_df.to_frame().T], ignore_index=True)
-
-# Adds a column flagging if the associated value is positive or negative for graph
-cand_news_sentiment_df_formatted['sign'] = cand_news_sentiment_df_formatted['value'] > 0
-
-"""
-
+cand_news_sentiment_df_formatted = dp.sent_cand_paper()
 # Dataset 3: Most Frequent Word by Candidate and Newspaper
-
-"""
-
-# This df comes from a JSON of Word frequency by candidate and newspaper
-words_df_path = parent_string + 'word_freq_cand_by_news.json'
-words_df = pd.read_json(words_df_path)
-word_df_formatted = pd.DataFrame(columns = ['news_id', 'candidate_id',
-                                'word','freq','candidates', 'newspapers'])
-
-for col in words_df.columns:
-    for index, row in words_df[col].items():
-
-        # Pandas reads missing values as nan (type float), exclude those rows
-        if not isinstance(row, float):
-            for pair in row:
-                temp_df = pd.Series({'news_id':col, 'candidate_id':index,
-                                'word':pair[0],'freq':pair[1],
-                                'candidates':NAME[index], 'newspapers':NEWS[col]})
-                word_df_formatted = pd.concat([word_df_formatted, 
-                                        temp_df.to_frame().T], ignore_index=True)
-
-
-# This df comes from a JSON of Word frequency from all sites combined
-words_freq_cand_df_path = parent_string + 'word_freq_candidate.json'
-words_freq_cand_df = pd.read_json(words_freq_cand_df_path, orient='index')
-
-for col in words_freq_cand_df.columns:
-    for index, row in words_freq_cand_df[col].items():
-
-            # Due to JSON conversion, some rows appear as None, exclude them
-            if row is not None:
-                temp_df = pd.Series({'news_id':'all_sites', 'candidate_id':index,
-                'word':row[0],'freq':row[1], 'candidates':NAME[index], 
-                'newspapers':'All Sites'})
-
-                word_df_formatted = pd.concat([word_df_formatted, 
-                                    temp_df.to_frame().T], ignore_index=True)
-
-"""
-
-#Create the app
-
-"""
+word_df_formatted = dp.word_freq()
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -157,25 +42,30 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 # Static Graphs live here, dynamic graphs are created in callbacks
 
 """
+def mentions_bar():
+    # Mentions Graph
+    mentions = px.bar(count_cand_df, x='candidates', y='mentions', 
+                labels={'candidates':'Candidate', 'mentions':'Number of Mentions'})
+    mentions.update_traces(marker=dict(color = 'mediumseagreen'))
 
-# Mentions Graph
-mentions = px.bar(count_cand_df, x='candidates', y='mentions', 
-            labels={'candidates':'Candidate', 'mentions':'Number of Mentions'})
-mentions.update_traces(marker=dict(color = 'mediumseagreen'))
+    return mentions
 
-# Mentions vs. Vote Share
-temp_df = count_cand_df
+def vote_scatter():
+    # Mentions vs. Vote Share
+    temp_df = count_cand_df
 
-# Remove rows we don't want to plot, Lightfoot removed as incumbent
-temp_df.drop(['total_unique_articles_scraped', 'cand_ll'], inplace=True)
-temp_df = pd.concat([temp_df,pd.Series(VOTE_SHARE)],axis=1)
-temp_df.rename(columns={0:'vote_share'}, inplace=True)
-mentions_scatter = px.scatter(temp_df, x='mentions', y = 'vote_share', 
-                            text='candidates', labels={'mentions':'Number of Mentions',
-                            'vote_share': 'Vote Share'})
+    # Remove rows we don't want to plot, Lightfoot removed as incumbent
+    temp_df.drop(['total_unique_articles_scraped', 'cand_ll'], inplace=True)
+    temp_df = pd.concat([temp_df,pd.Series(VOTE_SHARE)],axis=1)
+    temp_df.rename(columns={0:'vote_share'}, inplace=True)
+    mentions_scatter = px.scatter(temp_df, x='mentions', y = 'vote_share', 
+                                text='candidates', labels={'mentions':'Number of Mentions',
+                                'vote_share': 'Vote Share'})
 
-mentions_scatter.update_traces(marker=dict(color ='darkviolet', size=10),
-                               textposition='bottom center')
+    mentions_scatter.update_traces(marker=dict(color ='darkviolet', size=10),
+                                textposition='bottom center')
+
+    return mentions_scatter
 
 """
 
@@ -189,7 +79,7 @@ mentions_card = dbc.Card(
         dbc.CardHeader(html.H5("Newspaper Mentions by Candidate")),
         dbc.CardBody(
             [
-                dcc.Graph(id='mentions_graph', figure=mentions)
+                dcc.Graph(id='mentions_graph', figure=mentions_bar())
             ]
         ),
         dbc.CardFooter("Newspapers: Chicago Tribune, Chicago Defender,\
@@ -295,7 +185,7 @@ scatter_card = dbc.Card(
         dbc.CardHeader(html.H5("Vote Share vs. Number of Mentions")),
         dbc.CardBody(
             [
-                dcc.Graph(id='mentions_scatter', figure=mentions_scatter)
+                dcc.Graph(id='mentions_scatter', figure=vote_scatter())
             ]
         ),
         dbc.CardFooter("Lori Lightfoot excluded due to Incumbency. Correlation ~0.45"),
@@ -338,9 +228,6 @@ NAVBAR = dbc.Navbar(
     sticky="top",
 )
 
-# Create app layout
-app.layout = html.Div(children=[NAVBAR, BODY])
-
 
 """
 # Callbacks
@@ -380,7 +267,10 @@ def sentiment_graph(selection):
                   )
 
     graph.update_layout(legend={'title_text':''})
+
     return graph
+
+app.layout = html.Div(children=[NAVBAR, BODY])  
 
 
 @app.callback(
@@ -433,6 +323,11 @@ def update_wordcloud_plot(news_value_drop, cand_value_drop):
     return (wordcloud_figure, frequency_figure)
 
 
+def run():
+
+    app.run_server(debug=False, port=8059)
+
+
 if __name__ == "__main__":
-    # Run the app on the specified port
+
     app.run_server(debug=False, port=8059)
