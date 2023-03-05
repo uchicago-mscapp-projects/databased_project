@@ -45,7 +45,7 @@ To execute a desired aspect of the project please enter one of the following com
     4 - Conduct Data Analysyis
     5 - Run Entire Project Start to Finish(Scrape -> Clean -> Analyze -> Visualize)
     6 - End Program
-    \n
+    
 Please input the number of your desired command:
 ```
 
