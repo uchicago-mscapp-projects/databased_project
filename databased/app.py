@@ -16,13 +16,13 @@ from databased.analysis.most_frequent_words import most_frequent
 from databased.analysis.basic_sentiment import basic_sentence_sentiment
 
 # Data Visualization
-#from databased.data_viz #need function to call ?
+#from databased.data_viz.plots.app import run_server
 
 def run():
     print()
     print("********************************************************************************************************************************")
     print()
-    print("CAPP 122 databased project")
+    print("CAPP 122 dataBASED project")
     print("Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primary Election's Mayoral Candidates in Chicago")
 
     render_project()
@@ -47,7 +47,7 @@ def render_project():
     
     if user_input == 1:
         print("\nRendering DASH for Data Visualization:")
-        # Will need to enter the command for data viz here
+        # TODO we need to figure this out
         ask_continue()
 
     elif user_input == 2:
