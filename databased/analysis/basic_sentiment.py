@@ -5,7 +5,7 @@ File name: basic_sentiment.py
 Finds the basic sentiment of articles about candidates and within newspapers by
 using NLTK’s built-in classifier, which uses VADER.
 
-NOTE: running this file takes about 35 minutes
+NOTE: running this file takes about 15 minutes
 
 @Author: Madeleine Roberts
 @Date: Mar 2, 2023
@@ -19,7 +19,7 @@ import json
 import pandas as pd
 from nltk.corpus import stopwords
 from nltk.sentiment import SentimentIntensityAnalyzer
-from analysis_helpers import single_text_str, write_to_json, unique_list
+from .analysis_helpers import single_text_str, write_to_json, unique_list
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)

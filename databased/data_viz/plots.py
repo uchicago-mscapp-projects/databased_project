@@ -1,86 +1,95 @@
+
+"""
+Project: Analyzing News Coverage of Chicago's 2023 Mayoral Election
+Team: dataBased
+File Name: plots.py
+Authors: Abe Burton and Lee-Or Bentovim 
+Note: We wrote this file entirely jointly and all work is equally attributable to both of us
+
+Outputs:
+    None: opens a Dash page on local server with all visualizations
+
+Description:
+    Creates all the plots and generates a dashboard to display our analysis
+
+Some guidance was drawn from this plotly example: 
+https://github.com/plotly/dash-sample-apps/blob/main/apps/dash-nlp/app.py
+"""
+
 from dash import Dash, html, dcc
 from dash.dependencies import Output, Input, State
 import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 from wordcloud import WordCloud
-from matplotlib import pyplot as plt
+import data_processing as dp
 
-### Read in the data
-# Candidate Sentiment By Newspaper data is in a tricky json format. Reformat
-# to work with pandas.
-cand_news_sentiment_df = pd.read_json('/home/abejburton/capp30122/databased_project/analysis/data/sentiment.json')
-cand_news_sentiment_df_formatted = pd.DataFrame(columns = ['news_id','candidate_id','neg','pos','neu','compound','candidates', 'newspapers'])
+VOTE_SHARE = {'cand_kb':.109, 'cand_cg':.137, 'cand_jg':.021, 'cand_bj':.211,
+'cand_sk':.013, 'cand_rs':.004, 'cand_pv':.332,'cand_ww':.093, 'cand_ll':.169}
 
-name_dict = {'cand_kb':'Kam Buckner', 'cand_cg':'Chuy García', 'cand_jg':"Ja'Mal Green", 'cand_bj':'Brandon Johnson', 'cand_sk':'Sophia King', 'cand_rs':'Roderick Sawyer', 'cand_pv':'Paul Vallas','cand_ww':'Willie Wilson', 'cand_ll':'Lori Lightfoot'}
-news_dict = {'news_cc':"Crain's Chicago", 'news_ct':'Chicago Tribune', 'news_cd':"Chicago Defender", 'news_hp':'Hyde Park Herald', 'news_ln':'Lawndale News', 'news_tt':'The Triibe', 'overall_sentiment':'Overall Sentiment'}
+# Dataset 1: Mentions by Candidate
+count_cand_df = dp.mentions_candidate()
+# Dataset 2: News Sentiment by candidate and paper
+cand_news_sentiment_df_formatted = dp.sent_cand_paper()
+# Dataset 3: Most Frequent Word by Candidate and Newspaper
+word_df_formatted = dp.word_freq()
 
-for col in cand_news_sentiment_df.columns:
-    for row in cand_news_sentiment_df[col].items():
-
-        if not isinstance(row[1], float):
-            temp_df = {'news_id':col, 'candidate_id':row[0],'neg':row[1]['neg'],'pos':row[1]['pos'], 'neu':row[1]['neu'], 'compound':row[1]['compound'], 'candidates':name_dict[row[0]], 'newspapers':news_dict[col]}
-            cand_news_sentiment_df_formatted = cand_news_sentiment_df_formatted.append(temp_df, ignore_index = True)
-        else:
-            temp_df = {'news_id':col, 'candidate_id':row[0], 'neg':None, 'pos':None, 'neu':None, 'compound':None, 'candidates':None, 'newspapers':None}
-            cand_news_sentiment_df_formatted = cand_news_sentiment_df_formatted.append(temp_df, ignore_index = True)
-
-cand_news_sentiment_df_formatted.dropna(inplace=True)
-cand_news_sentiment_df_formatted.reset_index(drop=True, inplace=True)
-cand_news_sentiment_df_formatted['neg'] = cand_news_sentiment_df_formatted['neg'] * -1
-
-            
-# TODO get article info from maddie and also most common words.
-# clean_articles_df = pd.read_csv(pathlib.Path(__file__).parent.parent / clean_articles_filepath, usecols=['candidate_id', 'newspaper_id', 'url', 'date'], nrows = 50)
-# Candidate references in articles count
-count_cand_df = pd.read_json('/home/abejburton/capp30122/databased_project/analysis/data/count_cand.json', orient='index')
-count_cand_df.rename(columns={0:'mentions'}, inplace=True)
-MENTION_LABELS = ['Kam Buckner','Chuy García',"Ja'Mal Green",'Brandon Johnson','Sophia King','Roderick Sawyer','Paul Vallas','Willie Wilson','Lori Lightfoot','Total Articles','Total Unique Articles']
-count_cand_df['candidates'] = MENTION_LABELS
-count_cand_df.drop(['total_num_articles_scraped'], inplace=True)
-
-words_df = pd.read_json("/home/abejburton/capp30122/databased_project/analysis/data/word_freq_cand_by_news.json")
-word_df_formatted = pd.DataFrame(columns = ['news_id','candidate_id','word','freq','candidates', 'newspapers'])
-news_dict_wordcloud = {'news_cc':"Crain's Chicago", 'news_ct':'Chicago Tribune', 'news_cd':"Chicago Defender", 'news_hp':'Hyde Park Herald', 'news_ln':'Lawndale News', 'news_tt':'The Triibe', 'all_sites':'All Sites'}
-
-for col in words_df.columns:
-    for index, row in words_df[col].items():
-        if not isinstance(row, float):
-            for pair in row:
-                temp_df = {'news_id':col, 'candidate_id':index,'word':pair[0],'freq':pair[1], 'candidates':name_dict[index], 'newspapers':news_dict_wordcloud[col]}
-                word_df_formatted = word_df_formatted.append(temp_df, ignore_index = True)
-            
-words_freq_cand_df = pd.read_json("/home/abejburton/capp30122/databased_project/analysis/data/word_freq_candidate.json", orient='index')
-
-for col in words_freq_cand_df.columns:
-    for index, row in words_freq_cand_df[col].items():
-            if row is not None:
-                temp_df = {'news_id':'all_sites', 'candidate_id':index,'word':row[0],'freq':row[1], 'candidates':name_dict[index], 'newspapers':news_dict_wordcloud['all_sites']}
-                word_df_formatted = word_df_formatted.append(temp_df, ignore_index = True)
-
-
-### Create the app
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-# Make Graphs
-mentions = px.bar(count_cand_df, x='candidates', y='mentions', labels={'candidates':'Candidate', 'mentions':'Number of Mentions'})
-mentions.update_traces(marker=dict(color = 'blue'))
-#sentiment.layout.update(showlegend=False)
+"""
 
-# Make Cards
+# Make Graphs
+# Static Graphs live here, dynamic graphs are created in callbacks
+
+"""
+def mentions_bar():
+    # Mentions Graph
+    mentions = px.bar(count_cand_df, x='candidates', y='mentions', 
+                labels={'candidates':'Candidate', 'mentions':'Number of Mentions'})
+    mentions.update_traces(marker=dict(color = 'mediumseagreen'))
+
+    return mentions
+
+def vote_scatter():
+    # Mentions vs. Vote Share
+    temp_df = count_cand_df
+
+    # Remove rows we don't want to plot, Lightfoot removed as incumbent
+    temp_df.drop(['total_unique_articles_scraped', 'cand_ll'], inplace=True)
+    temp_df = pd.concat([temp_df,pd.Series(VOTE_SHARE)],axis=1)
+    temp_df.rename(columns={0:'vote_share'}, inplace=True)
+    mentions_scatter = px.scatter(temp_df, x='mentions', y = 'vote_share', 
+                                text='candidates', labels={'mentions':'Number of Mentions',
+                                'vote_share': 'Vote Share'})
+
+    mentions_scatter.update_traces(marker=dict(color ='darkviolet', size=10),
+                                textposition='bottom center')
+
+    return mentions_scatter
+
+"""
+
+# Make Cards (One per section)
+
+"""
+
+# This card refers to Newspaper Mentions by Candidate
 mentions_card = dbc.Card(
     [
-        dbc.CardHeader(html.H5("Number of Newspaper Mentions by Candidate")),
+        dbc.CardHeader(html.H5("Newspaper Mentions by Candidate")),
         dbc.CardBody(
             [
-                dcc.Graph(id='mentions_graph', figure=mentions)
+                dcc.Graph(id='mentions_graph', figure=mentions_bar())
             ]
         ),
-        dbc.CardFooter("Newspapers: Chicago Tribune, Chicago Defender, Crain's Chicago, Hyde Park Herald, Lawndale News, The Triibe"),
+        dbc.CardFooter("Newspapers: Chicago Tribune, Chicago Defender,\
+                        Crain's Chicago Business, Hyde Park Herald,\
+                        Lawndale News, The Triibe"),
     ],
     style={"marginTop": 0, "marginBottom": 0},
 )
 
+# This card refers to Sentiment by Candidate and Newspaper
 sentiment_card = dbc.Card(
     [
         dbc.CardHeader(html.H5("Sentiment by Candidate and Newspaper")),
@@ -93,7 +102,9 @@ sentiment_card = dbc.Card(
                             id='sentiment-input',
                             options=[
                                 {'label': source, 'value': source}
-                                for source in cand_news_sentiment_df_formatted['newspapers'].unique()
+                                for source in 
+                                cand_news_sentiment_df_formatted\
+                                ['newspapers'].unique()
                             ],
                             value='Overall Sentiment',
                         )
@@ -104,20 +115,16 @@ sentiment_card = dbc.Card(
             ],
             style={'marginTop':0, 'marginBottom':0},
         ),
-        dbc.CardFooter("Sentiment represents the percent of words used in sentences where the candidate is mentioned that are positive or negative"),
+        dbc.CardFooter("Sentiment represents the percent of words used in\
+        sentences where the candidate is mentioned that are positive or negative"),
     ],
     style={"marginTop": 0, "marginBottom": 0},
 )
 
+# This card refers to Most Common Words by Candidate and Newspaper
 wordcloud_card = dbc.Card(
     [
         dbc.CardHeader(html.H5("Most Common Words by Candidate and Newspaper")),
-        dbc.Alert(
-            "Not enough data to render these plots, please adjust the filters",
-            id="no-data-alert",
-            color="warning",
-            style={"display": "none"},
-        ),
         dbc.CardBody(
             [
                 dbc.Row([
@@ -172,11 +179,32 @@ wordcloud_card = dbc.Card(
     style={"marginTop": 0, "marginBottom": 0},
 )
 
+# This card refers to Newspaper Mentions by Candidate
+scatter_card = dbc.Card(
+    [
+        dbc.CardHeader(html.H5("Vote Share vs. Number of Mentions")),
+        dbc.CardBody(
+            [
+                dcc.Graph(id='mentions_scatter', figure=vote_scatter())
+            ]
+        ),
+        dbc.CardFooter("Lori Lightfoot excluded due to Incumbency. Correlation ~0.45"),
+    ],
+    style={"marginTop": 0, "marginBottom": 0},
+)
+
+"""
+
+# Creating a NavBar and Body for displaying our data
+
+"""
+
 # Put together body of cards
 BODY = html.Div(children=[
-    dbc.Row([dbc.Col(md=2),dbc.Col(mentions_card),dbc.Col(md=2),], style={'marginTop':30}),
+    dbc.Row([dbc.Col(md=2),dbc.Col(mentions_card),dbc.Col(md=2),], style={'marginTop':0}),
     dbc.Row([dbc.Col(md=2),dbc.Col(sentiment_card),dbc.Col(md=2),], style={'marginTop':30}),
     dbc.Row([dbc.Col(md=2),dbc.Col(wordcloud_card),dbc.Col(md=2),], style={'marginTop':30}),
+    dbc.Row([dbc.Col(md=2),dbc.Col(scatter_card),dbc.Col(md=2),], style={'marginTop':30}),
 ],
     style={'backgroundColor':'slategray'}
 )
@@ -198,38 +226,57 @@ NAVBAR = dbc.Navbar(
     color="white",
     dark=False,
     sticky="top",
-    style={'backgroundColor':'slategray'},
 )
 
-# Create app layout
-app.layout = html.Div(children=[NAVBAR, BODY])
-
 
 """
-Callbacks
+# Callbacks
 
-Create graphs with decorators so that the graphs update when a dropdown
-is selected
+# Create graphs with decorators so that the graphs update 
+    when a dropdown is selected
 """
 
+# Callback for Sentiment Graph
 @app.callback(
     Output('sentiment-graph', 'figure'),
     Input('sentiment-input', 'value')
 )
 def sentiment_graph(selection):
-    """ Callback to create the sentiment graph for the selected newspaper"""
-    temp_df = cand_news_sentiment_df_formatted[cand_news_sentiment_df_formatted['newspapers'] == selection]
-    graph = px.bar(temp_df, x='candidates', y=['pos', 'neg'],
-                   labels={'candidates': 'Candidate'})
-    print(selection)
+    """ 
+    This Callback creates the sentiment graph for the selected newspaper
+
+    Inputs: 
+        selection (str): selection is determined when the value at id
+                sentiment-input is changed
+    
+    Outputs:
+        graph (graph object): the bar graph created, which returns to the id
+                at sentiment-graph as a figure
+    """
+    temp_df = cand_news_sentiment_df_formatted[cand_news_sentiment_df_formatted\
+                                                ['newspapers'] == selection]
+    graph = px.bar(temp_df, x='candidates', y='value', color='sign',
+                labels={'candidates': 'Candidate', 'value': 'Sentiment Percentage'},
+                color_discrete_sequence=['mediumseagreen','darkviolet'])
+
+    newnames = {'True':'Positive', 'False': 'Negative'}
+    graph.for_each_trace(lambda t: t.update(name = newnames[t.name],
+                                      legendgroup = newnames[t.name],
+                                      hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])
+                                     )
+                  )
+
+    graph.update_layout(legend={'title_text':''})
+
     return graph
+
+app.layout = html.Div(children=[NAVBAR, BODY])  
 
 
 @app.callback(
     [
         Output("wordcloud", "figure"),
         Output("frequency-figure", "figure"),
-        Output("no-data-alert", "style"),
     ],
     [
         Input("news-drop", "value"),
@@ -237,29 +284,50 @@ def sentiment_graph(selection):
     ],
 )
 def update_wordcloud_plot(news_value_drop, cand_value_drop):
-    """ Callback to rerender wordcloud plot with the given filters """
-    temp_df = word_df_formatted[(word_df_formatted['newspapers'] == news_value_drop) & (word_df_formatted['candidates'] == cand_value_drop)]
+    """ 
+    This Callback creates the wordcloud and frequency graphs for the 
+    selected newspaper and candidate pairing
+
+    Inputs: 
+        news_value_drop (str): news_value_drop is determined when the value at 
+                id news-drop is changed
+        cand_value_drop (str): cand_value_drop is determined when the value at 
+                id candidate-drop is changed
+    
+    Outputs:
+        wordcloud_figure (image object): the wordcloud created, which returns to
+                the id at wordcloud as a figure
+        frrequency_figure (graph object): the bar graph created, which returns to
+                the id at frequency-figure as a figure
+    """
+    temp_df = word_df_formatted[(word_df_formatted['newspapers'] == 
+        news_value_drop) & (word_df_formatted['candidates'] == cand_value_drop)]
+
     # Create the wordcloud
-    cloud = WordCloud(max_font_size=400, background_color='white', width=2500, height=1250)
+    cloud = WordCloud(max_font_size=400, background_color='white', 
+                      width=2500, height=1250)
     temp_df.set_index('word', inplace=True, drop=False)
     freq_dict = pd.DataFrame(temp_df['freq']).to_dict()['freq']
     cloud.generate_from_frequencies(freq_dict)
+
     wordcloud_figure = px.imshow(cloud)
     wordcloud_figure.update_xaxes(visible=False)
     wordcloud_figure.update_yaxes(visible=False)
     
     # Create the bar graph
-    frequency_figure = px.bar(temp_df.iloc[:20].iloc[::-1], x='freq', y='word', orientation='h')
-    frequency_figure.update_traces(marker=dict(color = 'blue'))
+    frequency_figure = px.bar(temp_df.iloc[:20].iloc[::-1], x='freq', y='word',
+                orientation='h', labels={'freq': 'Frequency', 'word': 'Word'})
 
-    alert_style = {"display": "none"}
-    if (wordcloud_figure == {}) or (frequency_figure == {}):
-        alert_style = {"display": "block"}
-    print("redrawing wordcloud...done")
+    frequency_figure.update_traces(marker=dict(color = 'mediumseagreen'))
 
-    return (wordcloud_figure, frequency_figure, alert_style)
+    return (wordcloud_figure, frequency_figure)
+
+
+def run():
+
+    app.run_server(debug=False, port=8059)
 
 
 if __name__ == "__main__":
-    # Run the app on the specified port
+
     app.run_server(debug=False, port=8059)

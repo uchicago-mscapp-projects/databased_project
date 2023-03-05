@@ -21,7 +21,7 @@ import json
 import lxml.html
 import copy
 import pandas as pd
-from utils import make_request
+from .utils import make_request
 from datetime import datetime
 
 current = os.path.dirname(os.path.realpath(__file__))
@@ -157,7 +157,7 @@ def check_next_page_exists(search_string, current_page, url = "https://chicagode
 
     return len(nav_list)
 
-def crawl(current_page = 1, url="https://chicagodefender.com/page/"):
+def defender_scrape(current_page = 1, url="https://chicagodefender.com/page/"):
     """
     This function starts at the base URL for the Chicago Defender website and
     crawls through each page of the search, scraping each article before
@@ -209,4 +209,4 @@ def crawl(current_page = 1, url="https://chicagodefender.com/page/"):
         json.dump(pages, f, indent=1)
 
 if __name__ == "__main__":
-    crawl()
+    defender_scrape()
