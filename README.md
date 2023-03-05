@@ -53,7 +53,7 @@ To execute a desired aspect of the project please enter one of the following com
     
 Please input the number of your desired command:
 ```
-<sub>example: "1[Return]" will run the data visualization</sub>
+<sub>example: "1[Return]" will run the data visualization.</sub>
 
 <br />
 
@@ -74,25 +74,28 @@ Note: This command will take about 20 minutes to complete.
 <br />
 
 **Command 3 - Executes All Data Cleaning**
+
 Runs data cleaning on all scraped data; strips stop words, normalizes case, and selects only sentences that refer to the candidate that is the subject of the article. The cleaned data is then stored in JSON format and outputted to the databased/data folder.
 
-Note: this command will take about 1 minute to complete.
+Notes:
+    This command will take about 1 minute to complete.
 
 <br />
 
 
 **Command 4 - Execute All Data Analysis**
-Runs data analysis on cleaned candidate data
 
-Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.
+Runs data analysis on cleaned candidate data to calculate word frequency, sentiment, and article counts for the candidate, the newspaper, and for the candidate within each paper.
+
+Note: 
+
+this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 2 minutes. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.
 
 <br />
 
 
 **Command 5 - Execute Entire Project**
-```bash
-python -m databased
-```
+
 <sub>Note: this command will take about 35 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 1 minute. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.</sub>
 <br />
 
