@@ -55,7 +55,7 @@ def render_project():
         ask_continue()
 
     elif user_input == 3:
-        print("\nCleaning Data")
+        print("\nCleaning Data:")
         export_clean()
         ask_continue()
 
@@ -68,7 +68,7 @@ def render_project():
         
         run_scrapers()
 
-        print("\nCleaning Data")
+        print("\nCleaning Data:")
         export_clean()
 
         run_analysis()
