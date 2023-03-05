@@ -16,6 +16,14 @@ plotly = "^5.13.0"
 pyarrow = "^11.0.0"
 nltk = "^3.8.1"
 corpora = "^1.0"
+pathlib = "^1.0.1"
+dash = "^2.8.1"
+plotly-express = "^0.4.1"
+dash-bootstrap-components = "^1.4.0"
+dash-html-components = "^2.0.0"
+dash-core-components = "^2.0.0"
+wordcloud = "^1.8.2.2"
+matplotlib = "^3.7.1"
 
 
 [build-system]
