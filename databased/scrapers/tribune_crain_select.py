@@ -10,6 +10,7 @@ Description: Search through a list of article dictionaries using candidate name
 tokens and assign articles to a candidate if their name appears in that article.
 Export these dictionaries as a list of JSONs.
 '''
+#!python3 pip install pyarrow
 import os
 import sys
 import re
@@ -49,7 +50,6 @@ def run_selection():
     Outputs:
         None. Writes JSON file of selected articles to the data folder
     """
-    print((sys.path[-1]))
     papers = [TRIBUNE_FILEPATHS, CRAIN_FILEPATHS]
     for paper in papers:
         proquest_files, newspaper_id, json_filepath = paper
@@ -77,7 +77,8 @@ def article_selection(proquest_files, newspaper_id):
     cand_name_dict = (search_str.groupby('candidate_id')['name_tokens']
                     .apply(lambda x: list(set(x)))
                     .to_dict())
-
+    cand_name_dict["cand_jg"] += ['JaMal Green']
+    print(cand_name_dict)
     all_articles = []
     for file in proquest_files:
         tar, parquet, url_counter = file
@@ -86,6 +87,7 @@ def article_selection(proquest_files, newspaper_id):
 
     cand_ids = search_str['candidate_id'].unique()
     cand_articles = {val: [] for val in cand_ids}
+    print(cand_articles)
 
     for article in all_articles:
         for cand_id, names in cand_name_dict.items():
