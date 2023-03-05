@@ -14,11 +14,12 @@ The project aims to analyze the press coverage of the Chicago's mayoral primary 
 
 ## Installation
 
-1. Clone the project repository
+1. Clone the Project Repository via SSH
 ```bash
+git@github.com:uchicago-capp122-spring23/databased_project.git
 ```
 
-2. Install virtual environment and dependencies
+2. Install Virtual Environment and Dependencies
 ```bash
 poetry install
 python3 -m pip install nltk
