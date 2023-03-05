@@ -7,10 +7,10 @@
    "compound": 0.2023
   },
   "cand_cg": {
-   "neg": 0.041,
+   "neg": 0.04,
    "neu": 0.818,
    "pos": 0.141,
-   "compound": 0.9916
+   "compound": 0.9918
   },
   "cand_jg": {
    "neg": 0.172,
@@ -43,24 +43,24 @@
    "compound": 0.9837
   },
   "cand_ww": {
-   "neg": 0.07,
+   "neg": 0.071,
    "neu": 0.804,
    "pos": 0.126,
    "compound": 0.9892
   },
   "cand_ll": {
-   "neg": 0.072,
+   "neg": 0.073,
    "neu": 0.79,
-   "pos": 0.138,
+   "pos": 0.136,
    "compound": 0.9998
   }
  },
  "news_ct": {
   "cand_kb": {
-   "neg": 0.098,
-   "neu": 0.801,
-   "pos": 0.101,
-   "compound": -0.9106
+   "neg": 0.087,
+   "neu": 0.822,
+   "pos": 0.091,
+   "compound": -0.4991
   },
   "cand_cg": {
    "neg": 0.057,
@@ -68,40 +68,46 @@
    "pos": 0.128,
    "compound": 1.0
   },
+  "cand_jg": {
+   "neg": 0.125,
+   "neu": 0.776,
+   "pos": 0.099,
+   "compound": -0.9994
+  },
   "cand_bj": {
    "neg": 0.084,
-   "neu": 0.775,
-   "pos": 0.141,
+   "neu": 0.776,
+   "pos": 0.14,
    "compound": 0.9999
   },
   "cand_sk": {
-   "neg": 0.111,
-   "neu": 0.751,
+   "neg": 0.11,
+   "neu": 0.752,
    "pos": 0.138,
    "compound": 0.9999
   },
   "cand_rs": {
-   "neg": 0.092,
-   "neu": 0.825,
-   "pos": 0.083,
-   "compound": -0.9973
+   "neg": 0.088,
+   "neu": 0.829,
+   "pos": 0.084,
+   "compound": -0.9956
   },
   "cand_pv": {
-   "neg": 0.109,
-   "neu": 0.755,
-   "pos": 0.137,
-   "compound": 0.9996
+   "neg": 0.107,
+   "neu": 0.757,
+   "pos": 0.136,
+   "compound": 0.9997
   },
   "cand_ww": {
-   "neg": 0.107,
-   "neu": 0.756,
-   "pos": 0.137,
+   "neg": 0.106,
+   "neu": 0.76,
+   "pos": 0.134,
    "compound": 0.9997
   },
   "cand_ll": {
-   "neg": 0.112,
-   "neu": 0.764,
-   "pos": 0.124,
+   "neg": 0.111,
+   "neu": 0.766,
+   "pos": 0.123,
    "compound": 0.9999
   }
  },
@@ -113,10 +119,10 @@
    "compound": 0.9489
   },
   "cand_bj": {
-   "neg": 0.106,
-   "neu": 0.705,
-   "pos": 0.189,
-   "compound": 0.765
+   "neg": 0.052,
+   "neu": 0.657,
+   "pos": 0.291,
+   "compound": 0.9896
   },
   "cand_sk": {
    "neg": 0.159,
@@ -125,10 +131,10 @@
    "compound": -0.9403
   },
   "cand_pv": {
-   "neg": 0.203,
-   "neu": 0.557,
-   "pos": 0.24,
-   "compound": 0.0516
+   "neg": 0.052,
+   "neu": 0.702,
+   "pos": 0.247,
+   "compound": 0.9979
   },
   "cand_ww": {
    "neg": 0.113,
@@ -137,48 +143,48 @@
    "compound": 0.5859
   },
   "cand_ll": {
-   "neg": 0.0,
-   "neu": 0.824,
-   "pos": 0.176,
-   "compound": 0.4939
+   "neg": 0.026,
+   "neu": 0.81,
+   "pos": 0.163,
+   "compound": 0.9962
   }
  },
  "news_hp": {
   "cand_kb": {
-   "neg": 0.11,
-   "neu": 0.776,
-   "pos": 0.114,
-   "compound": -0.4333
+   "neg": 0.082,
+   "neu": 0.813,
+   "pos": 0.105,
+   "compound": 0.9329
   },
   "cand_cg": {
    "neg": 0.0,
-   "neu": 0.891,
-   "pos": 0.109,
+   "neu": 0.899,
+   "pos": 0.101,
    "compound": 0.4019
   },
   "cand_bj": {
-   "neg": 0.0,
-   "neu": 0.84,
-   "pos": 0.16,
-   "compound": 0.6249
+   "neg": 0.018,
+   "neu": 0.866,
+   "pos": 0.115,
+   "compound": 0.9733
   },
   "cand_sk": {
-   "neg": 0.081,
-   "neu": 0.778,
-   "pos": 0.141,
-   "compound": 0.8225
+   "neg": 0.115,
+   "neu": 0.763,
+   "pos": 0.121,
+   "compound": -0.9595
   },
   "cand_rs": {
-   "neg": 0.0,
-   "neu": 1.0,
-   "pos": 0.0,
-   "compound": 0.0
+   "neg": 0.028,
+   "neu": 0.917,
+   "pos": 0.055,
+   "compound": 0.3818
   },
   "cand_pv": {
-   "neg": 0.0,
-   "neu": 1.0,
-   "pos": 0.0,
-   "compound": 0.0
+   "neg": 0.011,
+   "neu": 0.934,
+   "pos": 0.055,
+   "compound": 0.872
   },
   "cand_ww": {
    "neg": 0.0,
@@ -187,16 +193,16 @@
    "compound": 0.0
   },
   "cand_ll": {
-   "neg": 0.131,
-   "neu": 0.808,
-   "pos": 0.06,
-   "compound": -0.9558
+   "neg": 0.078,
+   "neu": 0.814,
+   "pos": 0.108,
+   "compound": 0.9974
   },
   "cand_jg": {
    "neg": 0.0,
-   "neu": 1.0,
-   "pos": 0.0,
-   "compound": 0.0
+   "neu": 0.943,
+   "pos": 0.057,
+   "compound": 0.743
   }
  },
  "news_ln": {
@@ -257,113 +263,113 @@
  },
  "news_tt": {
   "cand_kb": {
-   "neg": 0.1,
-   "neu": 0.823,
-   "pos": 0.077,
-   "compound": -0.5657
+   "neg": 0.032,
+   "neu": 0.911,
+   "pos": 0.057,
+   "compound": 0.781
   },
   "cand_cg": {
-   "neg": 0.061,
-   "neu": 0.798,
-   "pos": 0.141,
-   "compound": 0.998
+   "neg": 0.057,
+   "neu": 0.772,
+   "pos": 0.172,
+   "compound": 0.9994
   },
   "cand_jg": {
-   "neg": 0.085,
-   "neu": 0.814,
-   "pos": 0.101,
-   "compound": 0.6705
+   "neg": 0.052,
+   "neu": 0.899,
+   "pos": 0.049,
+   "compound": -0.0772
   },
   "cand_bj": {
-   "neg": 0.0,
-   "neu": 1.0,
-   "pos": 0.0,
-   "compound": 0.0
+   "neg": 0.022,
+   "neu": 0.841,
+   "pos": 0.137,
+   "compound": 0.9956
   },
   "cand_sk": {
-   "neg": 0.029,
-   "neu": 0.84,
-   "pos": 0.131,
-   "compound": 0.8934
+   "neg": 0.041,
+   "neu": 0.837,
+   "pos": 0.122,
+   "compound": 0.9983
   },
   "cand_rs": {
-   "neg": 0.145,
-   "neu": 0.855,
-   "pos": 0.0,
-   "compound": -0.5994
+   "neg": 0.045,
+   "neu": 0.912,
+   "pos": 0.043,
+   "compound": -0.7269
   },
   "cand_pv": {
-   "neg": 0.0,
-   "neu": 1.0,
-   "pos": 0.0,
-   "compound": 0.0
+   "neg": 0.107,
+   "neu": 0.802,
+   "pos": 0.091,
+   "compound": -0.836
   },
   "cand_ww": {
-   "neg": 0.0,
-   "neu": 0.85,
-   "pos": 0.15,
-   "compound": 0.5106
+   "neg": 0.065,
+   "neu": 0.871,
+   "pos": 0.065,
+   "compound": -0.4404
   },
   "cand_ll": {
-   "neg": 0.231,
-   "neu": 0.593,
-   "pos": 0.176,
-   "compound": -0.6124
+   "neg": 0.081,
+   "neu": 0.818,
+   "pos": 0.101,
+   "compound": 0.9226
   }
  },
  "overall_sentiment": {
   "cand_kb": {
-   "neg": 0.098,
-   "neu": 0.801,
-   "pos": 0.101,
-   "compound": -0.9324
+   "neg": 0.079,
+   "neu": 0.829,
+   "pos": 0.092,
+   "compound": 0.9709
   },
   "cand_cg": {
-   "neg": 0.056,
-   "neu": 0.814,
-   "pos": 0.13,
+   "neg": 0.055,
+   "neu": 0.812,
+   "pos": 0.133,
    "compound": 1.0
   },
   "cand_jg": {
-   "neg": 0.083,
-   "neu": 0.83,
-   "pos": 0.087,
-   "compound": 0.4588
+   "neg": 0.116,
+   "neu": 0.79,
+   "pos": 0.094,
+   "compound": -0.9994
   },
   "cand_bj": {
-   "neg": 0.082,
-   "neu": 0.772,
-   "pos": 0.146,
-   "compound": 0.9999
+   "neg": 0.077,
+   "neu": 0.778,
+   "pos": 0.145,
+   "compound": 1.0
   },
   "cand_sk": {
-   "neg": 0.111,
-   "neu": 0.752,
-   "pos": 0.137,
+   "neg": 0.108,
+   "neu": 0.758,
+   "pos": 0.134,
    "compound": 0.9999
   },
   "cand_rs": {
-   "neg": 0.093,
-   "neu": 0.824,
-   "pos": 0.082,
-   "compound": -0.9979
+   "neg": 0.084,
+   "neu": 0.837,
+   "pos": 0.079,
+   "compound": -0.997
   },
   "cand_pv": {
-   "neg": 0.107,
-   "neu": 0.757,
+   "neg": 0.101,
+   "neu": 0.761,
    "pos": 0.137,
-   "compound": 0.9997
+   "compound": 0.9999
   },
   "cand_ww": {
-   "neg": 0.104,
-   "neu": 0.76,
-   "pos": 0.136,
+   "neg": 0.1,
+   "neu": 0.772,
+   "pos": 0.128,
    "compound": 0.9998
   },
   "cand_ll": {
-   "neg": 0.112,
-   "neu": 0.767,
-   "pos": 0.121,
+   "neg": 0.109,
+   "neu": 0.772,
+   "pos": 0.12,
    "compound": 0.9999
   }
  }
