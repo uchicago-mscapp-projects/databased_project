@@ -2,114 +2,90 @@
  "cand_kb": [
   [
    "campaign",
-   46
-  ],
-  [
-   "school",
-   45
+   54
   ],
   [
    "side",
-   42
-  ],
-  [
-   "may",
    41
   ],
   [
-   "ald",
-   38
+   "may",
+   40
   ],
   [
-   "public",
-   38
+   "school",
+   39
   ],
   [
    "26th",
-   38
-  ],
-  [
-   "schools",
-   26
+   37
   ],
   [
    "park",
-   26
+   36
+  ],
+  [
+   "contributions",
+   29
+  ],
+  [
+   "made",
+   28
+  ],
+  [
+   "search",
+   27
   ],
   [
    "police",
-   26
-  ],
-  [
-   "university",
-   25
-  ],
-  [
-   "south",
    24
   ],
   [
    "running",
-   24
+   22
   ],
   [
-   "football",
-   24
-  ],
-  [
-   "year",
-   23
-  ],
-  [
-   "high",
+   "south",
    21
   ],
   [
+   "public",
+   21
+  ],
+  [
+   "high",
+   20
+  ],
+  [
+   "ald",
+   20
+  ],
+  [
+   "football",
+   20
+  ],
+  [
+   "university",
+   20
+  ],
+  [
    "morgan",
-   20
-  ],
-  [
-   "made",
-   20
-  ],
-  [
-   "north",
    19
-  ],
-  [
-   "teacher",
-   18
-  ],
-  [
-   "community",
-   17
-  ],
-  [
-   "people",
-   17
-  ],
-  [
-   "house",
-   17
-  ],
-  [
-   "plan",
-   17
-  ],
-  [
-   "far",
-   17
-  ],
-  [
-   "mother",
-   17
   ],
   [
    "elementary",
    17
   ],
   [
-   "grew",
+   "house",
+   16
+  ],
+  [
+   "far",
+   16
+  ],
+  [
+   "schools",
    16
   ],
   [
@@ -117,27 +93,27 @@
    16
   ],
   [
-   "search",
+   "since",
    16
   ],
   [
-   "contributions",
-   16
-  ],
-  [
-   "officer",
-   16
-  ],
-  [
-   "bill",
+   "year",
    15
   ],
   [
-   "law",
+   "grew",
    15
   ],
   [
    "graduated",
+   15
+  ],
+  [
+   "mother",
+   15
+  ],
+  [
+   "teacher",
    15
   ],
   [
@@ -146,6 +122,10 @@
   ],
   [
    "alcott",
+   15
+  ],
+  [
+   "north",
    15
   ],
   [
@@ -165,18 +145,6 @@
    15
   ],
   [
-   "ceo",
-   14
-  ],
-  [
-   "violence",
-   14
-  ],
-  [
-   "reported",
-   14
-  ],
-  [
    "official",
    14
   ],
@@ -189,7 +157,7 @@
    14
   ],
   [
-   "support",
+   "critic",
    14
   ],
   [
@@ -197,11 +165,27 @@
    14
   ],
   [
-   "next",
+   "includes",
    13
   ],
   [
-   "like",
+   "neighborhoods",
+   13
+  ],
+  [
+   "community",
+   12
+  ],
+  [
+   "name",
+   12
+  ],
+  [
+   "violence",
+   12
+  ],
+  [
+   "plan",
    12
   ],
   [
@@ -209,47 +193,67 @@
    12
   ],
   [
-   "cpd",
+   "ward",
    12
   ],
   [
-   "activist",
+   "back",
+   12
+  ],
+  [
+   "bill",
    11
   ],
   [
-   "board",
+   "represented",
    11
   ],
   [
-   "enforcement",
+   "15th",
    11
   ],
   [
-   "saying",
+   "yards",
    11
   ],
   [
-   "time",
+   "brighton",
    11
   ],
   [
-   "well",
+   "2015",
    11
   ],
   [
-   "district",
+   "consistent",
    11
   ],
   [
-   "union",
+   "clashed",
+   11
+  ],
+  [
+   "rahm",
+   11
+  ],
+  [
+   "emanuel",
+   11
+  ],
+  [
+   "black",
    10
   ],
   [
-   "first",
+   "law",
    10
   ],
   [
-   "health",
+   "officer",
+   10
+  ],
+  [
+   "cpd",
    10
   ],
   [
@@ -257,94 +261,90 @@
    10
   ],
   [
-   "work",
-   10
-  ],
-  [
-   "make",
-   10
-  ],
-  [
-   "administration",
-   10
-  ],
-  [
-   "cps",
-   9
-  ],
-  [
-   "including",
-   9
-  ],
-  [
-   "elected",
-   9
-  ],
-  [
-   "race",
-   9
-  ],
-  [
-   "years",
-   9
-  ],
-  [
-   "black",
-   9
-  ],
-  [
-   "money",
-   9
-  ],
-  [
-   "u",
-   8
-  ],
-  [
    "southwest",
-   8
+   9
   ],
   [
-   "forum",
-   8
+   "like",
+   9
   ],
   [
-   "asked",
-   8
-  ],
-  [
-   "gun",
-   8
-  ],
-  [
-   "2019",
-   8
-  ],
-  [
-   "adjusted",
-   8
-  ],
-  [
-   "gross",
-   8
-  ],
-  [
-   "income",
-   8
+   "work",
+   9
   ],
   [
    "announced",
    8
   ],
   [
-   "raised",
+   "district",
    8
+  ],
+  [
+   "activist",
+   8
+  ],
+  [
+   "people",
+   7
+  ],
+  [
+   "told",
+   7
+  ],
+  [
+   "years",
+   7
+  ],
+  [
+   "first",
+   7
+  ],
+  [
+   "time",
+   7
+  ],
+  [
+   "well",
+   7
+  ],
+  [
+   "2019",
+   7
+  ],
+  [
+   "raised",
+   7
+  ],
+  [
+   "enforcement",
+   7
+  ],
+  [
+   "department",
+   7
+  ],
+  [
+   "make",
+   7
+  ],
+  [
+   "race",
+   6
+  ],
+  [
+   "announcement",
+   6
+  ],
+  [
+   "union",
+   6
   ]
  ],
  "cand_cg": [
   [
    "campaign",
-   102
+   105
   ],
   [
    "race",
@@ -352,11 +352,11 @@
   ],
   [
    "political",
-   84
+   85
   ],
   [
    "madigan",
-   79
+   80
   ],
   [
    "progressive",
@@ -376,7 +376,7 @@
   ],
   [
    "support",
-   45
+   46
   ],
   [
    "time",
@@ -411,12 +411,16 @@
    38
   ],
   [
+   "speaker",
+   38
+  ],
+  [
    "community",
    38
   ],
   [
-   "speaker",
-   37
+   "ward",
+   38
   ],
   [
    "washington",
@@ -424,10 +428,6 @@
   ],
   [
    "public",
-   36
-  ],
-  [
-   "ward",
    36
   ],
   [
@@ -483,12 +483,20 @@
    29
   ],
   [
+   "year",
+   28
+  ],
+  [
    "congress",
    28
   ],
   [
    "bid",
    28
+  ],
+  [
+   "new",
+   27
   ],
   [
    "years",
@@ -501,14 +509,6 @@
   [
    "runoff",
    27
-  ],
-  [
-   "year",
-   26
-  ],
-  [
-   "new",
-   25
   ],
   [
    "since",
@@ -643,6 +643,10 @@
    19
   ],
   [
+   "building",
+   19
+  ],
+  [
    "candidacy",
    19
   ],
@@ -664,10 +668,6 @@
   ],
   [
    "politician",
-   18
-  ],
-  [
-   "building",
    18
   ],
   [
@@ -693,360 +693,340 @@
   [
    "white",
    17
+  ],
+  [
+   "expand",
+   17
   ]
  ],
  "cand_jg": [
   [
-   "se",
-   8
-  ],
-  [
    "activist",
-   6
-  ],
-  [
-   "police",
-   6
-  ],
-  [
-   "su",
-   6
-  ],
-  [
-   "public",
-   5
-  ],
-  [
-   "con",
-   5
-  ],
-  [
-   "schools",
-   4
-  ],
-  [
-   "ceo",
-   4
-  ],
-  [
-   "businessman",
-   4
-  ],
-  [
-   "para",
-   4
-  ],
-  [
-   "campa\u00f1a",
-   4
-  ],
-  [
-   "2019",
-   4
-  ],
-  [
-   "hendon",
-   4
+   88
   ],
   [
    "campaign",
-   4
+   60
   ],
   [
-   "26",
-   3
+   "police",
+   37
   ],
   [
-   "millionaire",
-   3
-  ],
-  [
-   "officer",
-   3
-  ],
-  [
-   "frederick",
-   3
-  ],
-  [
-   "collins",
-   3
-  ],
-  [
-   "actor",
-   3
-  ],
-  [
-   "bradley",
-   3
-  ],
-  [
-   "laborman",
-   3
-  ],
-  [
-   "100",
-   3
-  ],
-  [
-   "cuando",
-   3
-  ],
-  [
-   "alcalde",
-   3
-  ],
-  [
-   "oficina",
-   3
-  ],
-  [
-   "entre",
-   3
-  ],
-  [
-   "nuestra",
-   3
-  ],
-  [
-   "2023",
-   3
-  ],
-  [
-   "interview",
-   3
-  ],
-  [
-   "visto",
-   2
-  ],
-  [
-   "familiar",
-   2
-  ],
-  [
-   "laquan",
-   2
-  ],
-  [
-   "mcdonald",
-   2
-  ],
-  [
-   "violencia",
-   2
-  ],
-  [
-   "policial",
-   2
-  ],
-  [
-   "2017",
-   2
-  ],
-  [
-   "21",
-   2
-  ],
-  [
-   "a\u00f1os",
-   2
-  ],
-  [
-   "dijo",
-   2
-  ],
-  [
-   "msnbc",
-   2
-  ],
-  [
-   "townhall",
-   2
-  ],
-  [
-   "rahm",
-   2
-  ],
-  [
-   "emanuel",
-   2
-  ],
-  [
-   "por",
-   2
-  ],
-  [
-   "3",
-   2
-  ],
-  [
-   "triibe",
-   2
-  ],
-  [
-   "halsted",
-   2
-  ],
-  [
-   "auburn",
-   2
-  ],
-  [
-   "gresham",
-   2
-  ],
-  [
-   "chase",
-   2
-  ],
-  [
-   "entrevista",
-   2
-  ],
-  [
-   "vigilancia",
-   2
-  ],
-  [
-   "plan",
-   2
-  ],
-  [
-   "m\u00e1s",
-   2
-  ],
-  [
-   "sin",
-   2
-  ],
-  [
-   "pol\u00edtica",
-   2
-  ],
-  [
-   "ideas",
-   2
-  ],
-  [
-   "queer",
-   2
-  ],
-  [
-   "como",
-   2
-  ],
-  [
-   "byp",
-   2
-  ],
-  [
-   "assata",
-   2
-  ],
-  [
-   "daughters",
-   2
-  ],
-  [
-   "let",
-   2
-  ],
-  [
-   "us",
-   2
-  ],
-  [
-   "breathe",
-   2
-  ],
-  [
-   "collective",
-   2
-  ],
-  [
-   "2022",
-   2
-  ],
-  [
-   "audio",
-   2
-  ],
-  [
-   "rickey",
-   2
-  ],
-  [
-   "kevin",
-   2
-  ],
-  [
-   "hobby",
-   2
-  ],
-  [
-   "petici\u00f3n",
-   2
-  ],
-  [
-   "polls",
-   2
-  ],
-  [
-   "seen",
-   2
+   "community",
+   35
   ],
   [
    "black",
-   2
+   33
+  ],
+  [
+   "signatures",
+   27
+  ],
+  [
+   "hendon",
+   27
+  ],
+  [
+   "years",
+   27
+  ],
+  [
+   "announced",
+   27
+  ],
+  [
+   "2019",
+   26
+  ],
+  [
+   "challenged",
+   24
+  ],
+  [
+   "ballot",
+   23
+  ],
+  [
+   "june",
+   22
+  ],
+  [
+   "came",
+   20
+  ],
+  [
+   "public",
+   20
+  ],
+  [
+   "candidacy",
+   19
+  ],
+  [
+   "search",
+   19
+  ],
+  [
+   "contributions",
+   19
+  ],
+  [
+   "violence",
+   18
+  ],
+  [
+   "challenge",
+   17
+  ],
+  [
+   "times",
+   17
+  ],
+  [
+   "year",
+   17
+  ],
+  [
+   "ald",
+   17
+  ],
+  [
+   "matter",
+   17
+  ],
+  [
+   "14",
+   17
+  ],
+  [
+   "heated",
+   16
+  ],
+  [
+   "prominence",
+   16
+  ],
+  [
+   "recent",
+   16
+  ],
+  [
+   "business",
+   15
+  ],
+  [
+   "owner",
+   15
+  ],
+  [
+   "became",
+   15
+  ],
+  [
+   "war",
+   15
+  ],
+  [
+   "words",
+   15
+  ],
+  [
+   "bank",
+   15
+  ],
+  [
+   "ran",
+   15
+  ],
+  [
+   "lives",
+   14
+  ],
+  [
+   "protester",
+   14
+  ],
+  [
+   "outspoken",
+   14
+  ],
+  [
+   "critic",
+   14
+  ],
+  [
+   "failed",
+   14
+  ],
+  [
+   "sparking",
+   14
+  ],
+  [
+   "petitions",
+   13
+  ],
+  [
+   "businessman",
+   13
   ],
   [
    "people",
-   2
+   13
   ],
   [
-   "hq",
-   2
+   "ceo",
+   12
   ],
   [
-   "policing",
-   2
+   "long",
+   12
   ],
   [
-   "political",
-   2
+   "well",
+   11
   ],
   [
-   "race",
-   2
+   "young",
+   11
   ],
   [
-   "petition",
-   2
+   "two",
+   10
   ],
   [
-   "probably",
-   1
+   "south",
+   10
   ],
   [
-   "others",
-   1
+   "forum",
+   10
   ],
   [
-   "fighting",
-   1
+   "first",
+   10
   ],
   [
-   "insiders",
-   1
+   "support",
+   10
   ],
   [
-   "may",
-   1
+   "2020",
+   10
   ],
   [
-   "30",
-   1
+   "formally",
+   10
+  ],
+  [
+   "schools",
+   10
+  ],
+  [
+   "chase",
+   10
+  ],
+  [
+   "se",
+   10
+  ],
+  [
+   "run",
+   9
+  ],
+  [
+   "election",
+   9
+  ],
+  [
+   "money",
+   9
+  ],
+  [
+   "social",
+   9
+  ],
+  [
+   "2021",
+   9
+  ],
+  [
+   "tribune",
+   9
+  ],
+  [
+   "video",
+   9
+  ],
+  [
+   "second",
+   9
+  ],
+  [
+   "council",
+   9
+  ],
+  [
+   "side",
+   9
+  ],
+  [
+   "youth",
+   9
+  ],
+  [
+   "saying",
+   8
+  ],
+  [
+   "tax",
+   8
+  ],
+  [
+   "income",
+   8
+  ],
+  [
+   "message",
+   8
+  ],
+  [
+   "lot",
+   8
+  ],
+  [
+   "going",
+   8
+  ],
+  [
+   "laquan",
+   8
+  ],
+  [
+   "mcdonald",
+   8
+  ],
+  [
+   "made",
+   8
+  ],
+  [
+   "dropped",
+   8
+  ],
+  [
+   "board",
+   7
+  ],
+  [
+   "back",
+   7
+  ],
+  [
+   "increase",
+   7
   ]
  ],
  "cand_bj": [
@@ -1207,7 +1187,19 @@
    21
   ],
   [
+   "new",
+   20
+  ],
+  [
+   "year",
+   20
+  ],
+  [
    "working",
+   20
+  ],
+  [
+   "tribune",
    20
   ],
   [
@@ -1237,18 +1229,6 @@
   [
    "saying",
    19
-  ],
-  [
-   "new",
-   18
-  ],
-  [
-   "year",
-   18
-  ],
-  [
-   "tribune",
-   18
   ],
   [
    "workers",
@@ -1319,6 +1299,10 @@
    15
   ],
   [
+   "ward",
+   15
+  ],
+  [
    "field",
    14
   ],
@@ -1336,6 +1320,10 @@
   ],
   [
    "announced",
+   14
+  ],
+  [
+   "chicagoans",
    14
   ],
   [
@@ -1372,10 +1360,6 @@
   ],
   [
    "contributions",
-   13
-  ],
-  [
-   "whether",
    13
   ]
  ],
@@ -1418,19 +1402,19 @@
   ],
   [
    "school",
-   79
+   81
   ],
   [
    "community",
    77
   ],
   [
-   "campaign",
+   "ald",
    70
   ],
   [
-   "ald",
-   69
+   "campaign",
+   70
   ],
   [
    "progressive",
@@ -1537,6 +1521,14 @@
    41
   ],
   [
+   "high",
+   40
+  ],
+  [
+   "political",
+   39
+  ],
+  [
    "chair",
    39
   ],
@@ -1547,14 +1539,6 @@
   [
    "renaming",
    39
-  ],
-  [
-   "high",
-   39
-  ],
-  [
-   "political",
-   38
   ],
   [
    "announced",
@@ -1573,20 +1557,20 @@
    38
   ],
   [
+   "field",
+   37
+  ],
+  [
    "year",
+   37
+  ],
+  [
+   "race",
    37
   ],
   [
    "thinking",
    37
-  ],
-  [
-   "field",
-   36
-  ],
-  [
-   "race",
-   36
   ],
   [
    "money",
@@ -1649,6 +1633,10 @@
    32
   ],
   [
+   "work",
+   32
+  ],
+  [
    "violence",
    32
   ],
@@ -1674,10 +1662,6 @@
   ],
   [
    "another",
-   31
-  ],
-  [
-   "work",
    31
   ],
   [
@@ -1763,12 +1747,16 @@
    48
   ],
   [
+   "campaign",
+   43
+  ],
+  [
    "eugene",
    38
   ],
   [
    "ward",
-   35
+   36
   ],
   [
    "father",
@@ -1777,10 +1765,6 @@
   [
    "black",
    32
-  ],
-  [
-   "campaign",
-   31
   ],
   [
    "committee",
@@ -1800,6 +1784,14 @@
   ],
   [
    "running",
+   28
+  ],
+  [
+   "known",
+   27
+  ],
+  [
+   "contributions",
    26
   ],
   [
@@ -1827,6 +1819,10 @@
    25
   ],
   [
+   "side",
+   24
+  ],
+  [
    "style",
    24
   ],
@@ -1839,7 +1835,7 @@
    23
   ],
   [
-   "side",
+   "south",
    22
   ],
   [
@@ -1859,7 +1855,7 @@
    20
   ],
   [
-   "south",
+   "emanuel",
    20
   ],
   [
@@ -1868,10 +1864,6 @@
   ],
   [
    "unable",
-   19
-  ],
-  [
-   "emanuel",
    19
   ],
   [
@@ -1895,6 +1887,10 @@
    17
   ],
   [
+   "rahm",
+   17
+  ],
+  [
    "bid",
    17
   ],
@@ -1904,14 +1900,6 @@
   ],
   [
    "race",
-   16
-  ],
-  [
-   "known",
-   16
-  ],
-  [
-   "rahm",
    16
   ],
   [
@@ -1928,6 +1916,10 @@
   ],
   [
    "2",
+   16
+  ],
+  [
+   "well",
    16
   ],
   [
@@ -1959,6 +1951,18 @@
    15
   ],
   [
+   "richard",
+   15
+  ],
+  [
+   "since",
+   15
+  ],
+  [
+   "school",
+   14
+  ],
+  [
    "services",
    14
   ],
@@ -1979,7 +1983,7 @@
    14
   ],
   [
-   "contributions",
+   "government",
    14
   ],
   [
@@ -1995,10 +1999,6 @@
    14
   ],
   [
-   "since",
-   14
-  ],
-  [
    "activist",
    13
   ],
@@ -2011,7 +2011,19 @@
    13
   ],
   [
+   "search",
+   13
+  ],
+  [
+   "chicagoan",
+   13
+  ],
+  [
    "whose",
+   13
+  ],
+  [
+   "represented",
    13
   ],
   [
@@ -2023,19 +2035,15 @@
    12
   ],
   [
-   "school",
-   12
-  ],
-  [
    "raised",
    12
   ],
   [
-   "1980s",
+   "became",
    12
   ],
   [
-   "represented",
+   "1980s",
    12
   ],
   [
@@ -2055,40 +2063,20 @@
    11
   ],
   [
+   "longtime",
+   11
+  ],
+  [
+   "circles",
+   11
+  ],
+  [
+   "1990s",
+   11
+  ],
+  [
    "chairman",
    11
-  ],
-  [
-   "done",
-   11
-  ],
-  [
-   "people",
-   10
-  ],
-  [
-   "youth",
-   10
-  ],
-  [
-   "ceo",
-   10
-  ],
-  [
-   "tribune",
-   10
-  ],
-  [
-   "ald",
-   10
-  ],
-  [
-   "like",
-   10
-  ],
-  [
-   "two",
-   10
   ]
  ],
  "cand_pv": [
@@ -2110,11 +2098,11 @@
   ],
   [
    "campaign",
-   80
+   91
   ],
   [
    "school",
-   57
+   68
   ],
   [
    "race",
@@ -2135,6 +2123,10 @@
   [
    "account",
    41
+  ],
+  [
+   "side",
+   37
   ],
   [
    "support",
@@ -2161,12 +2153,20 @@
    33
   ],
   [
+   "new",
+   32
+  ],
+  [
    "last",
    32
   ],
   [
    "2019",
    32
+  ],
+  [
+   "made",
+   31
   ],
   [
    "union",
@@ -2177,11 +2177,11 @@
    30
   ],
   [
-   "new",
-   30
+   "money",
+   29
   ],
   [
-   "money",
+   "contributions",
    29
   ],
   [
@@ -2191,6 +2191,10 @@
   [
    "education",
    29
+  ],
+  [
+   "running",
+   28
   ],
   [
    "top",
@@ -2221,16 +2225,20 @@
    25
   ],
   [
+   "tribune",
+   25
+  ],
+  [
    "since",
+   25
+  ],
+  [
+   "south",
    25
   ],
   [
    "week",
    25
-  ],
-  [
-   "side",
-   24
   ],
   [
    "back",
@@ -2245,15 +2253,15 @@
    23
   ],
   [
-   "tribune",
-   23
-  ],
-  [
    "another",
    23
   ],
   [
    "job",
+   23
+  ],
+  [
+   "high",
    23
   ],
   [
@@ -2269,7 +2277,15 @@
    23
   ],
   [
+   "known",
+   22
+  ],
+  [
    "work",
+   22
+  ],
+  [
+   "far",
    22
   ],
   [
@@ -2313,10 +2329,6 @@
    20
   ],
   [
-   "known",
-   19
-  ],
-  [
    "endorsed",
    19
   ],
@@ -2349,10 +2361,6 @@
    18
   ],
   [
-   "contributions",
-   18
-  ],
-  [
    "became",
    18
   ],
@@ -2377,6 +2385,10 @@
    18
   ],
   [
+   "help",
+   18
+  ],
+  [
    "chief",
    17
   ],
@@ -2385,15 +2397,11 @@
    17
   ],
   [
-   "made",
+   "park",
    17
   ],
   [
    "need",
-   17
-  ],
-  [
-   "running",
    17
   ],
   [
@@ -2407,32 +2415,12 @@
   [
    "professor",
    17
-  ],
-  [
-   "media",
-   17
-  ],
-  [
-   "budget",
-   17
-  ],
-  [
-   "group",
-   17
-  ],
-  [
-   "local",
-   17
-  ],
-  [
-   "recently",
-   17
   ]
  ],
  "cand_ww": [
   [
    "campaign",
-   151
+   166
   ],
   [
    "businessman",
@@ -2455,12 +2443,12 @@
    60
   ],
   [
-   "giving",
+   "made",
    58
   ],
   [
-   "made",
-   55
+   "giving",
+   58
   ],
   [
    "people",
@@ -2492,7 +2480,7 @@
   ],
   [
    "political",
-   37
+   38
   ],
   [
    "owner",
@@ -2504,6 +2492,10 @@
   ],
   [
    "run",
+   35
+  ],
+  [
+   "president",
    35
   ],
   [
@@ -2519,7 +2511,11 @@
    33
   ],
   [
-   "president",
+   "omar",
+   31
+  ],
+  [
+   "contributions",
    31
   ],
   [
@@ -2527,8 +2523,16 @@
    31
   ],
   [
-   "omar",
+   "public",
    30
+  ],
+  [
+   "challenged",
+   30
+  ],
+  [
+   "medical",
+   29
   ],
   [
    "support",
@@ -2547,23 +2551,23 @@
    28
   ],
   [
-   "public",
-   28
-  ],
-  [
-   "medical",
-   28
-  ],
-  [
    "mcdonald",
    28
   ],
   [
-   "challenged",
+   "search",
    28
   ],
   [
    "known",
+   27
+  ],
+  [
+   "louisiana",
+   27
+  ],
+  [
+   "side",
    27
   ],
   [
@@ -2575,11 +2579,7 @@
    27
   ],
   [
-   "louisiana",
-   26
-  ],
-  [
-   "side",
+   "supplies",
    26
   ],
   [
@@ -2607,10 +2607,6 @@
    25
   ],
   [
-   "supplies",
-   25
-  ],
-  [
    "giveaways",
    24
   ],
@@ -2624,6 +2620,10 @@
   ],
   [
    "pay",
+   24
+  ],
+  [
+   "became",
    24
   ],
   [
@@ -2648,6 +2648,10 @@
   ],
   [
    "schools",
+   22
+  ],
+  [
+   "ald",
    22
   ],
   [
@@ -2687,7 +2691,11 @@
    21
   ],
   [
-   "ald",
+   "ceo",
+   20
+  ],
+  [
+   "first",
    20
   ],
   [
@@ -2696,10 +2704,6 @@
   ],
   [
    "sparking",
-   20
-  ],
-  [
-   "became",
    20
   ],
   [
@@ -2731,11 +2735,11 @@
    19
   ],
   [
-   "ceo",
+   "make",
    19
   ],
   [
-   "make",
+   "back",
    19
   ],
   [
@@ -2744,10 +2748,6 @@
   ],
   [
    "trump",
-   18
-  ],
-  [
-   "first",
    18
   ],
   [
@@ -2769,28 +2769,16 @@
   [
    "running",
    17
-  ],
-  [
-   "contributions",
-   17
-  ],
-  [
-   "back",
-   17
-  ],
-  [
-   "activist",
-   17
   ]
  ],
  "cand_ll": [
   [
    "council",
-   367
+   372
   ],
   [
    "campaign",
-   345
+   362
   ],
   [
    "police",
@@ -2798,7 +2786,7 @@
   ],
   [
    "year",
-   311
+   313
   ],
   [
    "first",
@@ -2814,11 +2802,11 @@
   ],
   [
    "2019",
-   264
+   265
   ],
   [
    "people",
-   237
+   238
   ],
   [
    "aldermen",
@@ -2826,11 +2814,15 @@
   ],
   [
    "political",
-   217
+   220
   ],
   [
    "committee",
-   216
+   217
+  ],
+  [
+   "park",
+   209
   ],
   [
    "announced",
@@ -2838,7 +2830,7 @@
   ],
   [
    "new",
-   200
+   202
   ],
   [
    "budget",
@@ -2849,8 +2841,8 @@
    198
   ],
   [
-   "park",
-   193
+   "south",
+   196
   ],
   [
    "board",
@@ -2865,10 +2857,6 @@
    189
   ],
   [
-   "south",
-   188
-  ],
-  [
    "field",
    187
   ],
@@ -2878,43 +2866,43 @@
   ],
   [
    "community",
+   185
+  ],
+  [
+   "black",
    184
+  ],
+  [
+   "ward",
+   183
   ],
   [
    "west",
    182
   ],
   [
-   "ward",
-   181
-  ],
-  [
-   "black",
-   179
-  ],
-  [
    "statement",
    179
   ],
   [
-   "election",
-   177
+   "since",
+   179
   ],
   [
-   "since",
-   177
+   "election",
+   178
+  ],
+  [
+   "run",
+   176
   ],
   [
    "term",
    175
   ],
   [
-   "run",
-   175
-  ],
-  [
    "time",
-   173
+   174
   ],
   [
    "crime",
@@ -2929,24 +2917,24 @@
    161
   ],
   [
-   "including",
+   "news",
    158
   ],
   [
-   "news",
-   157
+   "including",
+   158
   ],
   [
    "make",
    153
   ],
   [
-   "years",
+   "two",
    150
   ],
   [
-   "two",
-   149
+   "years",
+   150
   ],
   [
    "criticized",
@@ -2961,11 +2949,19 @@
    140
   ],
   [
+   "could",
+   136
+  ],
+  [
    "made",
    136
   ],
   [
-   "could",
+   "president",
+   136
+  ],
+  [
+   "side",
    135
   ],
   [
@@ -2981,10 +2977,6 @@
    132
   ],
   [
-   "president",
-   131
-  ],
-  [
    "bears",
    128
   ],
@@ -2993,15 +2985,11 @@
    128
   ],
   [
-   "side",
+   "conference",
    127
   ],
   [
    "race",
-   126
-  ],
-  [
-   "conference",
    126
   ],
   [
@@ -3013,24 +3001,24 @@
    123
   ],
   [
+   "brown",
+   122
+  ],
+  [
+   "criticism",
+   121
+  ],
+  [
    "though",
    121
   ],
   [
-   "brown",
-   121
-  ],
-  [
-   "criticism",
+   "running",
    120
   ],
   [
    "residents",
    120
-  ],
-  [
-   "running",
-   119
   ],
   [
    "second",
@@ -3053,6 +3041,14 @@
    115
   ],
   [
+   "many",
+   115
+  ],
+  [
+   "another",
+   114
+  ],
+  [
    "back",
    113
   ],
@@ -3061,16 +3057,12 @@
    113
   ],
   [
-   "many",
-   113
-  ],
-  [
-   "another",
-   113
-  ],
-  [
    "2023",
    113
+  ],
+  [
+   "ald",
+   110
   ],
   [
    "florida",
@@ -3093,10 +3085,6 @@
    105
   ],
   [
-   "ald",
-   105
-  ],
-  [
    "monday",
    105
   ],
@@ -3113,6 +3101,10 @@
    102
   ],
   [
+   "voters",
+   102
+  ],
+  [
    "2021",
    101
   ],
@@ -3121,8 +3113,8 @@
    101
   ],
   [
-   "voters",
-   101
+   "day",
+   100
   ],
   [
    "officials",
@@ -3130,10 +3122,6 @@
   ],
   [
    "members",
-   99
-  ],
-  [
-   "day",
    99
   ],
   [
@@ -3151,10 +3139,6 @@
   [
    "three",
    95
-  ],
-  [
-   "local",
-   94
   ]
  ]
 }

@@ -1,13 +1,13 @@
 {
- "cand_kb": 124,
- "cand_cg": 194,
- "cand_jg": 4,
- "cand_bj": 143,
- "cand_sk": 140,
- "cand_rs": 147,
- "cand_pv": 189,
- "cand_ww": 182,
- "cand_ll": 1266,
- "total_num_articles_scraped": 2389,
- "total_unique_articles_scraped": 1340
+ "cand_kb": 100,
+ "cand_cg": 197,
+ "cand_jg": 113,
+ "cand_bj": 162,
+ "cand_sk": 171,
+ "cand_rs": 163,
+ "cand_pv": 209,
+ "cand_ww": 200,
+ "cand_ll": 1385,
+ "total_num_articles_scraped": 2700,
+ "total_unique_articles_scraped": 1473
 }

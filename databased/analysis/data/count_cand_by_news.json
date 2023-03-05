@@ -11,8 +11,9 @@
   "cand_ll": 103
  },
  "news_ct": {
-  "cand_kb": 116,
+  "cand_kb": 61,
   "cand_cg": 166,
+  "cand_jg": 102,
   "cand_bj": 128,
   "cand_sk": 132,
   "cand_rs": 140,
@@ -22,22 +23,22 @@
  },
  "news_cd": {
   "cand_cg": 3,
-  "cand_bj": 1,
+  "cand_bj": 5,
   "cand_sk": 1,
-  "cand_pv": 1,
+  "cand_pv": 6,
   "cand_ww": 1,
-  "cand_ll": 2
+  "cand_ll": 13
  },
  "news_hp": {
-  "cand_kb": 2,
-  "cand_cg": 2,
-  "cand_bj": 1,
-  "cand_sk": 1,
-  "cand_rs": 1,
-  "cand_pv": 1,
-  "cand_ww": 1,
-  "cand_ll": 1,
-  "cand_jg": 1
+  "cand_kb": 26,
+  "cand_cg": 3,
+  "cand_bj": 6,
+  "cand_sk": 26,
+  "cand_rs": 8,
+  "cand_pv": 10,
+  "cand_ww": 7,
+  "cand_ll": 67,
+  "cand_jg": 6
  },
  "news_ln": {
   "cand_kb": 2,
@@ -51,16 +52,16 @@
   "cand_ll": 44
  },
  "news_tt": {
-  "cand_kb": 2,
-  "cand_cg": 4,
-  "cand_jg": 1,
-  "cand_bj": 1,
-  "cand_sk": 1,
-  "cand_rs": 1,
-  "cand_pv": 1,
-  "cand_ww": 1,
-  "cand_ll": 2
+  "cand_kb": 9,
+  "cand_cg": 6,
+  "cand_jg": 3,
+  "cand_bj": 11,
+  "cand_sk": 7,
+  "cand_rs": 10,
+  "cand_pv": 7,
+  "cand_ww": 13,
+  "cand_ll": 44
  },
- "total_num_articles_scraped": 2389,
- "total_unique_articles_scraped": 1340
+ "total_num_articles_scraped": 2700,
+ "total_unique_articles_scraped": 1473
 }

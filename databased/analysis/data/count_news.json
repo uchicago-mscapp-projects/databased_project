@@ -1,10 +1,10 @@
 {
  "news_cc": 106,
- "news_ct": 1159,
- "news_cd": 9,
- "news_hp": 8,
+ "news_ct": 1160,
+ "news_cd": 26,
+ "news_hp": 83,
  "news_ln": 47,
- "news_tt": 11,
- "total_num_articles_scraped": 2389,
- "total_unique_articles_scraped": 1340
+ "news_tt": 51,
+ "total_num_articles_scraped": 2700,
+ "total_unique_articles_scraped": 1473
 }

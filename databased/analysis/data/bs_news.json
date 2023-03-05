@@ -2,26 +2,26 @@
  "news_cc": {
   "neg": 0.073,
   "neu": 0.791,
-  "pos": 0.136,
+  "pos": 0.135,
   "compound": 1.0
  },
  "news_ct": {
-  "neg": 0.1,
-  "neu": 0.766,
-  "pos": 0.134,
+  "neg": 0.103,
+  "neu": 0.76,
+  "pos": 0.137,
   "compound": 1.0
  },
  "news_cd": {
-  "neg": 0.083,
-  "neu": 0.709,
-  "pos": 0.208,
-  "compound": 0.9998
+  "neg": 0.053,
+  "neu": 0.735,
+  "pos": 0.212,
+  "compound": 1.0
  },
  "news_hp": {
-  "neg": 0.093,
-  "neu": 0.771,
-  "pos": 0.135,
-  "compound": 0.9997
+  "neg": 0.092,
+  "neu": 0.764,
+  "pos": 0.144,
+  "compound": 1.0
  },
  "news_ln": {
   "neg": 0.044,
@@ -30,9 +30,9 @@
   "compound": 1.0
  },
  "news_tt": {
-  "neg": 0.112,
-  "neu": 0.748,
-  "pos": 0.14,
-  "compound": 0.9997
+  "neg": 0.077,
+  "neu": 0.804,
+  "pos": 0.119,
+  "compound": 1.0
  }
 }

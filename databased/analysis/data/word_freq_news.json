@@ -2,7 +2,7 @@
  "news_cc": [
   [
    "new",
-   285
+   286
   ],
   [
    "million",
@@ -10,7 +10,7 @@
   ],
   [
    "lightfoot",
-   254
+   271
   ],
   [
    "year",
@@ -18,7 +18,11 @@
   ],
   [
    "business",
-   194
+   195
+  ],
+  [
+   "partner",
+   190
   ],
   [
    "public",
@@ -26,7 +30,15 @@
   ],
   [
    "two",
-   159
+   161
+  ],
+  [
+   "university",
+   157
+  ],
+  [
+   "tax",
+   157
   ],
   [
    "could",
@@ -37,7 +49,7 @@
    156
   ],
   [
-   "tax",
+   "development",
    154
   ],
   [
@@ -49,59 +61,67 @@
    153
   ],
   [
-   "development",
-   152
+   "housing",
+   150
   ],
   [
-   "housing",
-   146
+   "like",
+   147
   ],
   [
    "firm",
-   144
+   145
   ],
   [
    "affordable",
    143
   ],
   [
-   "years",
-   139
+   "health",
+   141
   ],
   [
-   "like",
-   138
+   "years",
+   139
   ],
   [
    "people",
    137
   ],
   [
-   "health",
-   137
-  ],
-  [
    "last",
-   131
-  ],
-  [
-   "street",
-   131
+   135
   ],
   [
    "committee",
-   130
+   134
+  ],
+  [
+   "street",
+   132
   ],
   [
    "property",
    128
   ],
   [
+   "according",
+   122
+  ],
+  [
    "work",
-   120
+   121
   ],
   [
    "including",
+   121
+  ],
+  [
+   "first",
+   120
+  ],
+  [
+   "group",
    120
   ],
   [
@@ -109,31 +129,23 @@
    118
   ],
   [
-   "first",
-   118
+   "much",
+   116
   ],
   [
-   "according",
-   117
+   "law",
+   115
   ],
   [
    "women",
    115
   ],
   [
-   "much",
-   114
-  ],
-  [
    "community",
    113
   ],
   [
-   "law",
-   113
-  ],
-  [
-   "group",
+   "u.",
    112
   ],
   [
@@ -141,27 +153,23 @@
    109
   ],
   [
+   "lasalle",
+   108
+  ],
+  [
    "make",
    107
   ],
   [
-   "lasalle",
+   "many",
    107
   ],
   [
-   "university",
-   105
-  ],
-  [
-   "many",
-   105
-  ],
-  [
    "lori",
-   101
+   102
   ],
   [
-   "u.",
+   "real",
    98
   ],
   [
@@ -169,47 +177,55 @@
    98
   ],
   [
+   "food",
+   98
+  ],
+  [
    "downtown",
    97
   ],
   [
-   "real",
+   "co",
    97
   ],
   [
-   "food",
+   "association",
+   96
+  ],
+  [
+   "developers",
+   96
+  ],
+  [
+   "even",
    95
   ],
   [
    "council",
-   93
+   95
+  ],
+  [
+   "member",
+   95
   ],
   [
    "company",
    93
   ],
   [
-   "developers",
+   "park",
    93
   ],
   [
-   "park",
+   "market",
    92
   ],
   [
-   "market",
-   91
-  ],
-  [
-   "co",
-   91
-  ],
-  [
-   "association",
-   91
-  ],
-  [
    "time",
+   91
+  ],
+  [
+   "local",
    90
   ],
   [
@@ -217,16 +233,12 @@
    90
   ],
   [
-   "member",
-   89
-  ],
-  [
    "area",
    88
   ],
   [
-   "local",
-   86
+   "companies",
+   87
   ],
   [
    "buildings",
@@ -241,11 +253,19 @@
    86
   ],
   [
-   "may",
-   85
+   "chair",
+   86
   ],
   [
-   "even",
+   "projects",
+   86
+  ],
+  [
+   "practice",
+   86
+  ],
+  [
+   "may",
    85
   ],
   [
@@ -253,7 +273,7 @@
    85
   ],
   [
-   "projects",
+   "estate",
    85
   ],
   [
@@ -261,27 +281,31 @@
    84
   ],
   [
-   "estate",
+   "president",
    84
   ],
   [
-   "chair",
+   "help",
    84
   ],
   [
-   "companies",
-   83
+   "residents",
+   82
   ],
   [
    "pandemic",
    82
   ],
   [
-   "help",
-   82
+   "long",
+   81
   ],
   [
-   "long",
+   "program",
+   81
+  ],
+  [
+   "money",
    81
   ],
   [
@@ -293,11 +317,11 @@
    81
   ],
   [
-   "program",
-   80
+   "recently",
+   81
   ],
   [
-   "money",
+   "black",
    80
   ],
   [
@@ -305,7 +329,7 @@
    80
   ],
   [
-   "recently",
+   "litigation",
    80
   ],
   [
@@ -313,31 +337,23 @@
    79
   ],
   [
-   "practice",
+   "center",
    79
   ],
   [
-   "black",
+   "another",
    78
   ],
   [
-   "residents",
+   "units",
    78
   ],
   [
-   "center",
-   78
-  ],
-  [
-   "partner",
+   "since",
    78
   ],
   [
    "deal",
-   77
-  ],
-  [
-   "units",
    77
   ],
   [
@@ -350,14 +366,22 @@
   ],
   [
    "neighborhood",
-   75
-  ],
-  [
-   "since",
-   74
+   76
   ],
   [
    "three",
+   75
+  ],
+  [
+   "based",
+   75
+  ],
+  [
+   "corporate",
+   75
+  ],
+  [
+   "part",
    74
   ],
   [
@@ -365,426 +389,402 @@
    74
   ],
   [
-   "part",
+   "department",
    73
-  ],
-  [
-   "commercial",
-   73
-  ],
-  [
-   "based",
-   73
-  ],
-  [
-   "litigation",
-   73
-  ],
-  [
-   "need",
-   71
-  ],
-  [
-   "bally",
-   71
-  ],
-  [
-   "national",
-   71
   ]
  ],
  "news_ct": [
   [
    "lightfoot",
-   4155
+   4717
   ],
   [
    "police",
-   2520
+   2548
   ],
   [
    "people",
-   2509
-  ],
-  [
-   "..",
-   2312
+   2529
   ],
   [
    "new",
-   1933
+   1953
   ],
   [
    "year",
-   1914
+   1912
   ],
   [
    "public",
-   1857
+   1859
   ],
   [
    "first",
-   1681
-  ],
-  [
-   "community",
-   1462
+   1713
   ],
   [
    "park",
-   1438
+   1624
   ],
   [
    "two",
-   1426
+   1482
   ],
   [
-   "years",
-   1398
+   "community",
+   1476
   ],
   [
    "time",
-   1393
+   1405
+  ],
+  [
+   "years",
+   1400
+  ],
+  [
+   "lori",
+   1339
   ],
   [
    "council",
    1331
   ],
   [
-   "lori",
-   1324
-  ],
-  [
    "campaign",
-   1260
-  ],
-  [
-   "ward",
-   1230
-  ],
-  [
-   "like",
-   1185
-  ],
-  [
-   "million",
-   1175
-  ],
-  [
-   "last",
-   1146
-  ],
-  [
-   "side",
-   1132
-  ],
-  [
-   "make",
-   1124
-  ],
-  [
-   "board",
-   1109
+   1266
   ],
   [
    "ald.",
-   1068
+   1230
   ],
   [
-   "south",
-   1055
+   "ward",
+   1227
   ],
   [
-   "school",
-   1055
+   "last",
+   1217
   ],
   [
-   "department",
-   1051
+   "like",
+   1210
+  ],
+  [
+   "million",
+   1163
+  ],
+  [
+   "side",
+   1145
+  ],
+  [
+   "make",
+   1131
+  ],
+  [
+   "board",
+   1116
   ],
   [
    "many",
-   1050
-  ],
-  [
-   "district",
-   1044
+   1102
   ],
   [
    "tribune",
-   1025
+   1079
+  ],
+  [
+   "south",
+   1077
+  ],
+  [
+   "school",
+   1067
+  ],
+  [
+   "department",
+   1052
+  ],
+  [
+   "district",
+   1052
   ],
   [
    "political",
-   993
-  ],
-  [
-   "black",
-   964
-  ],
-  [
-   "need",
-   953
-  ],
-  [
-   "could",
-   947
-  ],
-  [
-   "going",
-   938
-  ],
-  [
-   "president",
-   935
-  ],
-  [
-   "including",
-   930
-  ],
-  [
-   "work",
-   896
+   1006
   ],
   [
    "since",
-   893
+   983
   ],
   [
-   "residents",
-   861
+   "black",
+   978
+  ],
+  [
+   "need",
+   957
+  ],
+  [
+   "could",
+   955
+  ],
+  [
+   "president",
+   952
+  ],
+  [
+   "going",
+   936
+  ],
+  [
+   "including",
+   932
+  ],
+  [
+   "work",
+   895
   ],
   [
    "u.",
-   849
-  ],
-  [
-   "tax",
-   845
-  ],
-  [
-   "support",
-   833
+   890
   ],
   [
    "according",
-   822
+   885
   ],
   [
-   "made",
-   814
+   "residents",
+   875
   ],
   [
-   "day",
-   803
+   "tax",
+   843
   ],
   [
-   "bears",
-   798
+   "support",
+   835
   ],
   [
    "election",
-   789
+   817
   ],
   [
-   "federal",
-   782
+   "bears",
+   817
   ],
   [
-   "crime",
-   780
+   "made",
+   815
   ],
   [
-   "west",
-   762
+   "day",
+   806
   ],
   [
    "even",
-   762
+   805
   ],
   [
-   "high",
-   761
+   "federal",
+   792
   ],
   [
-   "take",
-   758
-  ],
-  [
-   "announced",
-   753
-  ],
-  [
-   "long",
-   748
-  ],
-  [
-   "run",
-   747
-  ],
-  [
-   "well",
-   745
-  ],
-  [
-   "know",
-   739
-  ],
-  [
-   "think",
-   727
-  ],
-  [
-   "three",
-   727
-  ],
-  [
-   "want",
-   727
-  ],
-  [
-   "health",
-   722
-  ],
-  [
-   "part",
-   721
-  ],
-  [
-   "casino",
-   721
-  ],
-  [
-   "2019",
-   718
-  ],
-  [
-   "team",
-   717
-  ],
-  [
-   "back",
-   706
-  ],
-  [
-   "aldermen",
-   704
+   "crime",
+   791
   ],
   [
    "still",
-   697
+   782
+  ],
+  [
+   "garcia",
+   774
+  ],
+  [
+   "west",
+   770
+  ],
+  [
+   "take",
+   767
+  ],
+  [
+   "another",
+   763
+  ],
+  [
+   "high",
+   762
+  ],
+  [
+   "long",
+   760
+  ],
+  [
+   "announced",
+   757
+  ],
+  [
+   "three",
+   756
+  ],
+  [
+   "well",
+   755
+  ],
+  [
+   "chicagotribune.com",
+   752
+  ],
+  [
+   "run",
+   750
+  ],
+  [
+   "know",
+   742
+  ],
+  [
+   "group",
+   737
+  ],
+  [
+   "aldermen",
+   734
+  ],
+  [
+   "team",
+   733
+  ],
+  [
+   "want",
+   732
+  ],
+  [
+   "part",
+   731
+  ],
+  [
+   "2019",
+   728
+  ],
+  [
+   "think",
+   728
+  ],
+  [
+   "health",
+   724
+  ],
+  [
+   "casino",
+   723
+  ],
+  [
+   "wilson",
+   716
+  ],
+  [
+   "back",
+   714
+  ],
+  [
+   "johnson",
+   699
+  ],
+  [
+   "law",
+   691
   ],
   [
    "help",
    690
   ],
   [
-   "law",
+   "next",
    689
   ],
   [
-   "next",
-   683
-  ],
-  [
-   "group",
-   683
-  ],
-  [
    "violence",
-   679
-  ],
-  [
-   "another",
-   678
+   682
   ],
   [
    "members",
-   664
+   674
   ],
   [
-   "plan",
-   659
+   "vallas",
+   668
   ],
   [
    "officials",
-   656
-  ],
-  [
-   "property",
-   655
+   667
   ],
   [
    "news",
-   654
+   665
   ],
   [
    "field",
-   651
+   660
   ],
   [
    "see",
-   651
+   658
+  ],
+  [
+   "plan",
+   658
+  ],
+  [
+   "property",
+   658
+  ],
+  [
+   "may",
+   656
   ],
   [
    "vote",
-   650
+   654
   ],
   [
    "much",
-   648
-  ],
-  [
-   "wilson",
-   641
-  ],
-  [
-   "money",
-   640
+   649
   ],
   [
    "officers",
+   642
+  ],
+  [
+   "money",
    636
   ],
   [
    "home",
-   631
+   633
   ],
   [
    "committee",
-   629
-  ],
-  [
-   "way",
-   622
+   631
   ],
   [
    "good",
-   620
+   629
+  ],
+  [
+   "union",
+   628
+  ],
+  [
+   "way",
+   624
   ],
   [
    "called",
    616
-  ],
-  [
-   "may",
-   614
-  ],
-  [
-   "union",
-   612
-  ],
-  [
-   "johnson",
-   609
-  ],
-  [
-   "top",
-   606
-  ],
-  [
-   "safety",
-   605
   ]
  ],
  "news_cd": [
