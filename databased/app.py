@@ -27,7 +27,7 @@ from databased.analysis.most_frequent_words import most_frequent
 from databased.analysis.basic_sentiment import basic_sentence_sentiment
 
 # Data Visualization
-#from databased.data_viz.plots.app import run_server
+from databased.data_viz.plots import run_data_viz
 
 def run():
     """
@@ -53,7 +53,7 @@ def render_project():
         \t 1 - Open Data Visualization
         \t 2 - Scrape All Newspapers
         \t 3 - Clean Scraped Data
-        \t 4 - Conduct Data Analysyis
+        \t 4 - Conduct Data Analysis
         \t 5 - Run Entire Project Start to Finish (Scrape -> Clean -> Analyze -> Visualize)
         \t 6 - End Program
         """))
@@ -69,7 +69,7 @@ def render_project():
     # Visualize command
     if user_input == 1:
         print("\nRendering DASH for Data Visualization:")
-        # TODO we need to figure this out
+        run_data_viz()
         ask_continue()
    
     # Scrape command
@@ -100,7 +100,7 @@ def render_project():
         run_analysis()
 
         print("\nRendering DASH for Data Visualization:")
-        # Will need to enter the command for data viz here
+        run_data_viz()
         ask_continue()
 
     # Close command
@@ -137,7 +137,6 @@ def run_scrapers():
     
     print("\nScraping the Hyde Park Herald:")
     hph_scrape() 
-    # TODO add print statement within this file
 
     print("\nScraping Lawndale News:")
     ln_scrape()
@@ -147,8 +146,6 @@ def run_scrapers():
 
     print("\nAccessing APIs of the Chicago Tribune and Crain's Chicago Business:")
     run_selection()
-    # ^ TODO ask kathryn if tar files are created from this, if so delete and rerun to ensure it works
-
 
 def close_project():
     """

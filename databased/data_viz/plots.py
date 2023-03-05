@@ -22,7 +22,7 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 from wordcloud import WordCloud
-import data_processing as dp
+import data_viz.data_processing as dp
 
 VOTE_SHARE = {'cand_kb':.109, 'cand_cg':.137, 'cand_jg':.021, 'cand_bj':.211,
 'cand_sk':.013, 'cand_rs':.004, 'cand_pv':.332,'cand_ww':.093, 'cand_ll':.169}
@@ -323,7 +323,7 @@ def update_wordcloud_plot(news_value_drop, cand_value_drop):
     return (wordcloud_figure, frequency_figure)
 
 
-def run():
+def run_data_viz():
 
     app.run_server(debug=False, port=8059)
 
