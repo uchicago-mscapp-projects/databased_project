@@ -17,7 +17,8 @@ import pandas as pd
 
 STRINGS_TO_REMOVE = ["<meta name='ValidationSchema' content='http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd'/>",
 "</i>", "</p>", "</body>", "</html>", "<head>", "<title>", "</title>",
-"</head>", "<body>", "<p>", "<html>", "<b>", "<i>", "</b>"]
+"</head>", "<body>", "<p>", "<html>", "<b>", "<i>", "</b>", "\u2019", "\u201c", 
+"\u201d", "\u2014", "\u2018", "\n", "\u2026", "\u2032", "\u2013", "\"", "\u0097"]
 
 def unpack_file(tar, parquet):
     '''
@@ -70,13 +71,18 @@ def convert_to_dict(tar, parquet, newspaper_id, url_counter = 0):
         url_counter += 1
         row_json = json.loads(row[1]['Data'])
         text = row_json["RECORD"]["TextInfo"]['Text']['#text']
-        text_clean = re.sub('|'.join(STRINGS_TO_REMOVE), '', text)
+        text_clean_i = re.sub('\u00ed', 'i', text)
+        text_clean_u = re.sub('\u00fa', 'u', text_clean_i)
+        text_clean = re.sub('|'.join(STRINGS_TO_REMOVE), ' ', text_clean_u)
         url = url_counter
         title = row_json["RECORD"]['Obj']['TitleAtt']['Title']
+        title_clean_i = re.sub('\u00ed', 'i', title)
+        title_clean_u = re.sub('\u00fa', 'u', title_clean_i)
+        title_clean = re.sub('|'.join(STRINGS_TO_REMOVE), ' ', title_clean_u)
         pub_date = row_json["RECORD"]['Obj']['NumericDate']
         result_dict = {'candidate_id': None, 'name_tokens': None,
                        'announcement_date': None, 'newspaper_id': newspaper_id,
-                       'url': url, 'title': title, 'text': text_clean,
-                       'date': pub_date}
+                       'url': url, 'title': title_clean.strip(), 
+                       'text': text_clean.strip(),'date': pub_date}
         all_results.append(result_dict)
     return all_results
