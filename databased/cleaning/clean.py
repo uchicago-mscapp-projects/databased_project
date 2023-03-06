@@ -38,7 +38,8 @@ contain the following keys:
 Must run !python3 -m pip install nltk and nltk.download("stopwords")
 '''
 # !python3 -m pip install nltk
-# nltk.download("stopwords")
+import nltk
+nltk.download("stopwords")
 import sys
 import re
 import os
