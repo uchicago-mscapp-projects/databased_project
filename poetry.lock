@@ -1091,6 +1091,26 @@ files = [
 ]
 
 [[package]]
+name = "response"
+version = "0.5.0"
+description = "Your handy frequency and impulse response processing object"
+category = "main"
+optional = false
+python-versions = ">=3.6.0"
+files = [
+    {file = "response-0.5.0-py3-none-any.whl", hash = "sha256:48bc94600ad4031085063a7da1e4c450cdc0cbb8c768f5c8808aba38247cb973"},
+    {file = "response-0.5.0.tar.gz", hash = "sha256:3f1c1bd0728468be692c6e1c38c55015746778d35ea6e061e990b95e119932d4"},
+]
+
+[package.dependencies]
+matplotlib = ">=2.2.0"
+numpy = "*"
+scipy = "*"
+
+[package.extras]
+dev = ["pdoc3", "pycodestyle", "pydocstyle", "pytest", "pytest-cov"]
+
+[[package]]
 name = "scipy"
 version = "1.9.3"
 description = "Fundamental algorithms for scientific computing in Python"
@@ -1488,4 +1508,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "7edfdb6ff06f5feeb7525244311a8fa8c7610f124d464899b67149a44c415cd5"
+content-hash = "9c96b3938f0cd273d11495fdef8692f6ab94aea87c9b6e5c5d339627b74a10a0"

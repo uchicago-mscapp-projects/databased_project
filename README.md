@@ -68,7 +68,7 @@ Note: This command will take about 1 minute to render Dash.
 
 **Command 2 - Executes All Scrapers/Proquest API**
 
-Runs all scrapers and Proquest API to collect newpaper articles about Chicago's mayoral candidates. The retrieved data is then stored in JSON format and outputted to the databased/data folder.
+Runs all scrapers and Proquest API to collect newspaper articles about Chicago's mayoral candidates. The retrieved data is then stored in JSON format and outputted to the databased/data folder.
 
 Note: This command will take about 20 minutes to complete.
 
