@@ -12,7 +12,7 @@ NOTE: running this file takes about 15 minutes
 """
 import nltk
 #nltk.download("stopwords")
-#nltk.download('vader_lexicon')
+nltk.download('vader_lexicon')
 import sys
 import os
 import json

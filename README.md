@@ -13,20 +13,9 @@ The project aims to analyze the press coverage of the Chicago's mayoral primary 
 
 
 ## Installation
+Note can only be run with 
 
-1. Install Poetry to Local Machine
-
-Install poetry locally:
-
-```bash
-curl -sSL https://install.python-poetry.org | python3 -
-```
-
-Add application to path:
-
-```bash
-echo 'export PATH="~/.local/bin:$PATH"' >> ~/.bashrc
-```
+1. [Install Poetry to Local Machine](https://python-poetry.org/docs/)
 
 2. Clone the Project Repository via SSH
 
