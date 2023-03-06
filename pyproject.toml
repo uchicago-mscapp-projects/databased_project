@@ -24,6 +24,7 @@ dash-html-components = "^2.0.0"
 dash-core-components = "^2.0.0"
 wordcloud = "^1.8.2.2"
 matplotlib = "^3.7.1"
+response = "^0.5.0"
 requests = "^2.28.2"
 
 
