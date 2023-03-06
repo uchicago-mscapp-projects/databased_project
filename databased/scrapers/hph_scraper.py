@@ -84,6 +84,7 @@ def scrape_article(url):
     """
     try:
         url = "https://www.hpherald.com/" + url
+        print(f"Fetching {url}")
         response = requests.get(url).text
         root = lxml.html.fromstring(response)
         date = root.xpath("//time[1]")[0].text_content()

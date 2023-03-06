@@ -2,7 +2,7 @@
 name = "databased-project"
 version = "0.1.0"
 description = ""
-authors = ["Abe Burton, Lee-Or Bentovim, Maddie Roberts"]
+authors = ["Abe Burton, Lee-Or Bentovim, Maddie Roberts, Kathryn Link-Oberstar"]
 readme = "README.md"
 packages = [{include = "databased_project"}]
 
@@ -24,6 +24,9 @@ dash-html-components = "^2.0.0"
 dash-core-components = "^2.0.0"
 wordcloud = "^1.8.2.2"
 matplotlib = "^3.7.1"
+response = "^0.5.0"
+requests = "^2.28.2"
+setuptools = "^67.5.0"
 
 
 [build-system]

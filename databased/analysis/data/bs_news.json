@@ -18,9 +18,9 @@
   "compound": 1.0
  },
  "news_hp": {
-  "neg": 0.092,
-  "neu": 0.764,
-  "pos": 0.144,
+  "neg": 0.09,
+  "neu": 0.765,
+  "pos": 0.145,
   "compound": 1.0
  },
  "news_ln": {

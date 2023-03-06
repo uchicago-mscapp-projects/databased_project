@@ -39,7 +39,7 @@ MENTION_LABELS = ['Kam Buckner', 'Chuy García', "Ja'Mal Green", 'Brandon Johnso
 
 """
 
-parent_string = str(pathlib.PurePath(sys.path[0]).parents[0]) + '/analysis/data/'
+parent_string = str(pathlib.PurePath(sys.path[0]).parents[0]) + '/databased_project/databased/analysis/data/'
 
 """
 
