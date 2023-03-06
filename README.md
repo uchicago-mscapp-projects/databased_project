@@ -35,7 +35,7 @@ python3 pip install pyarrow
 ## Usage
 Project **must** be run in the Poetry virtual environment. 
 Upon completion of above installation requirements and within project terminal, 
-and on each subsequent rendering of project, initalize virtual environment by running:
+and on each subsequent rendering of project, initialize virtual environment by running:
 
 ```bash
 poetry shell
