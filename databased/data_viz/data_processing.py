@@ -141,7 +141,7 @@ def sent_cand_paper():
                                     temp_neg_df.to_frame().T], ignore_index=True)    
 
     # Adds a column flagging if the associated value is positive or negative for graph
-    cand_news_sentiment_df_formatted['sign'] = cand_news_sentiment_df_formatted['value'] > 0
+    cand_news_sentiment_df_formatted['sign'] = cand_news_sentiment_df_formatted['value'] >= 0
 
     return cand_news_sentiment_df_formatted
 

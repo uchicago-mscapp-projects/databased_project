@@ -287,7 +287,7 @@ def sentiment_graph(selection):
                                                 ['newspapers'] == selection]
     graph = px.bar(temp_df, x='candidates', y='value', color='sign',
                 labels={'candidates': 'Candidate', 'value': 'Sentiment Percentage'},
-                color_discrete_sequence=['mediumseagreen','darkviolet'])
+                color_discrete_sequence=['mediumseagreen', 'darkviolet'])
 
     newnames = {'True':'Positive', 'False': 'Negative'}
     graph.for_each_trace(lambda t: t.update(name = newnames[t.name],
@@ -359,9 +359,9 @@ def run_data_viz():
     called by the make file for the project
     """
 
-    app.run_server(debug=False, port=8059)
+    app.run_server(debug=False, port=8042)
 
 
 if __name__ == "__main__":
 
-    app.run_server(debug=False, port=8059)
+    app.run_server(debug=False, port=8042)
