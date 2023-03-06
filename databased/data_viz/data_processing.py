@@ -47,11 +47,41 @@ parent_string = str(pathlib.PurePath(sys.path[0]).parents[0]) + '/analysis/data/
 
 """
 def mentions_candidate():
-    count_cand_path = parent_string + 'count_cand.json'
-    count_cand_df = pd.read_json(count_cand_path, orient='index')
-    count_cand_df.rename(columns={0:'mentions'}, inplace=True)
-    count_cand_df.drop(['total_num_articles_scraped'], inplace=True)
-    count_cand_df['candidates'] = MENTION_LABELS
+    
+    name_id_list = 7*list(NAME.keys())
+    name_list = 7*list(NAME.values())
+    names_dict = {'candidate_id': name_id_list, 'candidates': name_list}
+    count_cand_df = pd.DataFrame(names_dict)
+    count_cand_df['mentions'] = 0
+    
+    news_dict = {'news_cc':"Crain's Chicago Business", 'news_ct':'Chicago Tribune',
+        'news_cd':"Chicago Defender", 'news_hp':'Hyde Park Herald',
+        'news_ln':'Lawndale News', 'news_tt':'The Triibe', 'all_sites':'All Sites'}
+    
+    news_id_list = 9 * list(news_dict.keys())
+    news_list = 9 * list(news_dict.values())
+    news_dict_formatted = pd.DataFrame({'news_id': news_id_list, 'newspapers': news_list})
+    count_cand_df = count_cand_df.join(news_dict_formatted)
+    
+    count_cand_path = parent_string + 'count_cand_by_news.json'
+    cand_news_count_df = pd.read_json(count_cand_path)
+    
+    for col in cand_news_count_df.columns:
+        if col in news_dict.keys():
+            for row in cand_news_count_df[col].items():
+                count_cand_df.loc[(count_cand_df['news_id'] == col) & (count_cand_df['candidate_id'] == row[0])] = [row[0], NAME[row[0]], row[1], col, news_dict[col]]
+    
+    
+    all_sites_path = parent_string + 'count_cand.json'
+    all_sites_df = pd.read_json(all_sites_path, orient='index')
+    all_sites_df.rename(columns={0:'mentions'}, inplace=True)
+    all_sites_df.drop(['total_num_articles_scraped', 'total_unique_articles_scraped'], inplace=True)
+    
+    for key, val in all_sites_df.itertuples():
+        count_cand_df.loc[(count_cand_df['news_id'] == 'all_sites') & (count_cand_df['candidate_id'] == key)] = [key, NAME[key], val, 'all_sites', 'All Sites']
+        
+    count_cand_df['mentions'] = count_cand_df['mentions'].fillna(0)
+
     
     return count_cand_df
 

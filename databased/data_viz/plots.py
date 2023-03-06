@@ -42,21 +42,14 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 # Static Graphs live here, dynamic graphs are created in callbacks
 
 """
-def mentions_bar():
-    # Mentions Graph
-    mentions = px.bar(count_cand_df, x='candidates', y='mentions', 
-                labels={'candidates':'Candidate', 'mentions':'Number of Mentions'})
-    mentions.update_traces(marker=dict(color = 'mediumseagreen'))
-
-    return mentions
-
 def vote_scatter():
     # Mentions vs. Vote Share
-    temp_df = count_cand_df
-
+    temp_df = count_cand_df[count_cand_df['newspapers'] == 'All Sites']
     # Remove rows we don't want to plot, Lightfoot removed as incumbent
-    temp_df.drop(['total_unique_articles_scraped', 'cand_ll'], inplace=True)
+    temp_df.set_index('candidate_id',inplace=True)
     temp_df = pd.concat([temp_df,pd.Series(VOTE_SHARE)],axis=1)
+    print(temp_df)
+    temp_df = temp_df[temp_df['candidates'] != 'Lori Lightfoot']
     temp_df.rename(columns={0:'vote_share'}, inplace=True)
     mentions_scatter = px.scatter(temp_df, x='mentions', y = 'vote_share', 
                                 text='candidates', labels={'mentions':'Number of Mentions',
@@ -76,15 +69,30 @@ def vote_scatter():
 # This card refers to Newspaper Mentions by Candidate
 mentions_card = dbc.Card(
     [
-        dbc.CardHeader(html.H5("Newspaper Mentions by Candidate")),
+        dbc.CardHeader(html.H5("Article Mentions by Candidate and Newspaper")),
         dbc.CardBody(
             [
-                dcc.Graph(id='mentions_graph', figure=mentions_bar())
-            ]
+                dbc.Row([
+                    dbc.Col(html.P("Choose a News Source:"), md=12),
+                    dbc.Col([
+                        dcc.Dropdown(
+                            id='mentions-input',
+                            options=[
+                                {'label': source, 'value': source}
+                                for source in 
+                                count_cand_df\
+                                ['newspapers'].unique()
+                            ],
+                            value='All Sites',
+                        )
+                    ], md=12),
+                    dcc.Graph(id='mentions-graph'),
+                ],
+                )
+            ],
+            style={'marginTop':0, 'marginBottom':0},
         ),
-        dbc.CardFooter("Newspapers: Chicago Tribune, Chicago Defender,\
-                        Crain's Chicago Business, Hyde Park Herald,\
-                        Lawndale News, The Triibe"),
+        dbc.CardFooter(""),
     ],
     style={"marginTop": 0, "marginBottom": 0},
 )
@@ -235,6 +243,19 @@ NAVBAR = dbc.Navbar(
 # Create graphs with decorators so that the graphs update 
     when a dropdown is selected
 """
+
+# Callback for Mentions Bar
+@app.callback(
+    Output('mentions-graph', 'figure'),
+    Input('mentions-input', 'value')
+)
+def mentions_bar(selection):
+    temp_df = count_cand_df[count_cand_df['newspapers'] == selection]
+    mentions = px.bar(temp_df, x='candidates', y='mentions', 
+                labels={'candidates':'Candidate', 'mentions':'Number of Mentions'})
+    mentions.update_traces(marker=dict(color = 'mediumseagreen'))
+
+    return mentions
 
 # Callback for Sentiment Graph
 @app.callback(
