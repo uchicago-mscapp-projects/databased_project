@@ -14,21 +14,40 @@ The project aims to analyze the press coverage of the Chicago's mayoral primary 
 
 ## Installation
 
-1. Clone the Project Repository via SSH
+1. Install Poetry to Local Machine
+
+Install poetry locally:
+
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
+Add application to path:
+
+```bash
+echo 'export PATH="~/.local/bin:$PATH"' >> ~/.bashrc
+```
+
+2. Clone the Project Repository via SSH
+
 ```bash
 git@github.com:uchicago-capp122-spring23/databased_project.git
 ```
 
-2. Install Virtual Environment and Dependencies
+3. Install Virtual Environment and Dependencies
+
 ```bash
+poetry shell
 poetry install
 python3 -m pip install nltk
-python3 pip install pyarrow
+python3 pip install pyarrow 
 ```
 
 ## Usage
-Project must be run in the Poetry virtual environment. 
-Upon completion of above installation requirements and within project terminal, initalize virual environment by running:
+Project **must** be run in the Poetry virtual environment. 
+Upon completion of above installation requirements and within project terminal, 
+and on each subsequent rendering of project, initalize virual environment by running:
+
 ```bash
 poetry shell
 ```
@@ -40,7 +59,7 @@ poetry shell
 python -m databased
 ```
 <br />
-
+<sub> This command may take a minute to load project to terminal.</sub>
 You are then prompted to enter a singular digit command to execute a portion or the entire project, as seen below. 
 
 ```bash
@@ -78,9 +97,7 @@ Note: This command will take about 20 minutes to complete.
 
 Runs data cleaning on all scraped data; strips stop words, normalizes case, and selects only sentences that refer to the candidate that is the subject of the article. The cleaned data is then stored in JSON format and outputted to the databased/data folder.
 
-Notes:
- - This command will take about 1 minute to complete.
- - TEST THE DOWNLOAD MECHANISMS ON A OR L'S MACHINES. Can we do it outside file?
+Note: This command will take about 1 minute to complete.
 
 <br />
 
@@ -89,9 +106,7 @@ Notes:
 
 Runs data analysis on cleaned candidate data to calculate word frequency, sentiment, and article counts for the candidate, the newspaper, and for the candidate within each paper. The results are outputted to JSON files within databased/analysis/data folder.
 
-Notes: 
-- This command will take about 12 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 1 minute. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.
-- TEST THE DOWNLOAD MECHANISMS ON A OR L'S MACHINES. Can we do it outside file?
+Note: This command will take about 12 minutes to complete. However, if you comment out lines 54 and 55 in basic_sentiment.py the command will execute in about 1 minute. The completion of the JSON for overall newspaper sentiment will be prevented as a result of this.
 
 <br />
 
