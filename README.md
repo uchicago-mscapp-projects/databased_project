@@ -9,7 +9,7 @@ Examining the Scope and Sentiment of Local Newspaper Coverage on the 2023 Primar
 - [Madeleine Roberts](https://github.com/MadeleineKRoberts) 
 
 ## Introduction
-The project aims to analyze the press coverage of the Chicago's mayoral primary race and investigate how candidates are covered differently in local newspapers. We scraped/accessed the APIs of six different Chicago focused media sites to collect data. We then conducted data analysis to identify which topics are brought up most often and sentiment analysis to examine the tone of the articles. This analysis was performed for the candidate overall, the paper overall and for the candidate in each paper.
+The project aims to analyze the press coverage of Chicago's mayoral primary race and investigate how candidates are covered differently in local newspapers. We scraped/accessed the APIs of six different Chicago focused media sites to collect data. We then conducted data analysis to identify which topics are brought up most often and sentiment analysis to examine the tone of the articles. This analysis was performed for the candidate overall, the paper overall and for the candidate in each paper.
 
 
 ## Installation
@@ -28,14 +28,12 @@ git@github.com:uchicago-capp122-spring23/databased_project.git
 ```bash
 poetry shell
 poetry install
-python3 -m pip install nltk
-python3 pip install pyarrow 
 ```
 
 ## Usage
 Project **must** be run in the Poetry virtual environment. 
 Upon completion of above installation requirements and within project terminal, 
-and on each subsequent rendering of project, initalize virual environment by running:
+and on each subsequent rendering of project, initialize virtual environment by running:
 
 ```bash
 poetry shell
@@ -47,16 +45,19 @@ poetry shell
 ```bash
 python -m databased
 ```
-<br />
 <sub> This command may take a minute to load project to terminal.</sub>
+<br />
+<br />
+
 You are then prompted to enter a singular digit command to execute a portion or the entire project, as seen below. 
+<br />
 
 ```bash
 To execute a desired aspect of the project please enter one of the following commands:
     1 - Open Data Visualization
     2 - Scrape All Newspapers
     3 - Clean Scraped Data
-    4 - Conduct Data Analysyis
+    4 - Conduct Data Analysis
     5 - Run Entire Project Start to Finish (Scrape -> Clean -> Analyze -> Visualize)
     6 - End Program
     
@@ -70,7 +71,11 @@ Please input the number of your desired command:
 
 Renders a Dash to visualize the final results of the dataBASED project.
 
-Note: This command will take about 1 minute to render Dash.
+Notes: 
+<br />
+&emsp; This command will take about 1 minute to render Dash.
+<br />
+&emsp; Dash will throw a warning "This is a development server," this error is fine.
 
 <br />
 
@@ -112,12 +117,21 @@ Note: this command will take about 45 minutes to complete.
 
 Terminates python scripts.
 
+## Overall Notes
+If you encounter issues with nltk or pyarrow please run the following commands within the poetry shell:
+```bash
+python3 -m pip install nltk
+python3 pip install pyarrow 
+```
+<br />
+Upon extensive testing, sometimes a scraper will become blocked by servers. If this occurs, run program again and they should run completely.
+
 ## Acknowledgments
 CAPP 122 Instructor - Professor James Turk
 
 CAPP 122 Project TA - Yifu Hou
 
-Local Chicago Newsources Used for Data Collection:
+Local Chicago New Sources Used for Data Collection:
 - [Crain's Chicago Business](https://www.chicagobusiness.com/)
 - [Chicago Defender](https://chicagodefender.com/)
 - [Chicago Tribune](https://www.chicagotribune.com/)
