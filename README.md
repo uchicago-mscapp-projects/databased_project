@@ -47,8 +47,9 @@ python -m databased
 ```
 <br />
 <sub> This command may take a minute to load project to terminal.</sub>
+<br />
 You are then prompted to enter a singular digit command to execute a portion or the entire project, as seen below. 
-
+<br />
 ```bash
 To execute a desired aspect of the project please enter one of the following commands:
     1 - Open Data Visualization
@@ -69,7 +70,9 @@ Please input the number of your desired command:
 Renders a Dash to visualize the final results of the dataBASED project.
 
 Notes: 
+<br />
 &emsp; This command will take about 1 minute to render Dash.
+<br />
 &emsp; Dash will throw a warning "This is a development server," this error is fine.
 
 <br />
