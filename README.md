@@ -45,11 +45,13 @@ poetry shell
 ```bash
 python -m databased
 ```
-<br />
 <sub> This command may take a minute to load project to terminal.</sub>
 <br />
+<br />
+
 You are then prompted to enter a singular digit command to execute a portion or the entire project, as seen below. 
 <br />
+
 ```bash
 To execute a desired aspect of the project please enter one of the following commands:
     1 - Open Data Visualization
@@ -116,7 +118,7 @@ Note: this command will take about 45 minutes to complete.
 Terminates python scripts.
 
 ## Overall Notes
-If you encounter issues with nltk ir pyarrow please run the following commands within the poetry shell:
+If you encounter issues with nltk or pyarrow please run the following commands within the poetry shell:
 ```bash
 python3 -m pip install nltk
 python3 pip install pyarrow 
