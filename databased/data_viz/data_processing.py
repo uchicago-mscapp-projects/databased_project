@@ -35,13 +35,15 @@ MENTION_LABELS = ['Kam Buckner', 'Chuy García', "Ja'Mal Green", 'Brandon Johnso
 
 """
 
-parent_string = str(pathlib.PurePath(sys.path[0]).parents[0]) + '/databased_project/databased/analysis/data/'
+PARENT_STRING = str(pathlib.PurePath(sys.path[0]).parents[0])
+PARENT_STRING += '/databased_project/databased/analysis/data/'
 
 """
 
 # Dataset 1: Mentions by Candidate
 
 """
+
 def mentions_candidate():
     """
     This creates the dataset with information on the number of mentions for
@@ -66,33 +68,37 @@ def mentions_candidate():
     news_dict_formatted = pd.DataFrame({'news_id': news_id_list, 'newspapers': news_list})
     count_cand_df = count_cand_df.join(news_dict_formatted)
 
-    count_cand_path = parent_string + 'count_cand_by_news.json'
+    count_cand_path = PARENT_STRING + 'count_cand_by_news.json'
     cand_news_count_df = pd.read_json(count_cand_path)
 
     for col in cand_news_count_df.columns:
         if col in news_dict.keys():
             for row in cand_news_count_df[col].items():
-                count_cand_df.loc[(count_cand_df['news_id'] == col) & (count_cand_df['candidate_id'] == row[0])] = [row[0], NAME[row[0]], row[1], col, news_dict[col]]
+                count_cand_df.loc[(count_cand_df['news_id'] == col) & \
+                (count_cand_df['candidate_id'] == row[0])] = \
+                [row[0], NAME[row[0]], row[1], col, news_dict[col]]
 
 
-    all_sites_path = parent_string + 'count_cand.json'
+    all_sites_path = PARENT_STRING + 'count_cand.json'
     all_sites_df = pd.read_json(all_sites_path, orient='index')
     all_sites_df.rename(columns={0:'mentions'}, inplace=True)
     all_sites_df.drop(['total_num_articles_scraped', 'total_unique_articles_scraped'], inplace=True)
 
     for key, val in all_sites_df.itertuples():
-        count_cand_df.loc[(count_cand_df['news_id'] == 'all_sites') & (count_cand_df['candidate_id'] == key)] = [key, NAME[key], val, 'all_sites', 'All Sites']
+        count_cand_df.loc[(count_cand_df['news_id'] == 'all_sites') & \
+        (count_cand_df['candidate_id'] == key)] = \
+        [key, NAME[key], val, 'all_sites', 'All Sites']
 
     count_cand_df['mentions'] = count_cand_df['mentions'].fillna(0)
 
     return count_cand_df
-
 
 """
 
 # Dataset 2: News Sentiment by candidate and paper
 
 """
+
 def sent_cand_paper():
     """
     This creates the dataset with information on the sentiment for
@@ -102,9 +108,9 @@ def sent_cand_paper():
     Outputs:
         cand_news_sentiment_df_formatted (dataframe): dataframe for use in mentions graph
     """
-    cand_news_sentiment_df_path = parent_string + 'sentiment.json'
+    cand_news_sentiment_df_path = PARENT_STRING + 'sentiment.json'
     cand_news_sentiment_df = pd.read_json(cand_news_sentiment_df_path)
-    cand_news_sentiment_df_formatted = pd.DataFrame(columns = 
+    cand_news_sentiment_df_formatted = pd.DataFrame(columns=
                     ['news_id','candidate_id','value','candidates', 'newspapers'])
 
     for col in cand_news_sentiment_df.columns:
@@ -138,7 +144,7 @@ def sent_cand_paper():
             cand_news_sentiment_df_formatted = pd.concat([cand_news_sentiment_df_formatted,
                                     temp_pos_df.to_frame().T], ignore_index=True)
             cand_news_sentiment_df_formatted = pd.concat([cand_news_sentiment_df_formatted,
-                                    temp_neg_df.to_frame().T], ignore_index=True)    
+                                    temp_neg_df.to_frame().T], ignore_index=True)
 
     # Adds a column flagging if the associated value is positive or negative for graph
     cand_news_sentiment_df_formatted['sign'] = cand_news_sentiment_df_formatted['value'] >= 0
@@ -159,7 +165,7 @@ def word_freq():
     Outputs:
         word_df_formatted (dataframe): dataframe for use in wordclouds
     """
-    words_df_path = parent_string + 'word_freq_cand_by_news.json'
+    words_df_path = PARENT_STRING + 'word_freq_cand_by_news.json'
     words_df = pd.read_json(words_df_path)
     word_df_formatted = pd.DataFrame(columns = ['news_id', 'candidate_id',
                                     'word','freq','candidates', 'newspapers'])
@@ -176,9 +182,8 @@ def word_freq():
                     word_df_formatted = pd.concat([word_df_formatted,
                                             temp_df.to_frame().T], ignore_index=True)
 
-
     # This df comes from a JSON of Word frequency from all sites combined
-    words_freq_cand_df_path = parent_string + 'word_freq_candidate.json'
+    words_freq_cand_df_path = PARENT_STRING + 'word_freq_candidate.json'
     words_freq_cand_df = pd.read_json(words_freq_cand_df_path, orient='index')
 
     for col in words_freq_cand_df.columns:
@@ -187,10 +192,10 @@ def word_freq():
             # Due to JSON conversion, some rows appear as None, exclude them
             if row is not None:
                 temp_df = pd.Series({'news_id':'all_sites', 'candidate_id':index,
-                'word':row[0],'freq':row[1], 'candidates':NAME[index], 
+                'word':row[0],'freq':row[1], 'candidates':NAME[index],
                 'newspapers':'All Sites'})
 
-                word_df_formatted = pd.concat([word_df_formatted, 
+                word_df_formatted = pd.concat([word_df_formatted,
                                     temp_df.to_frame().T], ignore_index=True)
-         
+
     return word_df_formatted

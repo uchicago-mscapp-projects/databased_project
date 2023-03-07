@@ -15,7 +15,7 @@ Some guidance was drawn from this plotly example:
 https://github.com/plotly/dash-sample-apps/blob/main/apps/dash-nlp/app.py
 """
 from dash import Dash, html, dcc
-from dash.dependencies import Output, Input, State
+from dash.dependencies import Output, Input
 import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
@@ -275,7 +275,7 @@ def sentiment_graph(selection):
     """
     This Callback creates the sentiment graph for the selected newspaper
 
-    Inputs: 
+    Inputs:
         selection (str): selection is determined when the value at id
                 sentiment-input is changed
 
@@ -291,8 +291,8 @@ def sentiment_graph(selection):
 
     newnames = {'True':'Positive', 'False': 'Negative'}
     graph.for_each_trace(lambda t: t.update(name = newnames[t.name],
-                                      legendgroup = newnames[t.name],
-                                      hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])
+                        legendgroup = newnames[t.name],
+                        hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])
                                      )
                   )
     graph.update_layout(legend={'title_text':''})
@@ -300,8 +300,7 @@ def sentiment_graph(selection):
     return graph
 
 
-app.layout = html.Div(children=[NAVBAR, BODY])  
-
+app.layout = html.Div(children=[NAVBAR, BODY])
 
 @app.callback(
     [
@@ -319,7 +318,7 @@ def update_wordcloud_plot(news_value_drop, cand_value_drop):
     selected newspaper and candidate pairing
 
     Inputs:
-        news_value_drop (str): news_value_drop is determined when the value at 
+        news_value_drop (str): news_value_drop is determined when the value at
                 id news-drop is changed
         cand_value_drop (str): cand_value_drop is determined when the value at
                 id candidate-drop is changed
